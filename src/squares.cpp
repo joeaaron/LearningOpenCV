@@ -150,7 +150,7 @@ static void drawSquares( Mat& image, const vector<vector<Point> >& squares )
 
 int main(int /*argc*/, char** /*argv*/)
 {
-    static const char* names[] = { "imgs/2Stickies.jpg", "imgs/manyStickies.jpg",0 };
+    static const char* names[] = { "./data/imgs/2Stickies.jpg", "./data/imgs/manyStickies.jpg",0 };
     help();
     namedWindow( wndname, 1 );
     vector<vector<Point> > squares;
