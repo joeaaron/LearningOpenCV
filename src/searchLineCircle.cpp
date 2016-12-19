@@ -16,10 +16,10 @@ cv::Mat dst_img, work_img, sort_img, fin_img, choose_img;
 int main()
 {
 	//平行線検出
-	FindLines2();
+	//FindLines2();
 
-	//同心円検出
-	//FindCircles();
+	//同心圆检测
+	FindCircles();
 
 	cv::waitKey(0);
 	return 0;
@@ -40,7 +40,7 @@ void FindLines2() {
 	cv::Point startPoint[NUM], goalPoint[NUM];
 
 	//原画像の読み込み
-	cv::Mat src_img = cv::imread("image/test5.png");
+	cv::Mat src_img = cv::imread("./data/line_circle/test5.jpg");
 
 	//結果を描画する画像を準備
 	dst_img = src_img.clone();
@@ -192,8 +192,8 @@ void FindLines2() {
 
 void FindCircles() {
 
-	//画像を格納する変数の用意
-	cv::Mat src_img = cv::imread("image/test9.png", 1);
+	//声明变量存储图像
+	cv::Mat src_img = cv::imread("./data/line_circle/test9.png", 1);
 	cv::Mat src_gray;
 	cv::Mat dst_img, work_img, diff_img, np_img, gray_img, mask_img, result_img, final_img;
 
@@ -203,24 +203,24 @@ void FindCircles() {
 	result_img = src_img.clone();
 	final_img = src_img.clone();
 
-	//結果を描画するために真っ白な画像の用意
+	//结果图用纯白像素的图像创建
 	dst_img = cv::Scalar(255, 255, 255);
 	result_img = cv::Scalar(255, 255, 255);
 	final_img = cv::Scalar(255, 255, 255);
 
-	//inpaint関数やハフ変換を行うために画像をグレースケールにする
+	//以灰度图像来执行inpaint功能和Hough变换
 	cv::cvtColor(src_img, src_gray, CV_RGB2GRAY);
 	cv::cvtColor(src_img, work_img, CV_BGR2GRAY);
 
-	//カウント、半径、中心座標を格納する変数
+	//用变量存储半径和中心坐标
 	int i = 0, k = 0, l = 0, m = 0;
 	int rad_box[NUM] = { 0 }, rad_box2[NUM] = { 0 };
 	cv::Point cen_box[NUM] = { 0 }, cen_box2[NUM] = { 0 };
 
-	// Hough変換のための前処理（画像の平滑化を行なわないと誤検出が発生しやすい）
+	// Hough变换前的预处理（高斯平滑防止发生误检）
 	cv::GaussianBlur(work_img, work_img, cv::Size(11, 11), 3, 3);
 
-	// Hough変換による円の検出と検出した円の描画
+	// 用hough变换检测圆
 	std::vector<cv::Vec3f> circles;
 	cv::HoughCircles(work_img, circles, CV_HOUGH_GRADIENT, 1, 5, 40, 100, 20, 100);
 
@@ -233,30 +233,30 @@ void FindCircles() {
 
 		cv::circle(dst_img, center, radius, cv::Scalar(0, 0, 255), 8, 8, 0);
 
-		//半径と中心座標を格納
+		//存储半径和中心坐标
 		rad_box[i] = radius;
 		cen_box[i].x = center.x;
 		cen_box[i].y = center.y;
 
-		//検出個数のカウント
+		//检测到的圆的个数
 		i++;
 	}
 
-	//検出した円の半径と中心座標を表示
+	//输出检测到的圆的半径和中心坐标
 	for (k = 0; k < i; k++) {
 		std::cout << "[半径,中心] = {" << rad_box[k] << "," << cen_box[k] << "}" << std::endl;
 	}
 
-	//inpaint関数を用いるためにグレースケール変換
+	//对最终图像进行灰度变换
 	cv::cvtColor(dst_img, gray_img, CV_RGB2GRAY);
 
-	//マスク処理を行うためにネガポジ反転をしておく
+	//图像翻转方便进行掩模处理
 	np_img = ~gray_img;
 
-	//不要な円を削除
+	//删除不必要的圆
 	cv::inpaint(src_gray, np_img, fin_img, 15, cv::INPAINT_NS);
 
-	//円検出
+	//检测出圆
 	cv::HoughCircles(fin_img, circles, CV_HOUGH_GRADIENT, 1, 5, 30, 90, 1, 100);
 
 	std::vector<cv::Vec3f>::iterator it2 = circles.begin();
@@ -266,19 +266,17 @@ void FindCircles() {
 
 		cv::circle(result_img, center2, radius2, cv::Scalar(0, 0, 255), 8, 8, 0);
 
-		//検出した円の半径と中心座標を格納する
 		rad_box2[l] = radius2;
 		cen_box2[l].x = center2.x;
 		cen_box2[l].y = center2.y;
 
-		//検出個数のカウント
 		l++;
 	}
 
-	//見やすいように仕切りを作る
+	//创建便于查看的分隔符
 	std::cout << "------------------------------------------------" << std::endl;
 
-	//同心円であるかを判定し、同心円なら半径と中心座標を表示し中心座標を描画
+	//同心圆判定
 	for (k = 0; k < i; k++) {
 		for (m = 0; m < l; m++) {
 			if (cen_box[k].x - cen_box2[m].x <= 5 && cen_box[k].y - cen_box2[m].y <= 5) {
@@ -288,7 +286,7 @@ void FindCircles() {
 		}
 	}
 
-	/*画像の表示*/
+	/*图像的表示*/
 	cv::namedWindow("src", CV_WINDOW_AUTOSIZE | CV_WINDOW_FREERATIO);
 	cv::imshow("src", src_img);
 
