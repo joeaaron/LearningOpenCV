@@ -23,7 +23,11 @@ AUX_SOURCE_DIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/common" commonsrc)
 file(GLOB_RECURSE CURRENT_HEADERS *.h *.hpp)
 source_group("Include" FILES ${CURRENT_HEADERS})
 
-add_executable(findsquares squares.cpp ${CURRENT_HEADERS} ${commonsrc})
-target_link_libraries(findsquares ${OpenCV_LIBS})
-set_target_properties(findsquares PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+add_executable(FindSquares squares.cpp ${CURRENT_HEADERS} ${commonsrc})
+target_link_libraries(FindSquares ${OpenCV_LIBS})
+set_target_properties(FindSquares PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
+
+add_executable(SearchLineCircle searchLineCircle.cpp ${CURRENT_HEADERS} ${commonsrc})
+target_link_libraries(SearchLineCircle ${OpenCV_LIBS})
+set_target_properties(SearchLineCircle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
