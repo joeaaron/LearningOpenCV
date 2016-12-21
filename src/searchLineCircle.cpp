@@ -11,74 +11,67 @@ void FindLines2(void);
 void FindCircles(void);
 
 
-cv::Mat dst_img, work_img, sort_img, fin_img, choose_img;
+//cv::Mat dst_img, work_img, sort_img, fin_img, choose_img;
 
 int main()
 {
-	//平行線検出
-	//FindLines2();
+	//平行线检测
+	FindLines2();
 
 	//同心圆检测
-	FindCircles();
+  // FindCircles();
 
 	cv::waitKey(0);
 	return 0;
 }
 
 void FindLines2() {
-
-	/*検知した角度や傾き、切片を入れる変数*/
+	cv::Mat dst_img, work_img, sort_img, fin_img, choose_img;
+	/*检测角度和倾斜度，*/
 	double ang_box[NUM];
 	double tilt_box[NUM];
 	double b[NUM];
 
-	//カウントする変数
+	//变量计数
 	int i = 0, k = 0, l = 0;
 	int count = 0;
 
-	//検出した始点終点を格納する変数
+	//用变量来存储检测的起点和终点
 	cv::Point startPoint[NUM], goalPoint[NUM];
 
-	//原画像の読み込み
 	cv::Mat src_img = cv::imread("./data/line_circle/test5.jpg");
 
-	//結果を描画する画像を準備
 	dst_img = src_img.clone();
 	sort_img = src_img.clone();
 	fin_img = src_img.clone();
 	choose_img = src_img.clone();
 
-	//結果を描画するために真っ白な画像の生成
 	fin_img = cv::Scalar(255, 255, 255);
 
-	//原画像の出力
 	cv::namedWindow("src", CV_WINDOW_AUTOSIZE | CV_WINDOW_FREERATIO);
 	cv::imshow("src", src_img);
 
-	//グレースケールに変換
 	cv::cvtColor(src_img, work_img, CV_BGR2GRAY);
 
-	//エッジ検出
 	cv::Canny(work_img, work_img, 100, 100, 3);
 
-	//確率的ハフ変換
+	//概率Hough变换
 	std::vector<cv::Vec4i> lines;
 
 	cv::HoughLinesP(work_img, lines, 1, CV_PI / 180, 50, 60, 10);
 
 	std::vector<cv::Vec4i>::iterator it = lines.begin();
 
-	//検知した後、始点終点角度を変数に入れる
+	//开始检测后，将起始角度和中点角度存入变量
 	for (; it != lines.end(); ++it) {
 		cv::Vec4i l = *it;
 		cv::line(dst_img, cv::Point(l[0], l[1]), cv::Point(l[2], l[3]), cv::Scalar(0, 0, 255), 1, CV_AA);
 
-		//角度や座標を格納していく
+		//存储角度和坐标
 		double ang = atan2(double(l[3] - l[1]), double(l[2] - l[0]));
 
 		ang = ang * 180 / 3.1415926535;
 
-		//0～360以内にする
 		if (ang < 0) {
 			ang = ang + 360;
 		}
@@ -95,7 +88,7 @@ void FindLines2() {
 
 		//std::cout << "終点座標(x,y) = " << cv::Point(l[2],l[3]) << std::endl;
 
-		//それぞれの始点終点座標を配列に格納
+		//用数组存储每条线的起点和终点坐标
 		startPoint[i] = cv::Point(l[0], l[1]);
 
 		goalPoint[i] = cv::Point(l[2], l[3]);
@@ -106,7 +99,6 @@ void FindLines2() {
 
 		//std::cout << " b = " << l[1] - tilt * l[0] << std::endl;
 
-		//円のいくつ検出したかカウントする
 		i++;
 
 	}
@@ -114,14 +106,13 @@ void FindLines2() {
 	double length, start_len, goal_len, sg_len;
 	int check[NUM] = { 0 };
 
-	/*	始点終点中点、現時点の終点と次回の始点、傾きが近いもので近くにある線を消す	*/
 	for (k = 0; k < i; k++) {
 		for (l = k; l < i; l++) {
 			start_len = sqrt(pow((startPoint[k].x - startPoint[l].x), 2.0) + pow((startPoint[k].y - startPoint[l].y), 2.0));
 			goal_len = sqrt(pow((goalPoint[k].x - goalPoint[l].x), 2.0) + pow((goalPoint[k].y - goalPoint[l].y), 2.0));
 			sg_len = sqrt(pow((goalPoint[k].x - startPoint[l].x), 2.0) + pow((goalPoint[k].y - startPoint[l].y), 2.0));
-			//std::cout << "始点同士距離 = "<< start_len << std::endl;
-			//std::cout << "終点同士距離 = "<< goal_len << std::endl;
+			//std::cout << "起始点之间的距离 = "<< start_len << std::endl;
+			//std::cout << "中点之间的距离 = "<< goal_len << std::endl;
 			if ((((0 < start_len && start_len < 75) && (0 < goal_len && goal_len < 75)) || (sg_len < 70) && (tilt_box[l] / tilt_box[k]) < 1.2
 				&& (tilt_box[l] / tilt_box[k]) > 0.8) && (b[k] - b[l] < 30 || b[l] - b[k] < 30)) {
 				//vote++;
@@ -131,14 +122,14 @@ void FindLines2() {
 	}
 
 	count = 0;
-	std::cout << "-----------線引き--------------" << std::endl;
+	std::cout << "-----------分隔符--------------" << std::endl;
 
 	double sort_tilt[NUM] = { 0 }, sort_b[NUM] = { 0 };
 	cv::Point sort_start[NUM] = { 0 }, sort_goal[NUM] = { 0 };
 
 	for (int k = 0; k < i; k++) {
 		if (check[k] == 0) {
-			std::cout << "[傾き 切片 始点　終点] = [" << tilt_box[k] << "," << b[k] << "," << startPoint[k] << "," << goalPoint[k] << "]" << std::endl;
+			std::cout << "[倾斜角度 截距 始点　終点] = [" << tilt_box[k] << "," << b[k] << "," << startPoint[k] << "," << goalPoint[k] << "]" << std::endl;
 			cv::line(choose_img, startPoint[k], goalPoint[k], cv::Scalar(255, 0, 0), 1, CV_AA);
 			sort_tilt[count] = tilt_box[k];
 			sort_b[count] = b[k];
@@ -148,13 +139,11 @@ void FindLines2() {
 		}
 	}
 
-	std::cout << "残った線" << std::endl;
+	std::cout << "其余的线" << std::endl;
 	for (k = 0; k < count; k++) {
-		std::cout << "[傾き 切片 始点　終点] = [" << sort_tilt[k] << "," << sort_b[k] << "," << sort_start[k] << "," << sort_goal[k] << "]" << std::endl;
+		std::cout << "[倾斜角度 截距 始点　終点] = [" << sort_tilt[k] << "," << sort_b[k] << "," << sort_start[k] << "," << sort_goal[k] << "]" << std::endl;
 	}
 
-	/*	正負が同じもので傾きが似たものを探して計算して線を引く	*/
-	/*	線を一つ固定し、その線に対して他の線が条件に合うか見ていく	*/
 
 	cv::Point fin_s, fin_g;
 
@@ -162,20 +151,18 @@ void FindLines2() {
 		for (l = k + 1; l < count; l++) {
 			if (sort_tilt[k] / sort_tilt[l] < 2.5 && sort_tilt[k] / sort_tilt[l] > 0.5 && (sort_b[k] * sort_b[l]) > 0) {
 
-				//条件をパスした線の組み合わせに関して始点終点の平均を取る
 				fin_s.x = (sort_start[k].x + sort_start[l].x) / 2;
 				fin_s.y = (sort_start[k].y + sort_start[l].y) / 2;
 
 				fin_g.x = ((sort_goal[k].x + sort_goal[l].x)) / 2;
 				fin_g.y = ((sort_goal[k].y + sort_goal[l].y)) / 2;
 
-				//線を引く
 				cv::line(fin_img, fin_s, fin_g, cv::Scalar(0, 0, 255), 1, CV_AA);
 			}
 		}
 	}
 
-	//結果の描画
+	//结果图绘制
 	cv::namedWindow("HoughLinesP", CV_WINDOW_AUTOSIZE | CV_WINDOW_FREERATIO);
 	cv::imshow("HoughLinesP", dst_img);
 
@@ -189,6 +176,8 @@ void FindLines2() {
 	cv::imshow("fin", fin_img);
 
 }
+
+#if 0
 
 void FindCircles() {
 
@@ -306,3 +295,4 @@ void FindCircles() {
 	cv::namedWindow("final", CV_WINDOW_AUTOSIZE | CV_WINDOW_FREERATIO);
 	cv::imshow("final", final_img);
 }
+#endif
