@@ -27,7 +27,10 @@ add_executable(FindSquares squares.cpp ${CURRENT_HEADERS} ${commonsrc})
 target_link_libraries(FindSquares ${OpenCV_LIBS})
 set_target_properties(FindSquares PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
-
 add_executable(SearchLineCircle searchLineCircle.cpp ${CURRENT_HEADERS} ${commonsrc})
 target_link_libraries(SearchLineCircle ${OpenCV_LIBS})
 set_target_properties(SearchLineCircle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ThinImage imageThin.cpp ${CURRENT_HEADERS} ${commonsrc})
+target_link_libraries(ThinImage ${OpenCV_LIBS})
+set_target_properties(ThinImage PROPERTIES COMPILE_DEFINITIONS NOMINMAX)

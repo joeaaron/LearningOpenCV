@@ -4,7 +4,7 @@
 #include <iostream>
 #include <math.h>
 
-//配列の添字　いくつくらい検出するか大体を予想して適宜変更する
+//配列の添字　いくつくらい検出するか大体を予想して適宜変更する0
 #define NUM 30
 
 void FindLines2(void);
