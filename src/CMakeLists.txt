@@ -34,3 +34,7 @@ set_target_properties(SearchLineCircle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(ThinImage imageThin.cpp ${CURRENT_HEADERS} ${commonsrc})
 target_link_libraries(ThinImage ${OpenCV_LIBS})
 set_target_properties(ThinImage PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ReadImg readImg.cpp ${CURRENT_HEADERS} ${commonsrc})
+target_link_libraries(ReadImg ${OpenCV_LIBS})
+set_target_properties(ReadImg PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
