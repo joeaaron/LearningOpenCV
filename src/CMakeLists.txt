@@ -38,3 +38,7 @@ set_target_properties(ThinImage PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(ReadImg readImg.cpp ${CURRENT_HEADERS} ${commonsrc})
 target_link_libraries(ReadImg ${OpenCV_LIBS})
 set_target_properties(ReadImg PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(HandWrittenOCR handwrittenOCR.cpp ${CURRENT_HEADERS} ${commonsrc})
+target_link_libraries(HandWrittenOCR ${OpenCV_LIBS})
+set_target_properties(HandWrittenOCR PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
