@@ -10,31 +10,31 @@ cmake_minimum_required (VERSION 2.6)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 link_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/common")
-link_directories("${CMAKE_CURRENT_SOURCE_DIR}/common")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/SeqCapture")
+link_directories("${CMAKE_CURRENT_SOURCE_DIR}/SeqCapture")
 
 find_package(OpenCV REQUIRED)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 link_directories(${OpenCV_LIB_DIR})
 
-AUX_SOURCE_DIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/common" commonsrc)
+AUX_SOURCE_DIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/SeqCapture" SeqCaptureSRC)
 
 file(GLOB_RECURSE CURRENT_HEADERS *.h *.hpp)
 source_group("Include" FILES ${CURRENT_HEADERS})
 
-add_executable(FindSquares squares.cpp ${CURRENT_HEADERS} ${commonsrc})
+add_executable(FindSquares squares.cpp )
 target_link_libraries(FindSquares ${OpenCV_LIBS})
 set_target_properties(FindSquares PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
-add_executable(SearchLineCircle searchLineCircle.cpp ${CURRENT_HEADERS} ${commonsrc})
+add_executable(SearchLineCircle searchLineCircle.cpp )
 target_link_libraries(SearchLineCircle ${OpenCV_LIBS})
 set_target_properties(SearchLineCircle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
-add_executable(ThinImage imageThin.cpp ${CURRENT_HEADERS} ${commonsrc})
+add_executable(ThinImage imageThin.cpp )
 target_link_libraries(ThinImage ${OpenCV_LIBS})
 set_target_properties(ThinImage PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
-add_executable(ReadImg readImg.cpp ${CURRENT_HEADERS} ${commonsrc})
+add_executable(ReadImg readImg.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
 target_link_libraries(ReadImg ${OpenCV_LIBS})
 set_target_properties(ReadImg PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
