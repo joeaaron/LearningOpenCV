@@ -35,6 +35,10 @@ add_executable(ThinImage imageThin.cpp )
 target_link_libraries(ThinImage ${OpenCV_LIBS})
 set_target_properties(ThinImage PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
+add_executable(Calib calib.cpp )
+target_link_libraries(Calib ${OpenCV_LIBS})
+set_target_properties(Calib PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
 add_executable(ReadImg readImg.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
 target_link_libraries(ReadImg ${OpenCV_LIBS})
 set_target_properties(ReadImg PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
