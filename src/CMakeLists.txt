@@ -1,9 +1,9 @@
 #######################################################
 # Copyright:   Shanghai ReCAT Control Tech. Co., Ltd.
-# Author:      ECAT Vision Team
+# Author:      Vision Team
 # Version:     1.0
-# Data:        2016.12.14
-# url:         http://www.ecatmc.cc
+# Data:        2017.02.03
+# url:         
 ########################################################
 cmake_minimum_required (VERSION 2.6) 
 
@@ -42,3 +42,11 @@ set_target_properties(Calib PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(ReadImg readImg.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
 target_link_libraries(ReadImg ${OpenCV_LIBS})
 set_target_properties(ReadImg PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ImageRotation imageRotation.cpp)
+target_link_libraries(ImageRotation ${OpenCV_LIBS})
+set_target_properties(ImageRotation PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ImageCrop imageCrop.cpp)
+target_link_libraries(ImageCrop ${OpenCV_LIBS})
+set_target_properties(ImageCrop PROPERTIES COMPILE_DEFINITIONS NOMINMAX)

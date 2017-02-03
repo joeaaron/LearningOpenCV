@@ -40,7 +40,7 @@ Hough圆检测和线检测
 
 ----------
 
-**Aim 3:** Find squares in an image
+**Aim 3:** Thinning an image
 
    
 ###References - To improve results
@@ -49,3 +49,19 @@ Hough圆检测和线检测
 [细化算法](http://blog.sina.com.cn/s/blog_6f611c3001017y5m.html)
 
 [论文 A fast parallel algorithm for thinning digital patterns](http://wenku.baidu.com/link?url=CUrmS4LgO7DAL7GFl4yWZLkghCfvYnR3VvVsr3gj3lF_VTtS97nFz3B_1q2iXQDLObX_4oPM_qBPUPkdGMk6gXw7NdFP5spItERvqxfbK6W)
+
+----------
+
+**Aim 4:** Calibrate the camera
+
+**Aim 5:**  用OpenCV实现Photoshop算法
+
+1.图像旋转
+
+- warpAffine
+- getRotationMatrix2D
+
+2.图像剪切
+
+- MouseCallBack
+- rect
