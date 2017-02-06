@@ -50,3 +50,19 @@ set_target_properties(ImageRotation PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(ImageCrop imageCrop.cpp)
 target_link_libraries(ImageCrop ${OpenCV_LIBS})
 set_target_properties(ImageCrop PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ImageMatch imageMatch.cpp )
+target_link_libraries(ImageMatch ${OpenCV_LIBS})
+set_target_properties(ImageMatch PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ImageMatting imageMatting.cpp )
+target_link_libraries(ImageMatting ${OpenCV_LIBS})
+set_target_properties(ImageMatting PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(OCRReg ocrReg.cpp )
+target_link_libraries(OCRReg ${OpenCV_LIBS})
+set_target_properties(OCRReg PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ErodeDilation erodeDilation.cpp )
+target_link_libraries(ErodeDilation ${OpenCV_LIBS})
+set_target_properties(ErodeDilation PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
