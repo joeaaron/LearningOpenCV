@@ -65,3 +65,20 @@ Hough圆检测和线检测
 
 - MouseCallBack
 - rect
+
+3.图像匹配
+
+- matchTemplate
+- minMaxLoc
+
+2.抠图
+
+- imgmask
+- floodFill
+
+
+**Aim 6:** Erode and Dilate
+
+- getStructuringElement
+- erode
+- dilate

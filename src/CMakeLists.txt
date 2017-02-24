@@ -59,10 +59,14 @@ add_executable(ImageMatting imageMatting.cpp )
 target_link_libraries(ImageMatting ${OpenCV_LIBS})
 set_target_properties(ImageMatting PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
-add_executable(OCRReg ocrReg.cpp )
+add_executable(OCRReg OCR_Crop.cpp )
 target_link_libraries(OCRReg ${OpenCV_LIBS})
 set_target_properties(OCRReg PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
 add_executable(ErodeDilation erodeDilation.cpp )
 target_link_libraries(ErodeDilation ${OpenCV_LIBS})
 set_target_properties(ErodeDilation PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(BlobDetect blobDetect.cpp )
+target_link_libraries(BlobDetect ${OpenCV_LIBS})
+set_target_properties(BlobDetect PROPERTIES COMPILE_DEFINITIONS NOMINMAX)

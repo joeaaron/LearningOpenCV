@@ -1,175 +1,57 @@
-//
-//  cv_template_matcing_sample.cpp - テンプレートマッチングのサンプル
-//
-//  参考
-//      http://docs.opencv.org/doc/tutorials/imgproc/histograms/template_matching/template_matching.html
-//
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <vector>
-
-using namespace cv;
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include <iostream>
+#include <stdio.h>
 using namespace std;
-//#ifdef _WIN32
-//#ifdef _DEBUG
-//#pragma comment(lib, "opencv_core2410d.lib")
-//#pragma comment(lib, "opencv_imgproc2410d.lib")
-//#pragma comment(lib, "opencv_highgui2410d.lib")
-//#else
-//#pragma comment(lib, "opencv_core2410.lib")
-//#pragma comment(lib, "opencv_imgproc2410.lib")
-//#pragma comment(lib, "opencv_highgui2410.lib")
-//#endif
-//#endif
+using namespace cv;
+Mat img; Mat templ; Mat result;
+char* image_window = "Source Image";
+char* result_window = "Result window";
+int match_method;
+int max_Trackbar = 5;
+void MatchingMethod(int, void*);
 
-std::string window_name = "cv_template_matching_sample";
-
-int template_size = 100;
-double match_threshold = 0.7;
-
-cv::Mat capture_img;
-cv::Mat template_img;
-cv::Point match_pos;
-bool has_match_pos = false;
-
-void clear()
+int main(int argc, char** argv)
 {
-	template_img.release();
-	match_pos = cv::Point(-1, -1);
-	has_match_pos = false;
-}
-
-cv::Rect create_roi_center(const int &x, const int &y, const int &size)
-{
-	cv::Rect roi;
-	roi.x = x - size / 2;
-	roi.y = y - size / 2;
-	roi.width = size;
-	roi.height = size;
-	return roi;
-}
-
-cv::Rect create_roi_lt(const cv::Point &pos, const int &size)
-{
-	cv::Rect roi;
-	roi.x = pos.x;
-	roi.y = pos.y;
-	roi.width = size;
-	roi.height = size;
-	return roi;
-}
-
-cv::Rect correct_range(const cv::Rect &src, const cv::Size &size)
-{
-	cv::Rect r = src;
-
-	if (r.x < 0) r.x = 0;
-	if (r.y < 0) r.y = 0;
-	if (size.width < r.x + r.width) r.x = size.width - r.width;
-	if (size.height < r.y + r.height) r.y = size.height - r.height;
-
-	if (r.x < 0) {
-		r.x = 0;
-		r.width = size.width;
-	}
-	if (r.y < 0) {
-		r.y = 0;
-		r.height = size.height;
-	}
-
-	return r;
-}
-
-void pickup_template_image(int x, int y)
-{
-	cv::Mat gray_img;
-	cv::Rect template_roi;
-
-	cv::cvtColor(capture_img, gray_img, CV_BGR2GRAY);
-
-	template_roi = create_roi_center(x, y, template_size);
-	template_roi = correct_range(template_roi, cv::Size(640, 480));
-
-	if (!capture_img.empty()) {
-		gray_img(template_roi).copyTo(template_img);
-	}
-}
-
-void mouse_callback_function(int event, int x, int y, int, void* userdata)
-{
-	if (event & CV_EVENT_LBUTTONDOWN) {
-		pickup_template_image(x, y);
-	}
-}
-
-int main(int argc, char* argv[])
-{
-	//cv::VideoCapture capture;
-	//capture.open(0);
-
-	cv::namedWindow(window_name);
-	
-	capture_img = imread("ocr_1.jpg");
-	imshow(window_name, capture_img);
-	setMouseCallback(window_name, mouse_callback_function, NULL);
-
-	has_match_pos = false;
-
-	if (!template_img.empty()) {
-		// グレースケール画像に変換
-		cv::Mat gray_img;
-		cv::cvtColor(capture_img, gray_img, CV_BGR2GRAY);
-
-		// 結果格納用cv::Matの準備
-		cv::Size result_size(gray_img.cols - template_img.cols + 1, gray_img.rows - template_img.rows + 1);
-		cv::Mat result(result_size, CV_32FC1);
-
-		// テンプレートマッチングの実行
-		cv::matchTemplate(gray_img, template_img, result, CV_TM_CCOEFF_NORMED);
-
-		// CV_TM_CCOEFF_NORMEDの場合は最大値の座標がマッチ位置
-		double min_val, max_val, match_val;
-		cv::Point min_pos, max_pos;
-		cv::minMaxLoc(result, &min_val, &max_val, &min_pos, &max_pos, cv::Mat());
-
-		match_pos = max_pos;
-		match_val = max_val;
-
-		// 設定した閾値以上の場合はマッチしていると判断する
-		if (match_val > match_threshold) {
-			has_match_pos = true;
-		}
-
-		// 設定した閾値以上の場合はマッチしていると判断する
-		cv::Mat result_img(result.size(), CV_8UC1);
-		cv::convertScaleAbs(result, result_img, 255.0, 0.0);
-		cv::imshow("result", result_img);
-	}
-
-	// 結果の描画
-	cv::Mat canvas;
-	capture_img.copyTo(canvas);
-
-	if (has_match_pos) {
-		cv::Rect match_roi = create_roi_lt(match_pos, template_size);
-		cv::rectangle(canvas, match_roi, CV_RGB(0, 255, 0));
-	}
-
-	if (!template_img.empty()) {
-		cv::Mat tmp_img;
-		cv::cvtColor(template_img, tmp_img, CV_GRAY2BGR);
-		cv::Rect tmp_roi(canvas.cols - tmp_img.cols, canvas.rows - tmp_img.rows, tmp_img.cols, tmp_img.rows);
-		tmp_img.copyTo(canvas(tmp_roi));
-		cv::rectangle(canvas, tmp_roi, CV_RGB(0, 255, 0));
-	}
-	cv::imshow(window_name, canvas);
-
-	int c = cv::waitKey(1);
-	if (c == 27) {
-		return -1;
-	}
-	else if (c == 'c') {
-		clear();
-	}
+	img = imread("ocr_2.jpg");
+	templ = imread("templ.jpg");
+	namedWindow(image_window, CV_WINDOW_AUTOSIZE);
+	namedWindow(result_window, CV_WINDOW_AUTOSIZE);
+	char* trackbar_label = "Method: \n 0: SQDIFF \n 1: SQDIFF NORMED \n 2: TM CCORR \n 3: TM CCORR NORMED \n 4: TM COEFF \n      5: TM COEFF NORMED";
+	createTrackbar(trackbar_label, image_window, &match_method, max_Trackbar, MatchingMethod);
+	MatchingMethod(0, 0);//第一次显示的默认方式
+	waitKey(0);
 	return 0;
+}
+void MatchingMethod(int, void*)
+{
+	/// Source image to display
+	Mat img_display;
+	img.copyTo(img_display);
+	/// Create the result matrix
+	int result_cols = img.cols - templ.cols + 1;
+	int result_rows = img.rows - templ.rows + 1;
+	result.create(result_rows, result_cols, CV_32FC1);
+	/// Do the Matching and Normalize
+	matchTemplate(img, templ, result, match_method);
+	normalize(result, result, 0, 1, NORM_MINMAX, -1, Mat());
+	/// Localizing the best match with minMaxLoc
+	double minVal; double maxVal; Point minLoc; Point maxLoc;
+	Point matchLoc;
+	minMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, Mat());
+	/// For SQDIFF and SQDIFF_NORMED, the best matches are lower values. For all the other methods, the higher the better
+	if (match_method == CV_TM_SQDIFF || match_method == CV_TM_SQDIFF_NORMED)
+	{
+		matchLoc = minLoc;
+	}
+	else
+	{
+		matchLoc = maxLoc;
+	}
+	/// Show me what you got
+	rectangle(img_display, matchLoc, Point(matchLoc.x + templ.cols, matchLoc.y + templ.rows), Scalar::all(0), 2, 8, 0);   //用rect
+	rectangle(result, matchLoc, Point(matchLoc.x + templ.cols, matchLoc.y + templ.rows), Scalar::all(0), 2, 8, 0);
+	imshow(image_window, img_display);
+	imshow(result_window, result);
+	return;
 }
