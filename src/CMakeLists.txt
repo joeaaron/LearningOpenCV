@@ -74,3 +74,11 @@ set_target_properties(BlobDetect PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(BrightnessContrast imageBrightness.cpp)
 target_link_libraries(BrightnessContrast ${OpenCV_LIBS})
 set_target_properties(BrightnessContrast PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(Mosaic mosaic.cpp)
+target_link_libraries(Mosaic ${OpenCV_LIBS})
+set_target_properties(Mosaic PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(frostedGlass frostedGlass.cpp)
+target_link_libraries(frostedGlass ${OpenCV_LIBS})
+set_target_properties(frostedGlass PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
