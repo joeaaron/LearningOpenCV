@@ -19,10 +19,10 @@ int ImageCrop(InputArray src, OutputArray dst, Rect rect)
         return -1;
     }
 
-    //计算剪切区域：剪切Rect与源图像所在Rect的交集
-    Rect srcRect(0, 0, input.cols, input.rows);
-    rect = rect & srcRect;
-    if(rect.width <= 0 || rect.height <= 0) return -1;
+   //计算剪切区域，剪切Rect与源图像所在Rect的交集  
+    Rect srcRect(0, 0, input.cols, input.rows);  
+    rect = rect & srcRect;  
+    if ( rect.width <= 0  || rect.height <= 0 ) return -2;  
 
     //创建结果图像
     dst.create(Size(rect.width, rect.height), src.type());

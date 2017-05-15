@@ -70,3 +70,7 @@ set_target_properties(ErodeDilation PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(BlobDetect blobDetect.cpp )
 target_link_libraries(BlobDetect ${OpenCV_LIBS})
 set_target_properties(BlobDetect PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(BrightnessContrast imageBrightness.cpp)
+target_link_libraries(BrightnessContrast ${OpenCV_LIBS})
+set_target_properties(BrightnessContrast PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
