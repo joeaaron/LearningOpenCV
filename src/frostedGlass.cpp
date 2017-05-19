@@ -1,3 +1,5 @@
+///毛玻璃效果的实现通过用像素点邻域内随机一个像素点的颜色替代当前像素点的颜色实现。
+
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 

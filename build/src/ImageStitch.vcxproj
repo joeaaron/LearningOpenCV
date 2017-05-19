@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{7378ABD9-4559-371D-A549-81078BDC29B2}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ImageStitch</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">G:\code\LearningOpenCV\bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ImageStitch.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ImageStitch</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">G:\code\LearningOpenCV\bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ImageStitch.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ImageStitch</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">G:\code\LearningOpenCV\bin\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">ImageStitch.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">ImageStitch</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">G:\code\LearningOpenCV\bin\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">ImageStitch.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">ImageStitch</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv\new_build\install\include;D:\Program Files\opencv\new_build\install\include\opencv2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;NOMINMAX;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;NOMINMAX;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;opencv_shape320d.lib;opencv_stitching320d.lib;opencv_superres320d.lib;opencv_videostab320d.lib;opencv_objdetect320d.lib;opencv_calib3d320d.lib;opencv_features2d320d.lib;opencv_flann320d.lib;opencv_highgui320d.lib;opencv_ml320d.lib;opencv_photo320d.lib;opencv_video320d.lib;opencv_videoio320d.lib;opencv_imgcodecs320d.lib;opencv_imgproc320d.lib;opencv_core320d.lib;opencv_xfeatures2d320d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:/code/LearningOpenCV/bin/lib;G:/code/LearningOpenCV/bin/lib/$(Configuration);G:/code/LearningOpenCV;G:/code/LearningOpenCV/$(Configuration);G:/code/LearningOpenCV/lib;G:/code/LearningOpenCV/lib/$(Configuration);G:/code/LearningOpenCV/src;G:/code/LearningOpenCV/src/$(Configuration);G:/code/LearningOpenCV/src/SeqCapture;G:/code/LearningOpenCV/src/SeqCapture/$(Configuration);D:\Program Files\opencv\new_build\install\x86\vc12\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>G:/code/LearningOpenCV/bin/lib/Debug/ImageStitch.lib</ImportLibrary>
+      <ProgramDataBaseFile>G:/code/LearningOpenCV/bin/Debug/ImageStitch.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NOMINMAX;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NOMINMAX;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:/code/LearningOpenCV/bin/lib;G:/code/LearningOpenCV/bin/lib/$(Configuration);G:/code/LearningOpenCV;G:/code/LearningOpenCV/$(Configuration);G:/code/LearningOpenCV/lib;G:/code/LearningOpenCV/lib/$(Configuration);G:/code/LearningOpenCV/src;G:/code/LearningOpenCV/src/$(Configuration);G:/code/LearningOpenCV/src/SeqCapture;G:/code/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>G:/code/LearningOpenCV/bin/lib/Release/ImageStitch.lib</ImportLibrary>
+      <ProgramDataBaseFile>G:/code/LearningOpenCV/bin/Release/ImageStitch.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NOMINMAX;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NOMINMAX;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:/code/LearningOpenCV/bin/lib;G:/code/LearningOpenCV/bin/lib/$(Configuration);G:/code/LearningOpenCV;G:/code/LearningOpenCV/$(Configuration);G:/code/LearningOpenCV/lib;G:/code/LearningOpenCV/lib/$(Configuration);G:/code/LearningOpenCV/src;G:/code/LearningOpenCV/src/$(Configuration);G:/code/LearningOpenCV/src/SeqCapture;G:/code/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>G:/code/LearningOpenCV/bin/lib/MinSizeRel/ImageStitch.lib</ImportLibrary>
+      <ProgramDataBaseFile>G:/code/LearningOpenCV/bin/MinSizeRel/ImageStitch.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NOMINMAX;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NOMINMAX;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:/code/LearningOpenCV/bin/lib;G:/code/LearningOpenCV/bin/lib/$(Configuration);G:/code/LearningOpenCV;G:/code/LearningOpenCV/$(Configuration);G:/code/LearningOpenCV/lib;G:/code/LearningOpenCV/lib/$(Configuration);G:/code/LearningOpenCV/src;G:/code/LearningOpenCV/src/$(Configuration);G:/code/LearningOpenCV/src/SeqCapture;G:/code/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>G:/code/LearningOpenCV/bin/lib/RelWithDebInfo/ImageStitch.lib</ImportLibrary>
+      <ProgramDataBaseFile>G:/code/LearningOpenCV/bin/RelWithDebInfo/ImageStitch.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="G:\code\LearningOpenCV\src\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule G:/code/LearningOpenCV/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+F:\install\cmake\bin\cmake.exe -HG:/code/LearningOpenCV -BG:/code/LearningOpenCV/build --check-stamp-file G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">G:/code/LearningOpenCV/src/CMakeLists.txt;G:\code\LearningOpenCV\src\CMakeLists.txt;D:\Program Files\opencv_build\install\OpenCVConfig-version.cmake;D:\Program Files\opencv_build\install\OpenCVConfig.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;F:\install\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;G:\code\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule G:/code/LearningOpenCV/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+F:\install\cmake\bin\cmake.exe -HG:/code/LearningOpenCV -BG:/code/LearningOpenCV/build --check-stamp-file G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">G:/code/LearningOpenCV/src/CMakeLists.txt;G:\code\LearningOpenCV\src\CMakeLists.txt;D:\Program Files\opencv_build\install\OpenCVConfig-version.cmake;D:\Program Files\opencv_build\install\OpenCVConfig.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;F:\install\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;G:\code\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule G:/code/LearningOpenCV/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+F:\install\cmake\bin\cmake.exe -HG:/code/LearningOpenCV -BG:/code/LearningOpenCV/build --check-stamp-file G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">G:/code/LearningOpenCV/src/CMakeLists.txt;G:\code\LearningOpenCV\src\CMakeLists.txt;D:\Program Files\opencv_build\install\OpenCVConfig-version.cmake;D:\Program Files\opencv_build\install\OpenCVConfig.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;F:\install\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;G:\code\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule G:/code/LearningOpenCV/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+F:\install\cmake\bin\cmake.exe -HG:/code/LearningOpenCV -BG:/code/LearningOpenCV/build --check-stamp-file G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">G:/code/LearningOpenCV/src/CMakeLists.txt;G:\code\LearningOpenCV\src\CMakeLists.txt;D:\Program Files\opencv_build\install\OpenCVConfig-version.cmake;D:\Program Files\opencv_build\install\OpenCVConfig.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;F:\install\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;G:\code\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="G:\code\LearningOpenCV\src\imageStitching.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="G:/code/LearningOpenCV/build/ZERO_CHECK.vcxproj">
+      <Project>A6CB03A6-A939-35E5-8B0B-A22E55722888</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
