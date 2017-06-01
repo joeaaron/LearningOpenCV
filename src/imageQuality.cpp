@@ -73,8 +73,8 @@ Scalar GetMSSIM(const Mat& i1, const Mat& i2)
 
 int main()
 {
-	Mat i1 = imread("1.jpg");
-	Mat i2 = imread("2.jpg");
+	Mat i1 = imread("G:\\code\\LearningOpenCV\\data\\imgs\\1.jpg");
+	Mat i2 = imread("G:\\code\\LearningOpenCV\\data\\imgs\\2.jpg");
 	if (!i1.data || !i2.data)
 	{
 		cout << "Í¼Æ¬Â·¾¶ÓÐÎó£¡" << endl;

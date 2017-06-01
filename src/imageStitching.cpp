@@ -63,6 +63,7 @@ void stitch2(Mat& srcImage1, Mat& srcImage2, Mat& panorama)
 	vector<DMatch> matchePoints;
 	matcher.match(imageDesc1, imageDesc2, matchePoints, Mat());
 	sort(matchePoints.begin(), matchePoints.end()); //特征点排序    
+	
 	//获取排在前N个的最优匹配特征点  
 	vector<Point2f> imagePoints1, imagePoints2;
 	for (int i = 0; i < 10; i++)
@@ -123,9 +124,9 @@ int main(int argc, char* argv[])
 	imgs.push_back(image2);
 	imgs.push_back(image3);
 	cv::Mat resultMat1, resultMat2, resultMat;
-	//stitch(imgs, resultMat1);
-	//cv::imshow("resultMat1", resultMat1);
-	stitch2(image1, image2, resultMat2); 
+	stitch(imgs, resultMat1);
+	cv::imshow("resultMat1", resultMat1);
+	stitch2(image2, image3, resultMat2); 
 	cv::imshow("resultMat2", resultMat2);
 	//stitch2(resultMat2, image3, resultMat);
 	//cv::imshow("resultMat2", resultMat);

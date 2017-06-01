@@ -90,3 +90,7 @@ set_target_properties(ImageStitch PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(ImageQuality imageQuality.cpp)
 target_link_libraries(ImageQuality ${OpenCV_LIBS})
 set_target_properties(ImageQuality PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(JigSaw jigsaw.cpp)
+target_link_libraries(JigSaw ${OpenCV_LIBS})
+set_target_properties(JigSaw PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
