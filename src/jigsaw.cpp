@@ -20,7 +20,7 @@ int main(int argc,char*argv[])
 {
 	Sourceimage=imread("Source image.jpg");
 	imshow("Source image",Sourceimage);
-	rows = 4;      //atoi(argv[2]);
+	rows = 4;      // atoi(argv[2]);
 	cols = 4;      // atoi(argv[3]);
 	Roirows=Sourceimage.rows/rows;
 	Roicols=Sourceimage.cols/cols;
@@ -38,7 +38,6 @@ int main(int argc,char*argv[])
 	}
 
 	Randarrary( arraryimage);
-
 
 	for(int i=0;i<rows;i++)
 	{
@@ -73,7 +72,7 @@ void Randarrary( vector<Mat>& vectorMat)
 }
 
 //*******************************************************************//
-//鼠标回调函数，用于获取需要查找的子图像在原图像中的位置，并在叠加显示在目标图像中
+//鼠标回调函数，用于获取需要查找的子图像在原图像中的位置，并叠加显示在目标图像中
 //*******************************************************************//
 void OnMouseAction(int event,int x,int y,int flags,void *ustc)
 {
@@ -81,10 +80,9 @@ void OnMouseAction(int event,int x,int y,int flags,void *ustc)
 	{
 		Mat RoiSpilte,RoiSource;
 		int rows=(y/Roirows)*Roirows;
-		int clos=(x/Roicols)*Roicols;
+		int cols=(x/Roicols)*Roicols;
 
-
-		RoiSpilte=Spilteimage(Rect(clos,rows,Roicols,Roirows));
+		RoiSpilte=Spilteimage(Rect(cols,rows,Roicols,Roirows));
 		imshow("Slice",RoiSpilte);
 
 		Mat image=Mat::zeros(Sourceimage.rows-Roirows,Sourceimage.cols-Roicols,CV_32FC1);
@@ -101,7 +99,5 @@ void OnMouseAction(int event,int x,int y,int flags,void *ustc)
 		Mat ROIDst=Dstimage(Rect(minP.x,minP.y,Roicols,Roirows));
 		addWeighted(ROIDst,0,RoiSpilte,1,0,ROIDst,-1);
 		imshow("Jigsaw image",Dstimage);
-
-
 	}
 }
