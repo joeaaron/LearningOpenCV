@@ -98,3 +98,7 @@ set_target_properties(JigSaw PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(Video videoOpen.cpp)
 target_link_libraries(Video ${OpenCV_LIBS})
 set_target_properties(Video PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(Incircle incircle.cpp)
+target_link_libraries(Incircle ${OpenCV_LIBS})
+set_target_properties(Incircle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
