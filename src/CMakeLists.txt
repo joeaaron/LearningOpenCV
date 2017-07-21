@@ -102,3 +102,11 @@ set_target_properties(Video PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(Incircle incircle.cpp)
 target_link_libraries(Incircle ${OpenCV_LIBS})
 set_target_properties(Incircle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ChessBoardCenter chessBoardCenter.cpp)
+target_link_libraries(ChessBoardCenter ${OpenCV_LIBS})
+set_target_properties(ChessBoardCenter PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(FitLine fitLine.cpp)
+target_link_libraries(FitLine ${OpenCV_LIBS})
+set_target_properties(FitLine PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
