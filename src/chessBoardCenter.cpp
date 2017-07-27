@@ -302,6 +302,8 @@ int main(int argc, char* argv[])
 		imageSize = view.size();  // Format input image.
 		if (s.flipVertical)    flip(view, view, 0);
 
+		//cvtColor(view, view, CV_BGR2GRAY);
+
 		bool isFind;
 		int chessBoardFlags = CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_NORMALIZE_IMAGE;
 		switch (s.calibrationPattern) // Find feature points on the input format
