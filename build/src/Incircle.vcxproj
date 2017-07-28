@@ -319,7 +319,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\Aaron\Desktop\test.cpp" />
+    <ClCompile Include="..\..\src\incircle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="G:/code/LearningOpenCV/build/ZERO_CHECK.vcxproj">
