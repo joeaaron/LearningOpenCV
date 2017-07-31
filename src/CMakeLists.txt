@@ -114,3 +114,7 @@ set_target_properties(FitLine PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(SVMSimpleDemo svmSimpleDemo.cpp)
 target_link_libraries(SVMSimpleDemo ${OpenCV_LIBS})
 set_target_properties(SVMSimpleDemo PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ModifyPixel modifyPixel.cpp)
+target_link_libraries(ModifyPixel ${OpenCV_LIBS})
+set_target_properties(ModifyPixel PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
