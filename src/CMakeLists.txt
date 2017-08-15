@@ -118,3 +118,7 @@ set_target_properties(SVMSimpleDemo PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(ModifyPixel modifyPixel.cpp)
 target_link_libraries(ModifyPixel ${OpenCV_LIBS})
 set_target_properties(ModifyPixel PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(HahaMirror hahaMirror.cpp)
+target_link_libraries(HahaMirror ${OpenCV_LIBS})
+set_target_properties(HahaMirror PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
