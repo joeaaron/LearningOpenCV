@@ -126,3 +126,7 @@ set_target_properties(HahaMirror PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(FillHole fillHole.cpp)
 target_link_libraries(FillHole ${OpenCV_LIBS})
 set_target_properties(FillHole PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ChessBoard ChessBoard.cpp)
+target_link_libraries(ChessBoard ${OpenCV_LIBS})
+set_target_properties(ChessBoard PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
