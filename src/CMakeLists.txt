@@ -130,3 +130,7 @@ set_target_properties(FillHole PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(ChessBoard ChessBoard.cpp)
 target_link_libraries(ChessBoard ${OpenCV_LIBS})
 set_target_properties(ChessBoard PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(LBPFeature LBPFeature.cpp)
+target_link_libraries(LBPFeature ${OpenCV_LIBS})
+set_target_properties(LBPFeature PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
