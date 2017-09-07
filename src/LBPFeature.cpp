@@ -24,7 +24,7 @@ void getOriginalLBPFeature(cv::InputArray _src, cv::OutputArray _dst)
 			lbpCode |= (src.at<_tp>(i + 1, j - 1) > center) << 1;
 			lbpCode |= (src.at<_tp>(i, j - 1) > center) << 0;
 
-			dst.at<int>(i - 1, j - 1) = lbpCode;
+			dst.at<uchar>(i - 1, j - 1) = lbpCode;
 		}
 	}
 }
