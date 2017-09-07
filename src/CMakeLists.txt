@@ -138,3 +138,7 @@ set_target_properties(LBPFeature PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(TerminalLine terminalLine.cpp)
 target_link_libraries(TerminalLine ${OpenCV_LIBS})
 set_target_properties(TerminalLine PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ImshowManyImg imshowManyImg.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
+target_link_libraries(ImshowManyImg ${OpenCV_LIBS})
+set_target_properties(ImshowManyImg PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
