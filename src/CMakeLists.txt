@@ -142,3 +142,7 @@ set_target_properties(TerminalLine PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(ImshowManyImg imshowManyImg.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
 target_link_libraries(ImshowManyImg ${OpenCV_LIBS})
 set_target_properties(ImshowManyImg PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(InPaint inPaint.cpp)
+target_link_libraries(InPaint ${OpenCV_LIBS})
+set_target_properties(InPaint PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
