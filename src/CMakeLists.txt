@@ -146,3 +146,7 @@ set_target_properties(ImshowManyImg PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(InPaint inPaint.cpp)
 target_link_libraries(InPaint ${OpenCV_LIBS})
 set_target_properties(InPaint PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(CortAlgorithm cortAlgorithm.cpp)
+target_link_libraries(CortAlgorithm ${OpenCV_LIBS})
+set_target_properties(CortAlgorithm PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
