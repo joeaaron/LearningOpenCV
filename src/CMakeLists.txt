@@ -150,3 +150,7 @@ set_target_properties(InPaint PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(CortAlgorithm cortAlgorithm.cpp)
 target_link_libraries(CortAlgorithm ${OpenCV_LIBS})
 set_target_properties(CortAlgorithm PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(CamScanner camScanner.cpp)
+target_link_libraries(CamScanner ${OpenCV_LIBS})
+set_target_properties(CamScanner PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
