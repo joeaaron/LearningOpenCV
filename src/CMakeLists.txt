@@ -154,3 +154,7 @@ set_target_properties(CortAlgorithm PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(CamScanner camScanner.cpp)
 target_link_libraries(CamScanner ${OpenCV_LIBS})
 set_target_properties(CamScanner PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ImgMosaicking imgMosaicking.cpp)
+target_link_libraries(ImgMosaicking ${OpenCV_LIBS})
+set_target_properties(ImgMosaicking PROPERTIES COMPILE_DEFINITIONS NOMINMAX)

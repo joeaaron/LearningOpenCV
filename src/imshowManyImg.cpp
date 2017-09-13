@@ -4,8 +4,8 @@
 
 int main()
 {
-	cv::Mat img_1 = cv::imread("fro.bmp");
-	cv::Mat img_2 = cv::imread("fro_result.png");
+	cv::Mat img_1 = cv::imread("1.png");
+	cv::Mat img_2 = cv::imread("result.png");
 
 	cv::Mat dst;
 	std::vector<cv::Mat> manyImg;

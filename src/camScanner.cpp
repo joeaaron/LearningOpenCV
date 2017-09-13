@@ -8,7 +8,6 @@
 
 cv::Point2f center(0, 0);
 
-
 bool sort_corners(std::vector<cv::Point2f>& corners)
 {
 	std::vector<cv::Point2f> top, bot;
@@ -310,6 +309,7 @@ int main()
 			cv::imshow("find", bkp);
 			cv::imshow("quadrilateral", quad);
 
+			cv::imwrite("result.png", quad);
 			/*如果需要二值化就解掉注释把*/
 			/*
 			Mat local,gray;
