@@ -158,3 +158,11 @@ set_target_properties(CamScanner PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(ImgMosaicking imgMosaicking.cpp)
 target_link_libraries(ImgMosaicking ${OpenCV_LIBS})
 set_target_properties(ImgMosaicking PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(LowResolution lowResolution.cpp)
+target_link_libraries(LowResolution ${OpenCV_LIBS})
+set_target_properties(LowResolution PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(SuperResolution superResolution.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
+target_link_libraries(SuperResolution ${OpenCV_LIBS})
+set_target_properties(SuperResolution PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
