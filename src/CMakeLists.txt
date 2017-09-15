@@ -166,3 +166,7 @@ set_target_properties(LowResolution PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(SuperResolution superResolution.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
 target_link_libraries(SuperResolution ${OpenCV_LIBS})
 set_target_properties(SuperResolution PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(3DPointCloud 3DPointCloud.cpp)
+target_link_libraries(3DPointCloud ${OpenCV_LIBS})
+set_target_properties(3DPointCloud PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
