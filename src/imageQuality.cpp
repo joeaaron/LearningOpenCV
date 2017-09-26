@@ -1,100 +1,213 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <iomanip>
+#include <sstream>
+
 #include <opencv2\highgui\highgui.hpp>
 #include <opencv2\imgproc\imgproc.hpp>
 #include <opencv2\core\core.hpp>
-using namespace std;
-using namespace cv;
 
-double GetPSNR(const Mat& I1, const Mat& I2)
+double GetPSNR(const cv::Mat& I1, const cv::Mat& I2)
 {
-	Mat s1;
-	absdiff(I1, I2, s1);
-	s1.convertTo(s1, CV_32F);
-	s1 = s1.mul(s1);
-	Scalar s = sum(s1);
-	double sse = s.val[0] + s.val[1] + s.val[2];
-	if (sse <= 1e-10)
+	cv::Mat s1;
+	absdiff(I1, I2, s1); /* |I1 - I2| */
+	s1.convertTo(s1, CV_32F); /* cannot make a square on 8 bits */
+	s1 = s1.mul(s1); /* |I1 - I2|^2 */
+	cv::Scalar s = sum(s1); /* sum elements per channel */
+	double sse = s.val[0] + s.val[1] + s.val[2]; /* sum channels */
+
+	if (sse <= 1e-10) /* for small values return zero */
 		return 0;
-	else
-	{
+	else {
 		double mse = sse / (double)(I1.channels() * I1.total());
-		double psnr = 10.0 * log10(255 * 255 / mse);
+		double psnr = 10.0 * log10((255 * 255) / mse);
 		return psnr;
 	}
 }
 
-Scalar GetMSSIM(const Mat& i1, const Mat& i2)
+cv::Scalar GetMSSIM(const cv::Mat& i1, const cv::Mat& i2)
 {
 	const double C1 = 6.5025, C2 = 58.5225;
 	int d = CV_32F;
+	cv::Mat I1, I2;
 
-	Mat I1, I2;
+	/* cannot calculate on one byte large values */
 	i1.convertTo(I1, d);
 	i2.convertTo(I2, d);
-	Mat I2_2 = I2.mul(I2);        //I2^2
-	Mat I1_2 = I1.mul(I1);        //I1^2
-	Mat I1_I2 = I1.mul(I2);       //I1 * I2
 
-	Mat mu1, mu2;
-	GaussianBlur(I1, mu1, Size(11, 11), 1.5);
-	GaussianBlur(I2, mu2, Size(11, 11), 1.5);
+	cv::Mat I2_2 = I2.mul(I2); /* I2^2 */
+	cv::Mat I1_2 = I1.mul(I1); /* I1^2 */
+	cv::Mat I1_I2 = I1.mul(I2); /* I1 * I2 */
+	cv::Mat mu1, mu2; /* PRELIMINARY COMPUTING */
 
-	Mat mu1_2 = mu1.mul(mu1);
-	Mat mu2_2 = mu2.mul(mu2);
-	Mat mu1_mu2 = mu1.mul(mu2);
+	cv::GaussianBlur(I1, mu1, cv::Size(11, 11), 1.5);
+	cv::GaussianBlur(I2, mu2, cv::Size(11, 11), 1.5);
 
-	Mat sigma1_2, sigma2_2, sigma12;
+	cv::Mat mu1_2 = mu1.mul(mu1);
+	cv::Mat mu2_2 = mu2.mul(mu2);
+	cv::Mat mu1_mu2 = mu1.mul(mu2);
+	cv::Mat sigma1_2, sigma2_2, sigma12;
 
-	GaussianBlur(I1_2, sigma1_2, Size(11, 11), 1.5);
+	cv::GaussianBlur(I1_2, sigma1_2, cv::Size(11, 11), 1.5);
 	sigma1_2 -= mu1_2;
-
-	GaussianBlur(I2_2, sigma2_2, Size(11, 11), 1.5);
+	cv::GaussianBlur(I2_2, sigma2_2, cv::Size(11, 11), 1.5);
 	sigma2_2 -= mu2_2;
-
-	GaussianBlur(I1_I2, sigma12, Size(11, 11), 1.5);
+	cv::GaussianBlur(I1_I2, sigma12, cv::Size(11, 11), 1.5);
 	sigma12 -= mu1_mu2;
 
-	Mat t1, t2, t3;
+	/* FORMULA */
+	cv::Mat t1, t2, t3;
 	t1 = 2 * mu1_mu2 + C1;
 	t2 = 2 * sigma12 + C2;
+	/* t3 = ((2*mu1_mu2 + C1).*(2*sigma12 + C2)) */
 	t3 = t1.mul(t2);
-
 	t1 = mu1_2 + mu2_2 + C1;
 	t2 = sigma1_2 + sigma2_2 + C2;
+	/* t1 =((mu1_2 + mu2_2 + C1).*(sigma1_2 + sigma2_2 + C2)) */
 	t1 = t1.mul(t2);
 
-	Mat ssim_map;
-	divide(t3, t1, ssim_map);
-	Scalar mssim = mean(ssim_map);
-	return mssim;
+	cv::Mat ssim_map;
+	divide(t3, t1, ssim_map); /* ssim_map =  t3./t1; */
+	cv::Scalar mssim = cv::mean(ssim_map); /* mssim=avg(ssim map) */
 
+	return mssim;
+}
+
+void CalculateHistogram(const cv::Mat& srcImage, const std::string& windowName, int x, int y)
+{
+	/*separate the image in 3 places(B, G and R) */
+	std::vector<cv::Mat> bgr_planes;
+	cv::split(srcImage, bgr_planes);
+
+	/*Establish the number of bins*/
+	int histSize = 256;
+
+	/*set the ranges(for B,G,R)*/
+	float range[] = { 0, 256};
+	const float* histRange = { range };
+	bool uniform = true;
+	bool accumulate = true;
+	cv::Mat b_hist, g_hist, r_hist;
+
+	/*compute the histograms:*/
+	cv::calcHist(&bgr_planes[0], 1, 0, cv::Mat(), b_hist, 1, &histSize,
+		&histRange, uniform, accumulate);
+	/*std::cout << "---BLUE---" << std::endl << b_hist << std::endl
+		<< std::endl;*/
+	cv::calcHist(&bgr_planes[1], 1, 0, cv::Mat(), g_hist, 1, &histSize,
+		&histRange, uniform, accumulate);
+	//std::cout << "---GREEN---" << std::endl << g_hist
+	//	<< std::endl << std::endl;
+	cv::calcHist(&bgr_planes[2], 1, 0, cv::Mat(), r_hist, 1, &histSize,
+		&histRange, uniform, accumulate);
+	/*std::cout << "---RED---" << std::endl << r_hist
+		<< std::endl << std::endl;*/
+
+	/* Draw the histograms for B, G and R */
+	int hist_w = 512;
+	int hist_h = 400;
+	int bin_w = cvRound((double)hist_w / histSize);
+	cv::Mat histImage(hist_h, hist_w, CV_8UC3, cv::Scalar(0, 0, 0));
+
+	/* Normalize the result to [ 0, histImage.rows ] */
+	cv::normalize(b_hist, b_hist, 0, histImage.rows,
+		cv::NORM_MINMAX, -1, cv::Mat());
+	cv::normalize(g_hist, g_hist, 0, histImage.rows,
+		cv::NORM_MINMAX, -1, cv::Mat());
+	cv::normalize(r_hist, r_hist, 0, histImage.rows,
+		cv::NORM_MINMAX, -1, cv::Mat());
+
+	/* Draw for each channel */
+	for (int i = 1; i < histSize; i++)
+	{
+		cv::line(histImage, cv::Point(bin_w*(i - 1),
+			hist_h - cvRound(b_hist.at<float>(i - 1))),
+			cv::Point(bin_w*(i),
+			hist_h - cvRound(b_hist.at<float>(i))),
+			cv::Scalar(255, 0, 0), 1, 4, 0);
+		cv::line(histImage, cv::Point(bin_w*(i - 1),
+			hist_h - cvRound(g_hist.at<float>(i - 1))),
+			cv::Point(bin_w*(i),
+			hist_h - cvRound(g_hist.at<float>(i))),
+			cv::Scalar(0, 255, 0), 1, 4, 0);
+		cv::line(histImage, cv::Point(bin_w*(i - 1),
+			hist_h - cvRound(r_hist.at<float>(i - 1))),
+			cv::Point(bin_w*(i),
+			hist_h - cvRound(r_hist.at<float>(i))),
+			cv::Scalar(0, 0, 255), 1, 4, 0);
+	}
+
+	/* Display */
+	cv::namedWindow(windowName, cv::WINDOW_AUTOSIZE);
+	cv::imshow(windowName, histImage);
+	cv::moveWindow(windowName, x, y);
+}
+
+void ShowFrames(const cv::Mat& imageToShow,
+	const std::string& windowname, int x, int y)
+{
+	//display image
+	cv::namedWindow(windowname, cv::WINDOW_AUTOSIZE);
+	cv::imshow(windowname, imageToShow);
+	cv::moveWindow(windowname, x, y);
+}
+
+std::string DoubleToString(double doubleVal)
+{
+	std::stringstream doubleBuf;
+	doubleBuf << doubleVal;
+	return doubleBuf.str();
 }
 
 int main()
 {
-	Mat i1 = imread("G:\\code\\LearningOpenCV\\data\\imgs\\1.jpg");
-	Mat i2 = imread("G:\\code\\LearningOpenCV\\data\\imgs\\2.jpg");
-	if (!i1.data || !i2.data)
+	cv::Mat referenceImage = cv::imread("1.jpg");
+	if (!referenceImage.data)
 	{
-		cout << "图片路径有误！" << endl;
+		std::cout << "Reference image has no data!" << std::endl;
 		return -1;
 	}
 
-	cout << "PSNR:" << GetPSNR(i1, i2) << endl;
-	Scalar result = GetMSSIM(i1, i2);
-	if (i2.channels() ==  3)
-		cout << "SSIM: " << (result.val[0] + result.val[1] + result.val[2]) / 3 * 100 << endl;
-	else cout << "SSIM: " << result.val[0] << endl;
+	const std::string sourceCompareWith = "G:/code/LearningOpenCV/data/imgs/2.jpg";       //file path attention please!
+	cv::Mat sampleImage = cv::imread(sourceCompareWith);
+	if (!sampleImage.data) {
+		std::cout << "Sample image has no data!" << std::endl;
+		return -1;
+	}
 
-	Mat i11, i22;
-	cvtColor(i1, i11, COLOR_RGB2YUV);
-	cvtColor(i2, i22, COLOR_RGB2YUV);
-	vector<Mat> mv1, mv2;
-	split(i11, mv1);
-	split(i22, mv2);
-	cout << "Y 分量PSNR: " << GetPSNR(mv1[0], mv2[0]) << endl;
-	cout << "Y 分量SSIM: " << GetMSSIM(mv1[0], mv2[0]).val[0] * 100 << endl;
+	//check sizes here, in case of resizing required before test
+	//do comparisons
+	double psnrV;
+	cv::Scalar mssimV;
+
+	/* PSNR */
+	psnrV = GetPSNR(referenceImage, sampleImage);
+	std::cout << std::setiosflags(std::ios::fixed) << std::setprecision(3) << psnrV << "dB"<<std::endl;
+
+	/* SSIM */
+	mssimV = GetPSNR(referenceImage, sampleImage);
+	std::cout << "MSSIM:"
+		<< " R " << std::setiosflags(std::ios::fixed) << std::setprecision(2)
+		<< mssimV.val[2] * 100 << "%"
+		<< " G " << std::setiosflags(std::ios::fixed) << std::setprecision(2)
+		<< mssimV.val[1] * 100 << "%"
+		<< " B " << std::setiosflags(std::ios::fixed) << std::setprecision(2)
+		<< mssimV.val[0] * 100 << "%" << std::endl;
+
+	std::cout << std::endl;
+
+	//show images under test
+	ShowFrames(referenceImage, "REFERENCE_WINDOW", 200, 0);
+	ShowFrames(sampleImage, "SAMPLE_WINDOW", 800, 0);
+
+	//calculate and display histograms
+	CalculateHistogram(referenceImage, "Reference Image", 200, 400);
+	CalculateHistogram(sampleImage, "Sample Image", 800, 400);
+	
+	cv::waitKey(0);
+	cv::destroyAllWindows();
+
 	return 0;
-
+	
 }
