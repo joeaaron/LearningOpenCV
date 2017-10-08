@@ -169,7 +169,7 @@ int main()
 		return -1;
 	}
 
-	const std::string sourceCompareWith = "G:/code/LearningOpenCV/data/imgs/2.jpg";       //file path attention please!
+	const std::string sourceCompareWith = "2.jpg";       //file path attention please!
 	cv::Mat sampleImage = cv::imread(sourceCompareWith);
 	if (!sampleImage.data) {
 		std::cout << "Sample image has no data!" << std::endl;
@@ -186,7 +186,7 @@ int main()
 	std::cout << std::setiosflags(std::ios::fixed) << std::setprecision(3) << psnrV << "dB"<<std::endl;
 
 	/* SSIM */
-	mssimV = GetPSNR(referenceImage, sampleImage);
+	mssimV = GetMSSIM(referenceImage, sampleImage);
 	std::cout << "MSSIM:"
 		<< " R " << std::setiosflags(std::ios::fixed) << std::setprecision(2)
 		<< mssimV.val[2] * 100 << "%"
@@ -208,6 +208,7 @@ int main()
 	cv::waitKey(0);
 	cv::destroyAllWindows();
 
+	system("pause");
 	return 0;
 	
 }
