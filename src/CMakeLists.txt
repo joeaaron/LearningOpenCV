@@ -170,3 +170,7 @@ set_target_properties(SuperResolution PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(3DPointCloud 3DPointCloud.cpp)
 target_link_libraries(3DPointCloud ${OpenCV_LIBS})
 set_target_properties(3DPointCloud PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(BrightestPoint brightestPoint.cpp)
+target_link_libraries(BrightestPoint ${OpenCV_LIBS})
+set_target_properties(BrightestPoint PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
