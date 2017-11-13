@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGUID>{BF997CF8-A288-3015-A2D8-F35551530AEC}</ProjectGUID>
+    <ProjectGUID>{E0520FDE-22DC-37A8-A874-6942BA8E3A32}</ProjectGUID>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
     <ProjectName>Incircle</ProjectName>
@@ -58,25 +58,25 @@
   <PropertyGroup Label="UserMacros" />
     <PropertyGroup>
       <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">G:\code\LearningOpenCV\bin\Debug\</OutDir>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\JohnShua\Desktop\LearningOpenCV\bin\Debug\</OutDir>
       <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Incircle.dir\Debug\</IntDir>
       <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Incircle</TargetName>
       <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
       <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
       <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
-      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">G:\code\LearningOpenCV\bin\Release\</OutDir>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\JohnShua\Desktop\LearningOpenCV\bin\Release\</OutDir>
       <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Incircle.dir\Release\</IntDir>
       <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Incircle</TargetName>
       <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
       <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
       <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
-      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">G:\code\LearningOpenCV\bin\MinSizeRel\</OutDir>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\JohnShua\Desktop\LearningOpenCV\bin\MinSizeRel\</OutDir>
       <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Incircle.dir\MinSizeRel\</IntDir>
       <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Incircle</TargetName>
       <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
       <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
       <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
-      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">G:\code\LearningOpenCV\bin\RelWithDebInfo\</OutDir>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\JohnShua\Desktop\LearningOpenCV\bin\RelWithDebInfo\</OutDir>
       <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Incircle.dir\RelWithDebInfo\</IntDir>
       <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Incircle</TargetName>
       <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
@@ -85,7 +85,7 @@
     </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -102,10 +102,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;NOMINMAX;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -114,12 +114,12 @@
     </Midl>
     <Link>
       <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/code/LearningOpenCV/bin/lib;G:/code/LearningOpenCV/bin/lib/$(Configuration);G:/code/LearningOpenCV;G:/code/LearningOpenCV/$(Configuration);G:/code/LearningOpenCV/lib;G:/code/LearningOpenCV/lib/$(Configuration);G:/code/LearningOpenCV/src;G:/code/LearningOpenCV/src/$(Configuration);G:/code/LearningOpenCV/src/SeqCapture;G:/code/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib;C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV;C:/Users/JohnShua/Desktop/LearningOpenCV/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/lib;C:/Users/JohnShua/Desktop/LearningOpenCV/lib/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/src;C:/Users/JohnShua/Desktop/LearningOpenCV/src/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/src/SeqCapture;C:/Users/JohnShua/Desktop/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/code/LearningOpenCV/bin/lib/Debug/Incircle.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/code/LearningOpenCV/bin/Debug/Incircle.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib/Debug/Incircle.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/Debug/Incircle.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version></Version>
     </Link>
@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -145,10 +145,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NOMINMAX;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -157,12 +157,12 @@
     </Midl>
     <Link>
       <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/code/LearningOpenCV/bin/lib;G:/code/LearningOpenCV/bin/lib/$(Configuration);G:/code/LearningOpenCV;G:/code/LearningOpenCV/$(Configuration);G:/code/LearningOpenCV/lib;G:/code/LearningOpenCV/lib/$(Configuration);G:/code/LearningOpenCV/src;G:/code/LearningOpenCV/src/$(Configuration);G:/code/LearningOpenCV/src/SeqCapture;G:/code/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib;C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV;C:/Users/JohnShua/Desktop/LearningOpenCV/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/lib;C:/Users/JohnShua/Desktop/LearningOpenCV/lib/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/src;C:/Users/JohnShua/Desktop/LearningOpenCV/src/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/src/SeqCapture;C:/Users/JohnShua/Desktop/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/code/LearningOpenCV/bin/lib/Release/Incircle.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/code/LearningOpenCV/bin/Release/Incircle.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib/Release/Incircle.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/Release/Incircle.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version></Version>
     </Link>
@@ -172,7 +172,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -188,10 +188,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NOMINMAX;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -200,12 +200,12 @@
     </Midl>
     <Link>
       <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/code/LearningOpenCV/bin/lib;G:/code/LearningOpenCV/bin/lib/$(Configuration);G:/code/LearningOpenCV;G:/code/LearningOpenCV/$(Configuration);G:/code/LearningOpenCV/lib;G:/code/LearningOpenCV/lib/$(Configuration);G:/code/LearningOpenCV/src;G:/code/LearningOpenCV/src/$(Configuration);G:/code/LearningOpenCV/src/SeqCapture;G:/code/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib;C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV;C:/Users/JohnShua/Desktop/LearningOpenCV/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/lib;C:/Users/JohnShua/Desktop/LearningOpenCV/lib/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/src;C:/Users/JohnShua/Desktop/LearningOpenCV/src/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/src/SeqCapture;C:/Users/JohnShua/Desktop/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/code/LearningOpenCV/bin/lib/MinSizeRel/Incircle.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/code/LearningOpenCV/bin/MinSizeRel/Incircle.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib/MinSizeRel/Incircle.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/MinSizeRel/Incircle.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version></Version>
     </Link>
@@ -215,7 +215,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -231,10 +231,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NOMINMAX;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\code\LearningOpenCV\include;G:\code\LearningOpenCV\src;G:\code\LearningOpenCV\src\SeqCapture;D:\Program Files\opencv_build\install\include;D:\Program Files\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JohnShua\Desktop\LearningOpenCV\include;C:\Users\JohnShua\Desktop\LearningOpenCV\src;C:\Users\JohnShua\Desktop\LearningOpenCV\src\SeqCapture;D:\opencv_build\install\include;D:\opencv_build\install\include\opencv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -243,12 +243,12 @@
     </Midl>
     <Link>
       <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/code/LearningOpenCV/bin/lib;G:/code/LearningOpenCV/bin/lib/$(Configuration);G:/code/LearningOpenCV;G:/code/LearningOpenCV/$(Configuration);G:/code/LearningOpenCV/lib;G:/code/LearningOpenCV/lib/$(Configuration);G:/code/LearningOpenCV/src;G:/code/LearningOpenCV/src/$(Configuration);G:/code/LearningOpenCV/src/SeqCapture;G:/code/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_video320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib;D:\opencv_build\install\x86\vc12\lib\opencv_core320d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib;C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV;C:/Users/JohnShua/Desktop/LearningOpenCV/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/lib;C:/Users/JohnShua/Desktop/LearningOpenCV/lib/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/src;C:/Users/JohnShua/Desktop/LearningOpenCV/src/$(Configuration);C:/Users/JohnShua/Desktop/LearningOpenCV/src/SeqCapture;C:/Users/JohnShua/Desktop/LearningOpenCV/src/SeqCapture/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/code/LearningOpenCV/bin/lib/RelWithDebInfo/Incircle.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/code/LearningOpenCV/bin/RelWithDebInfo/Incircle.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/lib/RelWithDebInfo/Incircle.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/JohnShua/Desktop/LearningOpenCV/bin/RelWithDebInfo/Incircle.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version></Version>
     </Link>
@@ -257,10 +257,10 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="G:\code\LearningOpenCV\src\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule G:/code/LearningOpenCV/src/CMakeLists.txt</Message>
+    <CustomBuild Include="C:\Users\JohnShua\Desktop\LearningOpenCV\src\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/JohnShua/Desktop/LearningOpenCV/src/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-F:\install\cmake\bin\cmake.exe -HG:/code/LearningOpenCV -BG:/code/LearningOpenCV/build --check-stamp-file G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp
+"D:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/JohnShua/Desktop/LearningOpenCV -BC:/Users/JohnShua/Desktop/LearningOpenCV/build --check-stamp-file C:\Users\JohnShua\Desktop\LearningOpenCV\build\src\CMakeFiles\generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -268,12 +268,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">G:/code/LearningOpenCV/src/CMakeLists.txt;G:\code\LearningOpenCV\src\CMakeLists.txt;D:\Program Files\opencv_build\install\OpenCVConfig-version.cmake;D:\Program Files\opencv_build\install\OpenCVConfig.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;F:\install\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;G:\code\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/JohnShua/Desktop/LearningOpenCV/src/CMakeLists.txt;C:\Users\JohnShua\Desktop\LearningOpenCV\src\CMakeLists.txt;D:\opencv_build\install\OpenCVConfig-version.cmake;D:\opencv_build\install\OpenCVConfig.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;C:\Users\JohnShua\Desktop\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\JohnShua\Desktop\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule G:/code/LearningOpenCV/src/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/JohnShua/Desktop/LearningOpenCV/src/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-F:\install\cmake\bin\cmake.exe -HG:/code/LearningOpenCV -BG:/code/LearningOpenCV/build --check-stamp-file G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp
+"D:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/JohnShua/Desktop/LearningOpenCV -BC:/Users/JohnShua/Desktop/LearningOpenCV/build --check-stamp-file C:\Users\JohnShua\Desktop\LearningOpenCV\build\src\CMakeFiles\generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -281,12 +281,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">G:/code/LearningOpenCV/src/CMakeLists.txt;G:\code\LearningOpenCV\src\CMakeLists.txt;D:\Program Files\opencv_build\install\OpenCVConfig-version.cmake;D:\Program Files\opencv_build\install\OpenCVConfig.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;F:\install\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;G:\code\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/JohnShua/Desktop/LearningOpenCV/src/CMakeLists.txt;C:\Users\JohnShua\Desktop\LearningOpenCV\src\CMakeLists.txt;D:\opencv_build\install\OpenCVConfig-version.cmake;D:\opencv_build\install\OpenCVConfig.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;C:\Users\JohnShua\Desktop\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\JohnShua\Desktop\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule G:/code/LearningOpenCV/src/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/JohnShua/Desktop/LearningOpenCV/src/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-F:\install\cmake\bin\cmake.exe -HG:/code/LearningOpenCV -BG:/code/LearningOpenCV/build --check-stamp-file G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp
+"D:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/JohnShua/Desktop/LearningOpenCV -BC:/Users/JohnShua/Desktop/LearningOpenCV/build --check-stamp-file C:\Users\JohnShua\Desktop\LearningOpenCV\build\src\CMakeFiles\generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -294,12 +294,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">G:/code/LearningOpenCV/src/CMakeLists.txt;G:\code\LearningOpenCV\src\CMakeLists.txt;D:\Program Files\opencv_build\install\OpenCVConfig-version.cmake;D:\Program Files\opencv_build\install\OpenCVConfig.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;F:\install\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;G:\code\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/JohnShua/Desktop/LearningOpenCV/src/CMakeLists.txt;C:\Users\JohnShua\Desktop\LearningOpenCV\src\CMakeLists.txt;D:\opencv_build\install\OpenCVConfig-version.cmake;D:\opencv_build\install\OpenCVConfig.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;C:\Users\JohnShua\Desktop\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\JohnShua\Desktop\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule G:/code/LearningOpenCV/src/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/JohnShua/Desktop/LearningOpenCV/src/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-F:\install\cmake\bin\cmake.exe -HG:/code/LearningOpenCV -BG:/code/LearningOpenCV/build --check-stamp-file G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp
+"D:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/JohnShua/Desktop/LearningOpenCV -BC:/Users/JohnShua/Desktop/LearningOpenCV/build --check-stamp-file C:\Users\JohnShua\Desktop\LearningOpenCV\build\src\CMakeFiles\generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -307,17 +307,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">G:/code/LearningOpenCV/src/CMakeLists.txt;G:\code\LearningOpenCV\src\CMakeLists.txt;D:\Program Files\opencv_build\install\OpenCVConfig-version.cmake;D:\Program Files\opencv_build\install\OpenCVConfig.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;F:\install\cmake\share\cmake-3.7\Modules\FindPackageMessage.cmake;F:\install\cmake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\Program Files\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;G:\code\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/JohnShua/Desktop/LearningOpenCV/src/CMakeLists.txt;C:\Users\JohnShua\Desktop\LearningOpenCV\src\CMakeLists.txt;D:\opencv_build\install\OpenCVConfig-version.cmake;D:\opencv_build\install\OpenCVConfig.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVConfig.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files (x86)\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVModules.cmake;D:\opencv_build\install\x86\vc12\lib\OpenCVModules-debug.cmake;C:\Users\JohnShua\Desktop\LearningOpenCV\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\JohnShua\Desktop\LearningOpenCV\build\src\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="G:\code\LearningOpenCV\src\incircle.cpp"  />
+    <ClCompile Include="C:\Users\JohnShua\Desktop\LearningOpenCV\src\incircle.cpp"  />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="G:/code/LearningOpenCV/build/ZERO_CHECK.vcxproj">
-      <Project>A6CB03A6-A939-35E5-8B0B-A22E55722888</Project>
+    <ProjectReference Include="C:/Users/JohnShua/Desktop/LearningOpenCV/build/ZERO_CHECK.vcxproj">
+      <Project>D6EBB98B-9EBD-31F5-9A1E-7DE161964A13</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -959,6 +959,7 @@ build/src/3DPointCloud.dir/Debug/3DPointCloud.tlog/link.read.1.tlog
 build/src/3DPointCloud.dir/Debug/3DPointCloud.tlog/3DPointCloud.lastbuildstate
 build/src/3DPointCloud.dir/Debug/3DPointCloud.obj
 build/src/ImageQuality.vcxproj.user
+<<<<<<< HEAD
 build/src/ImagePartition.dir/Debug/ImagePartition.tlog/link.command.1.tlog
 build/src/ImagePartition.dir/Debug/ImagePartition.tlog/custombuild.write.1.tlog
 build/src/ImagePartition.dir/Debug/ImagePartition.tlog/custombuild.read.1.tlog
@@ -982,3 +983,24 @@ build/src/ImagePartition.dir/Debug/ImagePartition.log
 bin/Debug/ImagePartition.pdb
 bin/Debug/ImagePartition.ilk
 bin/Debug/ImagePartition.exe
+=======
+build/src/BrightestPoint.dir/Debug/BrightestPoint.tlog/link.write.1.tlog
+build/src/BrightestPoint.dir/Debug/BrightestPoint.tlog/link.read.1.tlog
+build/src/BrightestPoint.dir/Debug/BrightestPoint.tlog/link.command.1.tlog
+build/src/BrightestPoint.dir/Debug/BrightestPoint.tlog/custombuild.write.1.tlog
+build/src/BrightestPoint.dir/Debug/BrightestPoint.tlog/custombuild.read.1.tlog
+build/src/BrightestPoint.dir/Debug/BrightestPoint.tlog/custombuild.command.1.tlog
+build/src/BrightestPoint.dir/Debug/BrightestPoint.tlog/cl.write.1.tlog
+build/src/BrightestPoint.dir/Debug/BrightestPoint.tlog/cl.read.1.tlog
+build/src/BrightestPoint.dir/Debug/BrightestPoint.tlog/cl.command.1.tlog
+bin/Debug/BrightestPoint.ilk
+bin/Debug/BrightestPoint.exe
+build/src/BrightestPoint.dir/Debug/BrightestPoint.tlog/BrightestPoint.lastbuildstate
+build/src/BrightestPoint.dir/Debug/BrightestPoint.log
+bin/Debug/BrightestPoint.pdb
+build/src/BrightestPoint.vcxproj
+build/src/BrightestPoint.dir/Debug/vc120.pdb
+build/src/BrightestPoint.dir/Debug/brightestPoint.obj
+build/src/BrightestPoint.vcxproj.user
+build/src/BrightestPoint.vcxproj.filters
+>>>>>>> c7153ebcd9837087902198753d8b1be5d0cd25f4

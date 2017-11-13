@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="G:\code\LearningOpenCV\src\incircle.cpp">
+    <ClCompile Include="C:\Users\JohnShua\Desktop\LearningOpenCV\src\incircle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="G:\code\LearningOpenCV\src\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\JohnShua\Desktop\LearningOpenCV\src\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{F18A97A6-491F-3BF5-8783-6BB708E04A41}</UniqueIdentifier>
+      <UniqueIdentifier>{24C76C51-636F-3016-9346-FCC7EE604D46}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

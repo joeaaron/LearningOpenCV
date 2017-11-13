@@ -174,3 +174,8 @@ set_target_properties(3DPointCloud PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(ImagePartition imagePartition.cpp)
 target_link_libraries(ImagePartition ${OpenCV_LIBS})
 set_target_properties(ImagePartition PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(BrightestPoint brightestPoint.cpp)
+target_link_libraries(BrightestPoint ${OpenCV_LIBS})
+set_target_properties(BrightestPoint PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
