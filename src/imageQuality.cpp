@@ -8,6 +8,15 @@
 #include <opencv2\imgproc\imgproc.hpp>
 #include <opencv2\core\core.hpp>
 
+//************************************
+// Method:    GetPSNR
+// FullName:  GetPSNR
+// Access:    public 
+// Returns:   double 
+// Qualifier: PSNR越高，图像和原图越接近; 用得最多，但是其值不能很好地反映人眼主观感受。一般取值范围：20-40.值越大，视频质量越好。
+// Parameter: const cv::Mat & I1
+// Parameter: const cv::Mat & I2
+//************************************
 double GetPSNR(const cv::Mat& I1, const cv::Mat& I2)
 {
 	cv::Mat s1;
@@ -26,6 +35,15 @@ double GetPSNR(const cv::Mat& I1, const cv::Mat& I2)
 	}
 }
 
+//************************************
+// Method:    GetMSSIM
+// FullName:  GetMSSIM
+// Access:    public 
+// Returns:   cv::Scalar
+// Qualifier:
+// Parameter: const cv::Mat & i1
+// Parameter: const cv::Mat & i2
+//************************************
 cv::Scalar GetMSSIM(const cv::Mat& i1, const cv::Mat& i2)
 {
 	const double C1 = 6.5025, C2 = 58.5225;
@@ -72,6 +90,69 @@ cv::Scalar GetMSSIM(const cv::Mat& i1, const cv::Mat& i2)
 	cv::Scalar mssim = cv::mean(ssim_map); /* mssim=avg(ssim map) */
 
 	return mssim;
+}
+
+void GetHash(cv::Mat src1, cv::Mat src2)
+{
+	//cv::resize(src, src1, cv::Size(357, 419), 0, 0, cv::INTER_NEAREST);
+	////cv::flip(matSrc1, matSrc1, 1);
+	//cv::resize(src, src2, cv::Size(2177, 3233), 0, 0, cv::INTER_LANCZOS4);
+
+	cv::Mat matDst1, matDst2;
+
+	cv::resize(src1, matDst1, cv::Size(8, 8), 0, 0, cv::INTER_CUBIC);
+	cv::resize(src2, matDst2, cv::Size(8, 8), 0, 0, cv::INTER_CUBIC);
+
+	cv::cvtColor(matDst1, matDst1, CV_BGR2GRAY);
+	cv::cvtColor(matDst2, matDst2, CV_BGR2GRAY);
+
+	int iAvg1 = 0;
+	int iAvg2 = 0;
+
+	int arr1[64], arr2[64];
+
+	for (int i = 0; i < 8; i++)
+	{
+		uchar* data1 = matDst1.ptr<uchar>(i);
+		uchar* data2 = matDst2.ptr<uchar>(i);
+
+		int tmp = i * 8;
+
+		for (int j = 0; j < 8; j++)
+		{
+			int tmp1 = tmp + j;
+
+			arr1[tmp1] = data1[j] / 4 * 4;
+			arr2[tmp1] = data2[j] / 4 * 4;
+
+			iAvg1 += arr1[tmp1];
+			iAvg2 += arr2[tmp1];
+		}
+	}
+
+	iAvg1 /= 64;
+	iAvg2 /= 64;
+
+	for (int i = 0; i < 64; i++)
+	{
+		arr1[i] = (arr1[i] >= iAvg1) ? 1 : 0;
+		arr2[i] = (arr2[i] >= iAvg2) ? 1 : 0;
+	}
+
+	int iDiffNum = 0;
+
+	for (int i = 0; i < 64; i++)
+		if (arr1[i] != arr2[i])
+			++iDiffNum;
+
+	std::cout << "iDiffNum = " << iDiffNum << std::endl;
+
+	if (iDiffNum <= 5)
+		std::cout << "two images ars very similar!" << std::endl;
+	else if (iDiffNum > 10)
+		std::cout << "they are two different images!" << std::endl;
+	else
+		std::cout << "two image are somewhat similar!" << std::endl;
 }
 
 void CalculateHistogram(const cv::Mat& srcImage, const std::string& windowName, int x, int y)
@@ -162,20 +243,22 @@ std::string DoubleToString(double doubleVal)
 
 int main()
 {
-	cv::Mat referenceImage = cv::imread("1.jpg");
+	cv::Mat referenceImage = cv::imread("std.bmp");
 	if (!referenceImage.data)
 	{
 		std::cout << "Reference image has no data!" << std::endl;
 		return -1;
 	}
 
-	const std::string sourceCompareWith = "2.jpg";       //file path attention please!
+	const std::string sourceCompareWith = "x5.bmp";       //file path attention please!
 	cv::Mat sampleImage = cv::imread(sourceCompareWith);
 	if (!sampleImage.data) {
 		std::cout << "Sample image has no data!" << std::endl;
 		return -1;
 	}
 
+	//感知哈希算法
+	GetHash(referenceImage, sampleImage);
 	//check sizes here, in case of resizing required before test
 	//do comparisons
 	double psnrV;
@@ -183,7 +266,7 @@ int main()
 
 	/* PSNR */
 	psnrV = GetPSNR(referenceImage, sampleImage);
-	std::cout << std::setiosflags(std::ios::fixed) << std::setprecision(3) << psnrV << "dB"<<std::endl;
+	std::cout << "PSNR:"<< " " << std::setiosflags(std::ios::fixed) << std::setprecision(3) << psnrV << "dB" << std::endl;
 
 	/* SSIM */
 	mssimV = GetMSSIM(referenceImage, sampleImage);
