@@ -1004,3 +1004,21 @@ build/src/BrightestPoint.dir/Debug/brightestPoint.obj
 build/src/BrightestPoint.vcxproj.user
 build/src/BrightestPoint.vcxproj.filters
 >>>>>>> c7153ebcd9837087902198753d8b1be5d0cd25f4
+build/src/SingleCamera.vcxproj.user
+build/src/SingleCamera.vcxproj.filters
+build/src/SingleCamera.vcxproj
+build/src/SingleCamera.dir/Debug/vc120.pdb
+build/src/SingleCamera.dir/Debug/single_camera_calibration.obj
+bin/Debug/SingleCamera.ilk
+build/src/SingleCamera.dir/Debug/SingleCamera.tlog/cl.write.1.tlog
+build/src/SingleCamera.dir/Debug/SingleCamera.tlog/cl.read.1.tlog
+build/src/SingleCamera.dir/Debug/SingleCamera.tlog/cl.command.1.tlog
+build/src/SingleCamera.dir/Debug/SingleCamera.tlog/SingleCamera.lastbuildstate
+build/src/SingleCamera.dir/Debug/SingleCamera.log
+bin/Debug/SingleCamera.pdb
+build/src/SingleCamera.dir/Debug/SingleCamera.tlog/link.write.1.tlog
+build/src/SingleCamera.dir/Debug/SingleCamera.tlog/link.read.1.tlog
+build/src/SingleCamera.dir/Debug/SingleCamera.tlog/link.command.1.tlog
+build/src/SingleCamera.dir/Debug/SingleCamera.tlog/custombuild.write.1.tlog
+build/src/SingleCamera.dir/Debug/SingleCamera.tlog/custombuild.read.1.tlog
+build/src/SingleCamera.dir/Debug/SingleCamera.tlog/custombuild.command.1.tlog
