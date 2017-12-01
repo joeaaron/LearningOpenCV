@@ -186,3 +186,7 @@ set_target_properties(SingleCamera PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(Bwareaopen bwareaopen.cpp)
 target_link_libraries(Bwareaopen ${OpenCV_LIBS})
 set_target_properties(Bwareaopen PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(ObjectMainDirection objectMainDirection.cpp)
+target_link_libraries(ObjectMainDirection ${OpenCV_LIBS})
+set_target_properties(ObjectMainDirection PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
