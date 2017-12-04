@@ -22,5 +22,6 @@ int main()
 			imageResult.at<Vec3b>(i, j)[2] = imageSource.at<Vec3b>(i + randomNum, j + randomNum)[2];
 		}
 	imshow("Ã«²£Á§Ð§¹û", imageResult);
+	imwrite("lena.bmp", imageResult);
 	waitKey();
 }

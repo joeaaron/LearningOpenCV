@@ -202,13 +202,13 @@ int main(int argc, char* argv[])
 	cvShowImage("Image1", pImg);//显示图像  
 
 	cvWaitKey(0); //等待按键  
-
+	cvSaveImage("haha.png", pImg1, 0);
 	//销毁窗口 释放内存  
 	cvDestroyWindow("Image");//销毁窗口  
 	cvReleaseImage(&pImg); //释放图像  
 	cvDestroyWindow("Image1");//销毁窗口  
 	cvReleaseImage(&pImg1); //释放图像  
-
+	
 	return 0;
 
 }

@@ -225,7 +225,7 @@ Mat ThinImage(Mat &src, const int maxIteration )
 
 int main()
 {
-	src = imread("./data/imgs/preThinImage.png");
+	src = imread("preThinImage.png");
     if (src.empty())
     {
 		cout << "reading failed!" << endl;
@@ -239,6 +239,6 @@ int main()
 	imshow(original_name, src);
 	imshow(window_name, dst);
 
-	imwrite("./Image/aftThinImage.png", dst);
+	imwrite("afterThinImage.png", dst);
 	waitKey(0);
 }

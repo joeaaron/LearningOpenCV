@@ -61,5 +61,6 @@ void onMouse(int event, int x, int y, int flag, void *ustg)
 		}
 	}
 	imshow("ÂíÈü¿Ë", imageSourceCopy);
+	imwrite("mosaic.bmp", imageSourceCopy);
 	waitKey();
 }

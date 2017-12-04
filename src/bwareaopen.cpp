@@ -70,6 +70,7 @@ int main()
 	bwareaopen(output, 1000);
 	imshow("input", input);
 	imshow("output", output);
+	imwrite("output.bmp", output);
 	waitKey(0);
     return 0;
 }

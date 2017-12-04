@@ -53,5 +53,6 @@ int main(int argc, char* argv[])
 	//»æÖÆ½á¹û
 	circle(src, center, maxdist, Scalar(0, 0, 255));
 	imshow("dst", src);
+	imwrite("dst.bmp", src);
 	waitKey();
 }

@@ -1,23 +1,20 @@
-﻿Build started 2017/7/28 18:13:09.
-     1>Project "G:\code\LearningOpenCV\build\src\Incircle.vcxproj" on node 2 (Rebuild target(s)).
-     1>CustomBuild:
-         Building Custom Rule G:/code/LearningOpenCV/src/CMakeLists.txt
-         CMake does not need to re-run because G:\code\LearningOpenCV\build\src\CMakeFiles\generate.stamp is up-to-date.
-       ClCompile:
-         D:\Program Files (x86)\VS2013\VC\bin\CL.exe /c /IG:\code\LearningOpenCV\include /IG:\code\LearningOpenCV\src /IG:\code\LearningOpenCV\src\SeqCapture /I"D:\Program Files\opencv_build\install\include" /I"D:\Program Files\opencv_build\install\include\opencv" /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D NOMINMAX /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Incircle.dir\Debug\\" /Fd"Incircle.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\incircle.cpp
+﻿Build started 2017/12/4 18:06:18.
+     1>Project "G:\code\LearningOpenCV\build\src\Incircle.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\Program Files (x86)\VS2013\VC\bin\CL.exe /c /IG:\code\LearningOpenCV\include /IG:\code\LearningOpenCV\src /IG:\code\LearningOpenCV\src\SeqCapture /I"D:\Program Files\opencv_build\install\include" /I"D:\Program Files\opencv_build\install\include\opencv" /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D NOMINMAX /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Incircle.dir\Debug\\" /Fd"Incircle.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt G:\code\LearningOpenCV\src\incircle.cpp
          incircle.cpp
      1>D:\Program Files\opencv_build\install\include\opencv2/core/mat.hpp(2586): warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
      1>D:\Program Files\opencv_build\install\include\opencv2/core/persistence.hpp : warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
      1>D:\Program Files\opencv_build\install\include\opencv2/core/utility.hpp : warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
      1>D:\Program Files\opencv_build\install\include\opencv2/imgproc.hpp(596): warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
-     1>..\..\src\incircle.cpp(14): warning C4018: '<' : signed/unsigned mismatch
-     1>..\..\src\incircle.cpp(15): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>..\..\src\incircle.cpp(45): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>G:\code\LearningOpenCV\src\incircle.cpp(14): warning C4018: '<' : signed/unsigned mismatch
+     1>G:\code\LearningOpenCV\src\incircle.cpp(15): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>G:\code\LearningOpenCV\src\incircle.cpp(45): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
        Link:
          D:\Program Files (x86)\VS2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"G:\code\LearningOpenCV\bin\Debug\Incircle.exe" /INCREMENTAL /NOLOGO /LIBPATH:G:/code/LearningOpenCV/bin/lib /LIBPATH:G:/code/LearningOpenCV/bin/lib/Debug /LIBPATH:G:/code/LearningOpenCV /LIBPATH:G:/code/LearningOpenCV/Debug /LIBPATH:G:/code/LearningOpenCV/lib /LIBPATH:G:/code/LearningOpenCV/lib/Debug /LIBPATH:G:/code/LearningOpenCV/src /LIBPATH:G:/code/LearningOpenCV/src/Debug /LIBPATH:G:/code/LearningOpenCV/src/SeqCapture /LIBPATH:G:/code/LearningOpenCV/src/SeqCapture/Debug kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_shape320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_stitching320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_superres320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videostab320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_objdetect320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_calib3d320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_features2d320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_flann320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_highgui320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_ml320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_photo320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_video320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_videoio320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgcodecs320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_imgproc320d.lib" "D:\Program Files\opencv_build\install\x86\vc12\lib\opencv_core320d.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"G:/code/LearningOpenCV/bin/Debug/Incircle.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"G:/code/LearningOpenCV/bin/lib/Debug/Incircle.lib" /MACHINE:X86 /SAFESEH  /machine:X86 Incircle.dir\Debug\incircle.obj
          Incircle.vcxproj -> G:\code\LearningOpenCV\bin\Debug\Incircle.exe
-     1>Done Building Project "G:\code\LearningOpenCV\build\src\Incircle.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "G:\code\LearningOpenCV\build\src\Incircle.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.11
+Time Elapsed 00:00:00.83

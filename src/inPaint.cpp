@@ -63,5 +63,6 @@ void OnMouse(int event, int x, int y, int flag, void *ustg)
 		inpaint(ROI, imageMask, ROI, 9, INPAINT_TELEA);  //Í¼ÏñÐÞ¸´
 		imshow("Mask", imageMask);
 		imshow("ÐÞ¸´ºó", imageSource);
+		imwrite("imageSource.bmp", imageSource);
 	}
 }

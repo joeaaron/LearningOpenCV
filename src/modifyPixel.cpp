@@ -39,6 +39,7 @@ int main()
 	//通过LUT函数实现图像取反
 	LUT(img1, lookupTable, img1);
 	cv::imshow("Second",img1);
+	imwrite("robot.bmp", img1);
 	cv::waitKey();
 	return 0;
 }
