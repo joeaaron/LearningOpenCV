@@ -194,3 +194,11 @@ set_target_properties(ObjectMainDirection PROPERTIES COMPILE_DEFINITIONS NOMINMA
 add_executable(BadPoint badPoint.cpp)
 target_link_libraries(BadPoint ${OpenCV_LIBS})
 set_target_properties(BadPoint PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(Hsv hsv.cpp)
+target_link_libraries(Hsv ${OpenCV_LIBS})
+set_target_properties(Hsv PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(FindContourCenterPoint findContourCenterPoint.cpp)
+target_link_libraries(FindContourCenterPoint ${OpenCV_LIBS})
+set_target_properties(FindContourCenterPoint PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
