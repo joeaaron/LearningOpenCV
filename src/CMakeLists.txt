@@ -202,3 +202,11 @@ set_target_properties(Hsv PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(FindContourCenterPoint findContourCenterPoint.cpp)
 target_link_libraries(FindContourCenterPoint ${OpenCV_LIBS})
 set_target_properties(FindContourCenterPoint PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(Test test.cpp)
+target_link_libraries(Test ${OpenCV_LIBS})
+set_target_properties(Test PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(CountCellsNum countCellsNum.cpp)
+target_link_libraries(CountCellsNum ${OpenCV_LIBS})
+set_target_properties(CountCellsNum PROPERTIES COMPILE_DEFINITIONS NOMINMAX)

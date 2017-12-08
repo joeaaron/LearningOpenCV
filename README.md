@@ -198,5 +198,29 @@ Opencv中提供了SimpleBlobDetector的特征点检测方法。
 3.[论文 A fast parallel algorithm for thinning digital patterns](http://wenku.baidu.com/link?url=CUrmS4LgO7DAL7GFl4yWZLkghCfvYnR3VvVsr3gj3lF_VTtS97nFz3B_1q2iXQDLObX_4oPM_qBPUPkdGMk6gXw7NdFP5spItERvqxfbK6W)
 
 ----------
+### 十七、寻找轮廓中心点 ###
+- 阈值
+- 寻找轮廓
+- 计算中心点
 
+<center>
+![](https://images2018.cnblogs.com/blog/508489/201712/508489-20171203214438304-834121282.png)
+</center>
 
+----------
+### 十八、黏连细胞计数 ###
+- 寻找该图像的最小凸闭包，
+- 凸闭包和凹图形相减得到凹区域
+- 提取凹区域的轮廓
+- 按照区域面积大小最为权重，选取最大的两个区域作为凹点所在区域
+- 遍历这两个区域，寻找距离最短的两个点作为凹点
+- 基于该两个凹点分割
+
+<center>
+![](http://img.blog.csdn.net/20170725114507556?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTU5NDc3ODc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+</center>
+
+#### Reference: ####
+1.【[【opencv】凹点切分，种子计数，细胞计数前提 17/7/25更新](http://blog.csdn.net/qq_15947787/article/details/74583077)】 
+
+----------
