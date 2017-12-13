@@ -43,7 +43,7 @@ cv::Mat searchConcaveRegion(std::vector<std::vector<cv::Point> >contours, cv::Ma
 		return cv::Mat();
 
 	//遍历每个轮廓，寻找其凸包  
-	std::vector<	std::vector<cv::Point>>hull(contours.size());
+	std::vector<std::vector<cv::Point>>hull(contours.size());
 	for (unsigned int i = 0; i < contours.size(); ++i)
 	{
 		convexHull(cv::Mat(contours[i]), hull[i], false);
