@@ -218,3 +218,7 @@ set_target_properties(RemoveSeal PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(HVProjection hvProjection.cpp)
 target_link_libraries(HVProjection ${OpenCV_LIBS})
 set_target_properties(HVProjection PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(FindObject findObject.cpp)
+target_link_libraries(FindObject ${OpenCV_LIBS})
+set_target_properties(FindObject PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
