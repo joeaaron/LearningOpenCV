@@ -222,3 +222,7 @@ set_target_properties(HVProjection PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(FindObject findObject.cpp)
 target_link_libraries(FindObject ${OpenCV_LIBS})
 set_target_properties(FindObject PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(TwoLineAngle twoLineAngle.cpp)
+target_link_libraries(TwoLineAngle ${OpenCV_LIBS})
+set_target_properties(TwoLineAngle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
