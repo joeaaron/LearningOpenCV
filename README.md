@@ -224,3 +224,15 @@ Opencv中提供了SimpleBlobDetector的特征点检测方法。
 1.【[【opencv】凹点切分，种子计数，细胞计数前提 17/7/25更新](http://blog.csdn.net/qq_15947787/article/details/74583077)】 
 
 ----------
+### 十九、去除印章 ###
+- 通道选择
+- 二值化
+
+
+----------
+
+### 二十、检测椭圆和边 ###
+
+- HoughLinesP
+- findContours
+- fitEllipse

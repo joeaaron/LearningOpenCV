@@ -4,8 +4,8 @@
 
 int main()
 {
-	cv::Mat img_1 = cv::imread("wechat.jpg");
-	cv::Mat img_2 = cv::imread("alipay.jpg");
+	cv::Mat img_1 = cv::imread("btb3.bmp");
+	cv::Mat img_2 = cv::imread("result.bmp");
 
 	cv::Mat dst;
 	std::vector<cv::Mat> manyImg;
