@@ -226,3 +226,7 @@ set_target_properties(FindObject PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(TwoLineAngle twoLineAngle.cpp)
 target_link_libraries(TwoLineAngle ${OpenCV_LIBS})
 set_target_properties(TwoLineAngle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(Histograph histograph.cpp)
+target_link_libraries(Histograph ${OpenCV_LIBS})
+set_target_properties(Histograph PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
