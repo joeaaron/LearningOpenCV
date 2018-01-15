@@ -226,3 +226,8 @@ set_target_properties(FindObject PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(Realtime_online_cb_det Realtime_online_cb_det.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
 target_link_libraries(Realtime_online_cb_det ${OpenCV_LIBS})
 set_target_properties(Realtime_online_cb_det PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(TwoLineAngle twoLineAngle.cpp)
+target_link_libraries(TwoLineAngle ${OpenCV_LIBS})
+set_target_properties(TwoLineAngle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+

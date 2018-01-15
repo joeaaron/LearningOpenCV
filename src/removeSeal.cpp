@@ -36,7 +36,7 @@ int main()
 	cv::imshow("blue channel", blue);
 	cv::imshow("green channel", green);
 	cv::imshow("red+binary", redBinary);
-
+	cv::imwrite("result.bmp", redBinary);
 	cv::waitKey();
 
 

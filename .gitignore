@@ -1248,6 +1248,7 @@ build/src/Test.dir/Debug/Test.log
 build/src/Test.dir/Debug/Test.tlog/custombuild.read.1.tlog
 build/src/Test.dir/Debug/Test.tlog/custombuild.command.1.tlog
 build/src/Test.dir/Debug/Test.tlog/CL.read.1.tlog
+<<<<<<< HEAD
 build/src/Realtime_online_cb_det.vcxproj.filters
 build/src/Realtime_online_cb_det.vcxproj
 build/src/Realtime_online_cb_det.dir/Debug/wavelet_cdf97.obj
@@ -1266,3 +1267,23 @@ build/src/Realtime_online_cb_det.dir/Debug/Realtime.92FBD95E.tlog/Realtime_onlin
 build/src/Realtime_online_cb_det.dir/Debug/Realtime.92FBD95E.tlog/CL.write.1.tlog
 build/src/Realtime_online_cb_det.dir/Debug/Realtime.92FBD95E.tlog/CL.read.1.tlog
 build/src/Realtime_online_cb_det.dir/Debug/Realtime.92FBD95E.tlog/custombuild.command.1.tlog
+=======
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.tlog/custombuild.write.1.tlog
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.tlog/custombuild.read.1.tlog
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.tlog/custombuild.command.1.tlog
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.tlog/cl.write.1.tlog
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.tlog/cl.read.1.tlog
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.tlog/cl.command.1.tlog
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.tlog/TwoLineAngle.lastbuildstate
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.log
+bin/Debug/TwoLineAngle.pdb
+bin/Debug/TwoLineAngle.ilk
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.tlog/link.read.1.tlog
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.tlog/link.command.1.tlog
+bin/Debug/TwoLineAngle.exe
+build/src/TwoLineAngle.vcxproj.filters
+build/src/TwoLineAngle.vcxproj
+build/src/TwoLineAngle.dir/Debug/vc120.pdb
+build/src/TwoLineAngle.dir/Debug/twoLineAngle.obj
+build/src/TwoLineAngle.dir/Debug/TwoLineAngle.tlog/link.write.1.tlog
+>>>>>>> origin/PT-DEV
