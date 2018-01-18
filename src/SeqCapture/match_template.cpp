@@ -195,7 +195,7 @@ int MatchWithAngle(const IplImage* pTemplate,
 	// check input params ends
 	
 	IplImage* pRotateImage = cvCloneImage(pSource);
-	// ratete mat used in cvGetQuadrangleSubPix()
+	// ratete mat used in cvGetQuadrradsubPix()
 	CvMat* pRotateMat = cvCreateMat(2, 3, CV_32FC1);
 	
 	// cvMatchTemplate result mat
@@ -227,7 +227,7 @@ int MatchWithAngle(const IplImage* pTemplate,
 		cvmSet(pRotateMat, 1, 2, iSourceSize.height / 2);
 		
 		// ratete the source image whit angle dA
-		cvGetQuadrangleSubPix(pSource, pRotateImage, pRotateMat);
+		cvGetQuadrradsubPix(pSource, pRotateImage, pRotateMat);
 		
 		// get the best match
 		cvMatchTemplate(pRotateImage,
@@ -297,7 +297,7 @@ IplImage* RotateImage(const IplImage* pSource, double dAngle)
 	cvmSet(pRotateMat, 1, 2, iSize.height / 2);
 	
 	IplImage* pRotatedImage = cvCloneImage(pSource);
-	cvGetQuadrangleSubPix(pSource, pRotatedImage, pRotateMat);
+	cvGetQuadrradsubPix(pSource, pRotatedImage, pRotateMat);
 	
 	cvReleaseMat(&pRotateMat);
 	

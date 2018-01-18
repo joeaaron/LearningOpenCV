@@ -231,3 +231,10 @@ add_executable(TwoLineAngle twoLineAngle.cpp)
 target_link_libraries(TwoLineAngle ${OpenCV_LIBS})
 set_target_properties(TwoLineAngle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
+add_executable(RMatrixtoAngle RMatrixtoAngle.cpp)
+target_link_libraries(RMatrixtoAngle ${OpenCV_LIBS})
+set_target_properties(RMatrixtoAngle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(OpenCam openCam.cpp)
+target_link_libraries(OpenCam ${OpenCV_LIBS})
+set_target_properties(OpenCam PROPERTIES COMPILE_DEFINITIONS NOMINMAX)

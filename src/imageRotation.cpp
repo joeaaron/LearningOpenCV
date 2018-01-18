@@ -216,9 +216,9 @@ double detectRotation(InputArray src)
 	double line_length; //直线长度
 	double position_weighted; //直线的位置权重：靠图像中央的线权重为1, 越靠边的线权重越小
 	double main_lens[2]; //用于存放最长的二条直线长度的数组 (这两条直线即是主线条)
-	double main_angles[2];//用于存放最长的二条直线的摆正需要旋转的角度
+	double main_rads[2];//用于存放最长的二条直线的摆正需要旋转的角度
 	main_lens[0] = main_lens[1] = 0;
-	main_angles[0] = main_angles[1] = 0;
+	main_rads[0] = main_rads[1] = 0;
 
 	//逐个分析各条直线，判断哪个是主线条
 	for( size_t i = 0; i < lines.size(); i++ ) {
@@ -258,15 +258,15 @@ double detectRotation(InputArray src)
 			if (line_length > main_lens[0]) {
 				 main_lens[1] = main_lens[0];
 				 main_lens[0] = line_length;
-				 main_angles[1] = main_angles[0];
-				 main_angles[0] = rotate_angle;
+				 main_rads[1] = main_rads[0];
+				 main_rads[0] = rotate_angle;
 				 //如果定义了 SHOW_LINE, 则将该线条画出来
 				 #ifdef SHOW_LINE
 				 line( cdst, Point(x1, y1), Point(x2, y2), Scalar(0,0,255), 3, CV_AA);
 				 #endif
 			} else {
 				main_lens[1] = line_length;
-				main_angles[1] = rotate_angle;
+				main_rads[1] = rotate_angle;
 			}
 		}
 	}
@@ -280,9 +280,9 @@ double detectRotation(InputArray src)
 	if ( main_lens[0] > 0 ) {
 		//如果最长的线 与 次长的线 两者长度相近，则返回两者需要旋转的角度的平均值
 		if (main_lens[1] > 0 && (main_lens[0] - main_lens[1] / main_lens[0] < 0.2 )) {
-			return (main_angles[0] + main_angles[1] ) / 2;
+			return (main_rads[0] + main_rads[1] ) / 2;
 		} else {
-			return main_angles[0];   //否则，返回最长的线需要旋转的角度
+			return main_rads[0];   //否则，返回最长的线需要旋转的角度
 		}
 	} else {
 		return 0;

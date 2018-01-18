@@ -127,7 +127,7 @@ void connected_Components(IplImage *mask, int poly1_hull0, float perimScale, int
 	// PAINT THE FOUND REGIONS BACK INTO THE IMAGE
 	cvZero( mask );
 	IplImage *maskTemp;
-	//CALC CENTER OF MASS AND OR BOUNDING RECTANGLES
+	//CALC CENTER OF MASS AND OR BOUNDING RECTrads
 	if(num != NULL)
 	{
 		int N = *num, numFilled = 0, i=0;
@@ -149,7 +149,7 @@ void connected_Components(IplImage *mask, int poly1_hull0, float perimScale, int
 					centers[i].x = (int)(M10/M00);
 					centers[i].y = (int)(M01/M00);
 				}
-				//Bounding rectangles around blobs
+				//Bounding rectrads around blobs
 				if(bbs != NULL)
 				{
 					bbs[i] = cvBoundingRect(c);
