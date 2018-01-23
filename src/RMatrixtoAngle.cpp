@@ -5,16 +5,11 @@
 using namespace cv;
 using namespace std;
 
-cv::Mat cameraMatrix;
-cv::Mat distcofficients;
-vector<vector<Point2f>> imagePoints;
-vector<Point2f> pointBuf;
-vector<vector<Point3f> > objectPoints(1);
-
 #define INPUT_ROTATION_ANGLE  (-CV_PI/3)
-const float SQUARESIZE = 33.33333;
-const int BOARDSIZEWIDTH = 13;
-const int BOARDSIZEHEIGHT = 9;
+const float SQUARESIZE = 1.5;
+const int BOARDSIZEWIDTH = 5;
+const int BOARDSIZEHEIGHT = 4;
+char filename[100];			//声明一个字符型数组，用来存放图片命名
 
 //Checks if a matrix is a valid rotation matrix
 bool isRotationMatrix(Mat& R)
@@ -74,9 +69,9 @@ cv::Vec3f rotationMatrixToEulerAngles(Mat& R)
 	rads.push_back(z);
 	eulerAnglesToOrdinaryAngles(rads, angles);
 
-	float yaw = angles[2];
-	float roll = angles[1];
-	float pitch = angles[0];
+	float pitch = angles[0];        //ROTATIONAXIS:X
+	float roll = angles[1];			//ROTATIONAXIS:Y
+	float yaw = angles[2];			//ROTATIONAXIS:Z
 
 	cout << yaw << endl;
 
@@ -118,7 +113,6 @@ Mat RotationMatrix(Mat& axis,
 
 }
 
-
 //************************************
 // Method:    calcBoardCornerPositions
 // FullName:  calcBoardCornerPositions
@@ -138,8 +132,37 @@ static void calcBoardCornerPositions(float squareSize, vector<Point3f>& corners)
 	
 }
 
+// http://www.cnblogs.com/xpvincent/archive/2013/02/15/2912836.html
+cv::Mat getRotationMatix(cv::Mat originVec, cv::Mat expectedVec)
+{
+	cv::Mat rotationAxis = originVec.cross(expectedVec);
+	rotationAxis = rotationAxis / cv::norm(rotationAxis);
+
+	double rotationAngle = std::acos(originVec.dot(expectedVec) / cv::norm(originVec) / cv::norm(expectedVec));
+
+	cv::Mat omega(3, 3, CV_64FC1, Scalar(0));
+	omega.at<double>(0, 1) = -rotationAxis.at<double>(2);
+	omega.at<double>(0, 2) = rotationAxis.at<double>(1);
+	omega.at<double>(1, 0) = rotationAxis.at<double>(2);
+	omega.at<double>(1, 2) = -rotationAxis.at<double>(0);
+	omega.at<double>(2, 0) = -rotationAxis.at<double>(1);
+	omega.at<double>(2, 1) = rotationAxis.at<double>(0);
+	cv::Mat rotationMatrix = cv::Mat::eye(3, 3, CV_64FC1) + std::sin(rotationAngle)*omega + (1 - std::cos(rotationAngle))*omega*omega;
+
+	cv::Mat normedOri = originVec / cv::norm(originVec);
+	cv::Mat normedExp = expectedVec / cv::norm(expectedVec);
+
+	double BP = cv::norm(rotationMatrix*normedOri - normedExp);
+
+	//std::cout << "BP error of getTransformationMatrix of two vector is: " << BP << std::endl;
+	return rotationMatrix;
+}
+
 bool RunComputeAngle(const string inputCameraDataFile, float angle)
 {
+	cv::Mat cameraMatrix;
+	cv::Mat distcofficients;
+
 	//! [file_read]
 	FileStorage fs(inputCameraDataFile, FileStorage::READ); // Read the settings
 	if (!fs.isOpened())
@@ -152,31 +175,75 @@ bool RunComputeAngle(const string inputCameraDataFile, float angle)
 	fs["distortion_coefficients"] >> distcofficients;
 
 	///find image points
-	Mat viewGray;
-	Mat view;
-	cvtColor(view, viewGray, COLOR_BGR2GRAY);
-	cornerSubPix(viewGray, pointBuf, Size(11, 11),
-		Size(-1, -1), TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.1));
-	//sortConnerPoints(pointBuf);        imagePoints counter to objectPoints
-	imagePoints.push_back(pointBuf);
+	VideoCapture capture(0);
+	if (!capture.isOpened())     //判断是否打开摄像头
+		return 1;
+	bool stop(false);
+	cv::Mat frame;        //用来存放读取的视频序列
+	cv::Mat dst;
+	namedWindow("capVideo");
+	int i = 1;
+	while (!stop)
+	{
+		vector<vector<Point2f>> imagePoints;
+		vector<Point2f> pointBuf;
+		vector<vector<Point3f> > objectPoints(1);
 
-	///find object points
-	calcBoardCornerPositions(SQUARESIZE, objectPoints[0]);
+		if (!capture.read(frame))
+			break;
+		imshow("capVideo", frame);
 
-	///compute rotation matrix
-	Mat rvecs, tvecs;
-	solvePnP(objectPoints, imagePoints, cameraMatrix, distcofficients, rvecs, tvecs);
+		//Mat view = cv::imread("x0.bmp");
+		Mat view = frame;
+		Mat viewGray;
+		cvtColor(view, viewGray, COLOR_BGR2GRAY);
+
+		int chessBoardFlags = CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_NORMALIZE_IMAGE;
+		Size boardSize = Size(BOARDSIZEWIDTH, BOARDSIZEHEIGHT);
+		findChessboardCorners(view, boardSize, pointBuf, chessBoardFlags);   //pointBuf size : 117 = 13 * 9;
+		cornerSubPix(viewGray, pointBuf, Size(11, 11),
+			Size(-1, -1), TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.1));
+		//sortConnerPoints(pointBuf);        imagePoints counter to objectPoints
+		imagePoints.push_back(pointBuf);
+
+		///find object points
+		calcBoardCornerPositions(SQUARESIZE, objectPoints[0]);
+
+		///compute rotation vector
+		Mat rvecs, tvecs;
+		solvePnP(objectPoints[0], imagePoints[0], cameraMatrix, distcofficients, rvecs, tvecs, false, CV_ITERATIVE);
+
+
+		///rotation vector to rotation matrix
+		cv::Mat R;
+		cv::Rodrigues(rvecs, R);
+		//R = getRotationMatix(cv::Mat(cv::Vec3d(0, 0, 1)), rvecs);         //2018-01-19 some problems needed to be verified later
+		rotationMatrixToEulerAngles(R);
+
+		//Esc键停止
+		char c = cvWaitKey(33);
+		if (13 == c)
+		{
+			sprintf(filename, "%s%d%s", "x", i++, ".bmp");//保存的图片名，可以把保存路径写在filename中；
+			imwrite(filename, frame);
+		}
+
+
+		if (27 == c)
+			break;
+	}
+
+	capture.release();
+	
 }
 
 int main()
 {
-	cv::Mat rotationMatrix = RotationMatrix(cv::Mat(cv::Vec3d(0, 0, 1)), INPUT_ROTATION_ANGLE);   
-	rotationMatrixToEulerAngles(rotationMatrix);
-
-	float yaw = 0.0;
-	float pitch = 0.0;
-	float roll = 0.0;
-
-	//float angle = 0.0;
-	//RunComputeAngle("out_camera_data.xml", angle);
+	//cv::Mat rotationMatrix = RotationMatrix(cv::Mat(cv::Vec3d(0, 0, 1)), INPUT_ROTATION_ANGLE);   
+	//rotationMatrixToEulerAngles(rotationMatrix);
+	//float yaw = 0.0;
+	//float pitch = 0.0;
+	//float roll = 0.0;
+	float angle = 0.0;
+	RunComputeAngle("out_camera_data.xml", angle);
 }
