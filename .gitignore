@@ -1364,3 +1364,12 @@ build/src/BrightnessContrast.dir/Debug/Brightne.6DB266B5.tlog/CL.read.1.tlog
 build/src/BrightnessContrast.dir/Debug/Brightne.6DB266B5.tlog/BrightnessContrast.lastbuildstate
 build/src/3DPointCloud.dir/Debug/3DPointCloud.tlog/unsuccessfulbuild
 bin/Debug/SingleCamera.exe
+build/src/Test.dir/Debug/wavelet_cdf97.obj
+build/src/Test.dir/Debug/super_resolution.obj
+build/src/Test.dir/Debug/match_template.obj
+build/src/Test.dir/Debug/manyImages.obj
+build/src/Test.dir/Debug/interpolator.obj
+build/src/Test.dir/Debug/angle.obj
+build/src/Test.dir/Debug/Test.Build.CppClean.log
+build/src/Test.dir/Debug/SeqCapture.obj
+build/src/Calib.dir/Debug/Calib.tlog/unsuccessfulbuild

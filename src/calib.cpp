@@ -334,7 +334,7 @@ int main(int argc, char* argv[])
 		if (s.flipVertical)    flip(view, view, 0);
 
 		bool isFind;
-		int chessBoardFlags = CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_NORMALIZE_IMAGE;
+		int chessBoardFlags = CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_NORMALIZE_IMAGE | CV_CALIB_CB_FILTER_QUADS | CALIB_CB_FAST_CHECK;
 		switch (s.calibrationPattern) // Find feature points on the input format
 		{
 		case Settings::CHESSBOARD:
@@ -373,6 +373,7 @@ int main(int argc, char* argv[])
 			// Draw the corners.
 			drawChessboardCorners(view, s.boardSize, Mat(corner), isFind);
 		}
+
 		else
 		{
 			cout << "The image is bad please try again" << endl;

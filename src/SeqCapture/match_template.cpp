@@ -227,7 +227,7 @@ int MatchWithAngle(const IplImage* pTemplate,
 		cvmSet(pRotateMat, 1, 2, iSourceSize.height / 2);
 		
 		// ratete the source image whit angle dA
-		cvGetQuadrradsubPix(pSource, pRotateImage, pRotateMat);
+		//cvGetQuadrradsubPix(pSource, pRotateImage, pRotateMat);
 		
 		// get the best match
 		cvMatchTemplate(pRotateImage,
@@ -297,7 +297,7 @@ IplImage* RotateImage(const IplImage* pSource, double dAngle)
 	cvmSet(pRotateMat, 1, 2, iSize.height / 2);
 	
 	IplImage* pRotatedImage = cvCloneImage(pSource);
-	cvGetQuadrradsubPix(pSource, pRotatedImage, pRotateMat);
+	//cvGetQuadrradsubPix(pSource, pRotatedImage, pRotateMat);
 	
 	cvReleaseMat(&pRotateMat);
 	

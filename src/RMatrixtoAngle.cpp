@@ -6,10 +6,19 @@ using namespace cv;
 using namespace std;
 
 #define INPUT_ROTATION_ANGLE  (-CV_PI/3)
-const float SQUARESIZE = 1.5;
+#define TEST 0          //0:开启测试； 1：运行模式
+
+#if TEST
+const float SQUARESIZE = 1.75;
 const int BOARDSIZEWIDTH = 5;
 const int BOARDSIZEHEIGHT = 4;
-char filename[100];			//声明一个字符型数组，用来存放图片命名
+#else
+const float SQUARESIZE = 33.333;
+const int BOARDSIZEWIDTH = 13;
+const int BOARDSIZEHEIGHT = 9;
+#endif
+
+char filename[100];			
 
 //Checks if a matrix is a valid rotation matrix
 bool isRotationMatrix(Mat& R)
@@ -25,7 +34,6 @@ bool isRotationMatrix(Mat& R)
 ///pitch angle is the angle we need
 void eulerAnglesToOrdinaryAngles(vector<float> rads, vector<float>& angles)
 {
-
 	for (vector<float>::iterator it = rads.begin(); it != rads.end(); it++)
 	{
 		float angle = *it / CV_PI * 180;     //rad to angle
@@ -38,17 +46,17 @@ void eulerAnglesToOrdinaryAngles(vector<float> rads, vector<float>& angles)
 //Calculates rotation matrix to euler angles
 //The results is the same as MATLAB except the order
 //of the euler angles(x and z are swapped).
-cv::Vec3f rotationMatrixToEulerAngles(Mat& R)
+float rotationMatrixToEulerAngles(Mat& R, float& angle)
 {
 	vector<float> rads;
 	vector<float> angles;
-	rads.clear();
 
 	assert(isRotationMatrix(R));
 	
 	float sy = sqrt(R.at<double>(0, 0) * R.at<double>(0, 0) + R.at<double>(1, 0) * R.at<double>(1, 0));
 	bool singular = sy < 1e-6;	//If singular is true
 	float x, y, z;
+	float pitch, roll, yaw;
 
 	if (!singular)
 	{
@@ -63,19 +71,41 @@ cv::Vec3f rotationMatrixToEulerAngles(Mat& R)
 		z = 0;
 	}
 	
-
-	rads.push_back(x);
+	roll = y / CV_PI * 180;     //rad to angle
+	/*rads.push_back(x);
 	rads.push_back(y);
-	rads.push_back(z);
-	eulerAnglesToOrdinaryAngles(rads, angles);
+	rads.push_back(z);*/
 
-	float pitch = angles[0];        //ROTATIONAXIS:X
-	float roll = angles[1];			//ROTATIONAXIS:Y
-	float yaw = angles[2];			//ROTATIONAXIS:Z
+	//eulerAnglesToOrdinaryAngles(rads, angles);
 
-	cout << yaw << endl;
+	//pitch = angles[0];        //ROTATIONAXIS:X
+	//roll = angles[1];			//ROTATIONAXIS:Y
+	//yaw = angles[2];			//ROTATIONAXIS:Z
 
-	return Vec3f(x, y, z);
+	//cout << yaw << "\t" << roll << "\t" << pitch << "\t" << fps<< endl;
+	cout << roll << endl;
+
+	angle = roll;
+	return angle;
+}
+
+//************************************
+// Method:    calcBoardCornerPositions
+// FullName:  calcBoardCornerPositions
+// Access:    public static 
+// Returns:   void
+// Qualifier:
+// Parameter: float squareSize
+// Parameter: vector<Point3f> & corners
+//************************************
+static void calcBoardCornerPositions(float squareSize, vector<Point3f>& corners)
+{
+	corners.clear();
+
+	for (int i = 0; i < BOARDSIZEHEIGHT; ++i)
+		for (int j = 0; j < BOARDSIZEWIDTH; ++j)
+			corners.push_back(Point3f(j*squareSize, i*squareSize, 0));
+	
 }
 
 //http://blog.csdn.net/wang15061955806/article/details/51028484
@@ -112,26 +142,6 @@ Mat RotationMatrix(Mat& axis,
 	return m;
 
 }
-
-//************************************
-// Method:    calcBoardCornerPositions
-// FullName:  calcBoardCornerPositions
-// Access:    public static 
-// Returns:   void
-// Qualifier:
-// Parameter: float squareSize
-// Parameter: vector<Point3f> & corners
-//************************************
-static void calcBoardCornerPositions(float squareSize, vector<Point3f>& corners)
-{
-	corners.clear();
-
-	for (int i = 0; i < BOARDSIZEHEIGHT; ++i)
-		for (int j = 0; j < BOARDSIZEWIDTH; ++j)
-			corners.push_back(Point3f(j*squareSize, i*squareSize, 0));
-	
-}
-
 // http://www.cnblogs.com/xpvincent/archive/2013/02/15/2912836.html
 cv::Mat getRotationMatix(cv::Mat originVec, cv::Mat expectedVec)
 {
@@ -158,11 +168,10 @@ cv::Mat getRotationMatix(cv::Mat originVec, cv::Mat expectedVec)
 	return rotationMatrix;
 }
 
-bool RunComputeAngle(const string inputCameraDataFile, float angle)
+float RunComputeAngle(const string inputCameraDataFile, float& angle)
 {
 	cv::Mat cameraMatrix;
 	cv::Mat distcofficients;
-
 	//! [file_read]
 	FileStorage fs(inputCameraDataFile, FileStorage::READ); // Read the settings
 	if (!fs.isOpened())
@@ -170,80 +179,119 @@ bool RunComputeAngle(const string inputCameraDataFile, float angle)
 		std::cout << "Could not open the configuration file: \"" << inputCameraDataFile << "\"" << std::endl;
 		return -1;
 	}
-
 	fs["camera_matrix"] >> cameraMatrix;
 	fs["distortion_coefficients"] >> distcofficients;
 
+	///find object points
+	vector<Point3f> objectPoints;
+	calcBoardCornerPositions(SQUARESIZE, objectPoints);
+
+
 	///find image points
+#if TEST
 	VideoCapture capture(0);
-	if (!capture.isOpened())     //判断是否打开摄像头
+	if (!capture.isOpened())     //if the cam is opened
 		return 1;
+	double rate = capture.get(CV_CAP_PROP_FPS);
+	int frameHeight = capture.get(CV_CAP_PROP_FRAME_HEIGHT);  // the height of video frame
+	int frameWidth = capture.get(CV_CAP_PROP_FRAME_WIDTH);    // the width of video frame
+	cv::Mat frame;
+
+	int delay = 1000 / rate;
+#endif
 	bool stop(false);
-	cv::Mat frame;        //用来存放读取的视频序列
-	cv::Mat dst;
-	namedWindow("capVideo");
+	//namedWindow("capVideo");
+
 	int i = 1;
 	while (!stop)
 	{
-		vector<vector<Point2f>> imagePoints;
-		vector<Point2f> pointBuf;
-		vector<vector<Point3f> > objectPoints(1);
+		clock_t start, end;
+		start = clock();
 
+		vector<Point2f> pointBuf;
+		
+#if TEST
 		if (!capture.read(frame))
 			break;
+		
 		imshow("capVideo", frame);
-
-		//Mat view = cv::imread("x0.bmp");
 		Mat view = frame;
+#else
+		Mat view = cv::imread("x0.bmp");
+#endif
 		Mat viewGray;
 		cvtColor(view, viewGray, COLOR_BGR2GRAY);
 
 		int chessBoardFlags = CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_NORMALIZE_IMAGE;
 		Size boardSize = Size(BOARDSIZEWIDTH, BOARDSIZEHEIGHT);
-		findChessboardCorners(view, boardSize, pointBuf, chessBoardFlags);   //pointBuf size : 117 = 13 * 9;
-		cornerSubPix(viewGray, pointBuf, Size(11, 11),
+
+		clock_t T1, T2;
+		T1 = clock();
+		assert(findChessboardCorners(view, boardSize, pointBuf, chessBoardFlags));		//pointBuf size : 117 = 13 * 9;
+		T2 = clock();
+		double dur_1 = (double)(T2 - T1);
+
+		cout << "检测角点时间：" << dur_1 / CLOCKS_PER_SEC << endl;
+		/*
+		winSize：搜索窗口边长的一半，例如如果winSize = Size(5, 5)，则一个大小为的搜索窗口将被使用。
+		zeroZone：搜索区域中间的dead region边长的一半，有时用于避免自相关矩阵的奇异性。如果值设为(-1, -1)则表示没有这个区域。
+		criteria：角点精准化迭代过程的终止条件。也就是当迭代次数超过criteria.maxCount，或者角点位置变化小于criteria.epsilon时，停止迭代过程。
+		*/
+		cornerSubPix(viewGray, pointBuf, Size(5, 5),
 			Size(-1, -1), TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.1));
 		//sortConnerPoints(pointBuf);        imagePoints counter to objectPoints
-		imagePoints.push_back(pointBuf);
-
-		///find object points
-		calcBoardCornerPositions(SQUARESIZE, objectPoints[0]);
 
 		///compute rotation vector
 		Mat rvecs, tvecs;
-		solvePnP(objectPoints[0], imagePoints[0], cameraMatrix, distcofficients, rvecs, tvecs, false, CV_ITERATIVE);
+		clock_t T3, T4;
+		T3 = clock();
+		solvePnP(objectPoints, pointBuf, cameraMatrix, distcofficients, rvecs, tvecs, false, CV_ITERATIVE);
+		T4 = clock();
+		double dur_2 = (double)(T4 - T3);
 
-
+		cout << "求旋转向量时间：" << dur_2 / CLOCKS_PER_SEC << endl;
 		///rotation vector to rotation matrix
 		cv::Mat R;
 		cv::Rodrigues(rvecs, R);
 		//R = getRotationMatix(cv::Mat(cv::Vec3d(0, 0, 1)), rvecs);         //2018-01-19 some problems needed to be verified later
-		rotationMatrixToEulerAngles(R);
+		rotationMatrixToEulerAngles(R, angle);
+		
+#if TEST
+		if (waitKey(delay) >= 0)
+			stop = true;
 
-		//Esc键停止
-		char c = cvWaitKey(33);
+		//按ENTER保存
 		if (13 == c)
 		{
-			sprintf(filename, "%s%d%s", "x", i++, ".bmp");//保存的图片名，可以把保存路径写在filename中；
+			sprintf(filename, "%s%d%s", "x", i++, ".bmp");		
 			imwrite(filename, frame);
 		}
 
-
+		//Esc键停止
 		if (27 == c)
 			break;
-	}
 
+#else
+		char c = cvWaitKey(33);
+#endif
+		
+		end = clock();
+		double dur = (double)(end - start);
+
+		cout << "运行时间：" << dur / CLOCKS_PER_SEC << endl;
+	}
+#if TEST
 	capture.release();
-	
+#endif
+	return angle;
 }
 
 int main()
 {
 	//cv::Mat rotationMatrix = RotationMatrix(cv::Mat(cv::Vec3d(0, 0, 1)), INPUT_ROTATION_ANGLE);   
 	//rotationMatrixToEulerAngles(rotationMatrix);
-	//float yaw = 0.0;
-	//float pitch = 0.0;
-	//float roll = 0.0;
+
 	float angle = 0.0;
 	RunComputeAngle("out_camera_data.xml", angle);
+	cout << "steering angle = " << angle << endl;
 }

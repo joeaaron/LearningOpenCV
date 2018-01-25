@@ -203,7 +203,7 @@ add_executable(FindContourCenterPoint findContourCenterPoint.cpp)
 target_link_libraries(FindContourCenterPoint ${OpenCV_LIBS})
 set_target_properties(FindContourCenterPoint PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
-add_executable(Test test.cpp)
+add_executable(Test test.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
 target_link_libraries(Test ${OpenCV_LIBS})
 set_target_properties(Test PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 

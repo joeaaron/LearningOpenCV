@@ -6,7 +6,7 @@
 
 int main()
 {
-	cv::Mat src = cv::imread("5.png");
+	cv::Mat src = cv::imread("5.bmp");
 	CV_Assert(!src.empty());
 
 	cv::Mat srcGray;
