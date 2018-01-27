@@ -168,6 +168,19 @@ cv::Mat getRotationMatix(cv::Mat originVec, cv::Mat expectedVec)
 	return rotationMatrix;
 }
 
+void sortConnerPoints(std::vector<cv::Point2f>& corners)
+{
+	if (corners[0].y > corners[corners.size() - 1].y)
+	{
+		for (int i = 0; i < corners.size() / 2; i++)
+		{
+			cv::Point2f tmp = corners[i];
+			corners[i] = corners[corners.size() - 1 - i];
+			corners[corners.size() - 1 - i] = tmp;
+		}
+	}
+}
+
 float RunComputeAngle(const string inputCameraDataFile, float& angle)
 {
 	cv::Mat cameraMatrix;
@@ -228,6 +241,8 @@ float RunComputeAngle(const string inputCameraDataFile, float& angle)
 		clock_t T1, T2;
 		T1 = clock();
 		assert(findChessboardCorners(view, boardSize, pointBuf, chessBoardFlags));		//pointBuf size : 117 = 13 * 9;
+		if (pointBuf.size() != BOARDSIZEWIDTH * BOARDSIZEHEIGHT)
+			continue;
 		T2 = clock();
 		double dur_1 = (double)(T2 - T1);
 
@@ -239,7 +254,7 @@ float RunComputeAngle(const string inputCameraDataFile, float& angle)
 		*/
 		cornerSubPix(viewGray, pointBuf, Size(5, 5),
 			Size(-1, -1), TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.1));
-		//sortConnerPoints(pointBuf);        imagePoints counter to objectPoints
+		sortConnerPoints(pointBuf);        
 
 		///compute rotation vector
 		Mat rvecs, tvecs;
@@ -248,9 +263,9 @@ float RunComputeAngle(const string inputCameraDataFile, float& angle)
 		solvePnP(objectPoints, pointBuf, cameraMatrix, distcofficients, rvecs, tvecs, false, CV_ITERATIVE);
 		T4 = clock();
 		double dur_2 = (double)(T4 - T3);
-
 		cout << "求旋转向量时间：" << dur_2 / CLOCKS_PER_SEC << endl;
 		///rotation vector to rotation matrix
+		//rvecs.convertTo(rvecs, CV_32F);
 		cv::Mat R;
 		cv::Rodrigues(rvecs, R);
 		//R = getRotationMatix(cv::Mat(cv::Vec3d(0, 0, 1)), rvecs);         //2018-01-19 some problems needed to be verified later
