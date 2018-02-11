@@ -119,8 +119,8 @@ static void findSquares( const Mat& image, vector<vector<Point> >& squares )
                         maxCosine = MAX(maxCosine, cosine);
                     }
 
-                    // if cosines of all angles are small
-                    // (all angles are ~90 degree) then write quandrange
+                    // if cosines of all rads are small
+                    // (all rads are ~90 degree) then write quandrange
                     // vertices to resultant sequence
                     if( maxCosine < 0.3 )
                         squares.push_back(approx);

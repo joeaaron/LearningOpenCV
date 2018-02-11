@@ -203,7 +203,7 @@ add_executable(FindContourCenterPoint findContourCenterPoint.cpp)
 target_link_libraries(FindContourCenterPoint ${OpenCV_LIBS})
 set_target_properties(FindContourCenterPoint PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
-add_executable(Test test.cpp)
+add_executable(Test test.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
 target_link_libraries(Test ${OpenCV_LIBS})
 set_target_properties(Test PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
@@ -223,10 +223,24 @@ add_executable(FindObject findObject.cpp)
 target_link_libraries(FindObject ${OpenCV_LIBS})
 set_target_properties(FindObject PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
+add_executable(Realtime_online_cb_det Realtime_online_cb_det.cpp ${CURRENT_HEADERS} ${SeqCaptureSRC})
+target_link_libraries(Realtime_online_cb_det ${OpenCV_LIBS})
+set_target_properties(Realtime_online_cb_det PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
 add_executable(TwoLineAngle twoLineAngle.cpp)
 target_link_libraries(TwoLineAngle ${OpenCV_LIBS})
 set_target_properties(TwoLineAngle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 
+<<<<<<< HEAD
 add_executable(Histograph histograph.cpp)
 target_link_libraries(Histograph ${OpenCV_LIBS})
 set_target_properties(Histograph PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+=======
+add_executable(RMatrixtoAngle RMatrixtoAngle.cpp)
+target_link_libraries(RMatrixtoAngle ${OpenCV_LIBS})
+set_target_properties(RMatrixtoAngle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(OpenCam openCam.cpp)
+target_link_libraries(OpenCam ${OpenCV_LIBS})
+set_target_properties(OpenCam PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+>>>>>>> f013da8e3dff6accd583c6f39e7763209b83375e

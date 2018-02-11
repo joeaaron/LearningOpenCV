@@ -23,7 +23,7 @@ int main()
 {
 	//【1】读入视频
 	VideoCapture capture("1.avi");
-
+	int i = 0;
 	//【2】循环显示每一帧
 	while (1)
 	{
@@ -31,6 +31,7 @@ int main()
 		capture >> frame;  //读取当前帧
 		imshow("读取视频", frame);  //显示当前帧
 		waitKey(30);  //延时30ms
+		
 	}
 	return 0;
 }
