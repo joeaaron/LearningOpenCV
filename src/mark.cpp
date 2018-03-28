@@ -2,6 +2,7 @@
 #include<opencv2/opencv.hpp>    
 #include "markDetector.h"
 
+///global variables
 cv::Mat srcImg;
 
 void GetImagePoint(vector<Marker> marker)
@@ -18,7 +19,7 @@ void GetImagePoint(vector<Marker> marker)
 	double c1 = points[1].x * points[3].y - points[3].x * points[1].y;
 	
 	double d = a0 * b1 - a1 * b0;
-	imgPoint_.x = (b0 * c1 - b1 * c0) / d;
+	imgPoint_.x = (b0 * c1 - b1 * c0) / d; 
 	imgPoint_.y = (a1 * c0 - a0 * c1) / d;
 	circle(srcImg, imgPoint_, 3, Scalar(0, 0, 255), 2, 8);
 	// show marker in image
