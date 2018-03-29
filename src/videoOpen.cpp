@@ -22,15 +22,27 @@ using namespace cv;
 int main()
 {
 	//【1】读入视频
-	VideoCapture capture("1.avi");
-	int i = 0;
+	//VideoCapture capture("1.avi");
+	//int i = 0;
+	// open the cam
+	VideoCapture capture(0);
+	
 	//【2】循环显示每一帧
 	while (1)
 	{
 		Mat frame;//定义一个Mat变量，用于存储每一帧的图像
 		capture >> frame;  //读取当前帧
-		imshow("读取视频", frame);  //显示当前帧
-		waitKey(30);  //延时30ms
+		
+		if (!frame.empty()) //判断当前帧是否捕捉成功 **这步很重要  
+			imshow("读取视频", frame);  //显示当前帧 
+		else
+			std::cout << "can not ";
+		if (waitKey(3) == 27)
+			break;
+		if (waitKey(3) == 's')
+			imwrite("tmp.bmp", frame);
+
+		waitKey(3);
 		
 	}
 	return 0;

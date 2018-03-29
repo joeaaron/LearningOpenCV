@@ -33,14 +33,33 @@ void GetImagePoint(vector<Marker> marker)
 		circle(srcImg, marker[i].m_points[0], 3, Scalar(0, 255, 255), 2, 8);//clockwise code the points
 	}
 	imshow("markerDetector", srcImg);
-	cv::waitKey(5);
+	cv::waitKey(0);
 
 }
 
 int main()
 {
 	vector<Marker> markers;
-	srcImg = cv::imread("marker01.png");
+	//VideoCapture capture(0);
+
+	////【2】循环显示每一帧
+	//while (1)
+	//{
+	//	Mat frame;//定义一个Mat变量，用于存储每一帧的图像
+	//	capture >> frame;  //读取当前帧
+	//	//imshow("读取视频", frame);  //显示当前帧
+	//	//waitKey(3);  //延时30ms
+	//	//srcImg = cv::imread("marker01.png");
+	//	srcImg = frame.clone();
+	//	if (srcImg.empty())
+	//		return -1;
+	//	MarkProc* markProc = MarkProc::Create();
+	//	markProc->ProcessFrame(srcImg, markers);
+	//	if (markers.size() == 0)
+	//		continue;
+	//	GetImagePoint(markers);
+	//}
+	srcImg = cv::imread("marker02.bmp");
 	if (srcImg.empty())
 		return -1;
 	MarkProc* markProc = MarkProc::Create();

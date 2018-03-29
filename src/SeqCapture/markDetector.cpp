@@ -266,7 +266,7 @@ public:
 
 	void ProcessFrame(const Mat& _frame, vector<Marker>& markers)
 	{
-		markers.clear();
+		markers.clear(); 
 		findMarkers(_frame, markers);
 	}
 

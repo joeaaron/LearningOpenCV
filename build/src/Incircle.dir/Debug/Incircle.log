@@ -1,12 +1,5 @@
-﻿  Building Custom Rule C:/Users/JohnShua/Desktop/LearningOpenCV/src/CMakeLists.txt
-  CMake does not need to re-run because C:\Users\JohnShua\Desktop\LearningOpenCV\build\src\CMakeFiles\generate.stamp is up-to-date.
-  incircle.cpp
-D:\opencv_build\install\include\opencv2/core/mat.hpp(2586): warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
-D:\opencv_build\install\include\opencv2/core/persistence.hpp : warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
-D:\opencv_build\install\include\opencv2/core/utility.hpp : warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
-D:\opencv_build\install\include\opencv2/imgproc.hpp(596): warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
-C:\Users\JohnShua\Desktop\LearningOpenCV\src\incircle.cpp(14): warning C4018: '<' : signed/unsigned mismatch
-C:\Users\JohnShua\Desktop\LearningOpenCV\src\incircle.cpp(15): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-C:\Users\JohnShua\Desktop\LearningOpenCV\src\incircle.cpp(45): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-  LINK : C:\Users\JohnShua\Desktop\LearningOpenCV\bin\Debug\Incircle.exe not found or not built by the last incremental link; performing full link
-  Incircle.vcxproj -> C:\Users\JohnShua\Desktop\LearningOpenCV\bin\Debug\Incircle.exe
+﻿Build started 2018/3/28 10:18:51.
+
+Build succeeded.
+
+Time Elapsed 00:00:00.01
