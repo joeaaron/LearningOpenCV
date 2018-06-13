@@ -258,3 +258,7 @@ set_target_properties(Solvepnp PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(CalibTmp calibTmp.cpp)
 target_link_libraries(CalibTmp ${OpenCV_LIBS})
 set_target_properties(CalibTmp PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(CarDetectionAndTrack carDetectionAndTrack.cpp)
+target_link_libraries(CarDetectionAndTrack ${OpenCV_LIBS})
+set_target_properties(CarDetectionAndTrack PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
