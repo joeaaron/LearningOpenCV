@@ -1483,6 +1483,7 @@ build/src/Solvepnp.dir/Debug/Solvepnp.tlog/custombuild.command.1.tlog
 build/src/Solvepnp.vcxproj
 build/src/Solvepnp.dir/Debug/vc120.pdb
 build/src/Solvepnp.dir/Debug/Solvepnp.tlog/custombuild.read.1.tlog
+<<<<<<< HEAD
 build/src/CarDetectionAndTrack.vcxproj.filters
 build/src/CarDetectionAndTrack.vcxproj
 build/src/CarDetectionAndTrack.dir/Debug/vc120.pdb
@@ -1493,3 +1494,6 @@ build/src/CarDetectionAndTrack.dir/Debug/CarDetec.FFD6E77C.tlog/custombuild.read
 build/src/CarDetectionAndTrack.dir/Debug/CarDetec.FFD6E77C.tlog/custombuild.command.1.tlog
 build/src/CarDetectionAndTrack.dir/Debug/CarDetec.FFD6E77C.tlog/cl.command.1.tlog
 build/src/CarDetectionAndTrack.dir/Debug/CarDetec.FFD6E77C.tlog/CarDetectionAndTrack.lastbuildstate
+=======
+data/video/tmp.bmp
+>>>>>>> origin/PT-DEV
