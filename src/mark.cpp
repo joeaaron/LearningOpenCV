@@ -59,7 +59,7 @@ int main()
 	//		continue;
 	//	GetImagePoint(markers);
 	//}
-	srcImg = cv::imread("marker02.bmp");
+	srcImg = cv::imread("qr.png");
 	if (srcImg.empty())
 		return -1;
 	MarkProc* markProc = MarkProc::Create();

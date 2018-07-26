@@ -262,3 +262,7 @@ set_target_properties(CalibTmp PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(CarDetectionAndTrack carDetectionAndTrack.cpp)
 target_link_libraries(CarDetectionAndTrack ${OpenCV_LIBS})
 set_target_properties(CarDetectionAndTrack PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(QRcodeLocalization qrcodeLocalization.cpp)
+target_link_libraries(QRcodeLocalization ${OpenCV_LIBS})
+set_target_properties(QRcodeLocalization PROPERTIES COMPILE_DEFINITIONS NOMINMAX)

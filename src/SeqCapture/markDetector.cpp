@@ -13,9 +13,9 @@ using namespace cv;
 void findMarkerContours(const Mat& _imgThreshold, vector<vector<Point> >& _contours, int _minContourPointsAllowed)
 {
 	Mat imgTemp = _imgThreshold.clone();
-
+	vector<Vec4i>hierarchy;
 	vector<vector<Point>> allContours;
-	findContours(imgTemp, allContours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+	findContours(imgTemp, allContours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_NONE);
 
 	_contours.clear();
 	for (size_t i = 0; i < allContours.size(); i++)
@@ -211,7 +211,7 @@ bool findMarkers(const Mat& _frame, vector<Marker>& _detectedMarkers)
 	imshow("threshold", m_imgThreshold);
 #endif
 
-	findMarkerContours(m_imgThreshold, m_contours, m_imgGray.cols / 5);
+	findMarkerContours(m_imgThreshold, m_contours, m_imgGray.cols / 4);
 
 #if TEST
 	vector<Vec4i> hierarchy;

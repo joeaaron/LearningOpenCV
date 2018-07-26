@@ -181,6 +181,12 @@ void sortConnerPoints(std::vector<cv::Point2f>& corners)
 	}
 }
 
+template<typename _Tp>
+vector<_Tp> convertMat2Vector(const Mat& mat)
+{
+	return (vector<_Tp>)(mat.reshape(1, 1));
+}
+
 float RunComputeAngle(const string inputCameraDataFile, float& angle)
 {
 	cv::Mat cameraMatrix;
@@ -270,6 +276,12 @@ float RunComputeAngle(const string inputCameraDataFile, float& angle)
 		cv::Rodrigues(rvecs, R);
 		//R = getRotationMatix(cv::Mat(cv::Vec3d(0, 0, 1)), rvecs);         //2018-01-19 some problems needed to be verified later
 		rotationMatrixToEulerAngles(R, angle);
+		vector<float> Tvec = convertMat2Vector<float>(tvecs);
+		for (vector<float>::iterator it = Tvec.begin(); it != Tvec.end(); it++)
+		{
+			cout << "tve" << *it;
+		}
+		vector<Point> tmp;
 		
 #if TEST
 		if (waitKey(delay) >= 0)
