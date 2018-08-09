@@ -266,3 +266,7 @@ set_target_properties(CarDetectionAndTrack PROPERTIES COMPILE_DEFINITIONS NOMINM
 add_executable(QRcodeLocalization qrcodeLocalization.cpp)
 target_link_libraries(QRcodeLocalization ${OpenCV_LIBS})
 set_target_properties(QRcodeLocalization PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(Opennitest opennitest.cpp)
+target_link_libraries(Opennitest ${OpenCV_LIBS})
+set_target_properties(Opennitest PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
