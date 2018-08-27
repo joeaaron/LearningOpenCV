@@ -270,3 +270,7 @@ set_target_properties(QRcodeLocalization PROPERTIES COMPILE_DEFINITIONS NOMINMAX
 add_executable(Opennitest opennitest.cpp)
 target_link_libraries(Opennitest ${OpenCV_LIBS})
 set_target_properties(Opennitest PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(Quadrangle quadrangle.cpp)
+target_link_libraries(Quadrangle ${OpenCV_LIBS})
+set_target_properties(Quadrangle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)

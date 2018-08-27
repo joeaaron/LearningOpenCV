@@ -101,7 +101,7 @@ int main(int argc, char** argv)
 			// convert depth image GRAY to BGR  
 			cv::cvtColor(cvDepthImg, cvFusionImg, CV_GRAY2BGR);
 			cv::imshow("depth", cvDepthImg);
-		}
+		}	
 		//¡¾6¡¿  
 		cv::addWeighted(cvBGRImg, 0.5, cvFusionImg, 0.5, 0, cvFusionImg);
 		cv::imshow("fusion", cvFusionImg);
