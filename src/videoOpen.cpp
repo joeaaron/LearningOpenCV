@@ -7,10 +7,10 @@ using namespace cv;
 int main()
 {
 	//【1】读入视频
-	//VideoCapture capture("1.avi");
-	//int i = 0;
+	VideoCapture capture("LaneDetection.avi");
+	int i = 0;
 	// open the cam
-	VideoCapture capture(0);
+	//VideoCapture capture(0);
 
 	int count = 0;
 	//【2】循环显示每一帧

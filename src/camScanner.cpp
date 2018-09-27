@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <set>
 
+using namespace cv;
+
 cv::Point2f center(0, 0);
 
 bool sort_corners(std::vector<cv::Point2f>& corners)
@@ -138,26 +140,101 @@ void CalcDstSize(const std::vector<cv::Point2f>& corners)
 	g_dst_width = MAX(w1, w2);
 }
 
+Vec2d getPolarLine(Vec4d p)
+{
+	if (fabs(p[0] - p[2]) < 1e-5)//垂直直线
+	{
+		if (p[0] > 0)
+			return Vec2d(p[0], 0);
+		else
+			return Vec2d(p[0], CV_PI);
+	}
+
+	if (fabs(p[1] - p[3]) < 1e-5) //水平直线
+	{
+		if (p[1] > 0)
+			return Vec2d(p[1], CV_PI / 2);
+		else
+			return Vec2d(p[1], 3 * CV_PI / 2);
+	}
+
+	float k = (p[1] - p[3]) / (p[0] - p[2]);
+	float y_intercept = p[1] - k*p[0];
+
+	float theta;
+
+	if (k < 0 && y_intercept > 0)
+		theta = atan(-1 / k);
+	else if (k > 0 && y_intercept > 0)
+		theta = CV_PI + atan(-1 / k);
+	else if (k < 0 && y_intercept < 0)
+		theta = CV_PI + atan(-1 / k);
+	else if (k > 0 && y_intercept < 0)
+		theta = 2 * CV_PI + atan(-1 / k);
+
+	float _cos = cos(theta);
+	float _sin = sin(theta);
+
+	float r = p[0] * _cos + p[1] * _sin;
+
+	return Vec2d(r, theta);
+}
+
+bool isEqual(const Vec4i& _l1, const Vec4i& _l2)
+{
+	Vec4i l1(_l1), l2(_l2);
+
+	float length1 = sqrtf((l1[2] - l1[0])*(l1[2] - l1[0]) + (l1[3] - l1[1])*(l1[3] - l1[1]));
+	float length2 = sqrtf((l2[2] - l2[0])*(l2[2] - l2[0]) + (l2[3] - l2[1])*(l2[3] - l2[1]));
+
+	float product = (l1[2] - l1[0])*(l2[2] - l2[0]) + (l1[3] - l1[1])*(l2[3] - l2[1]);
+	if (fabs(product / (length1 * length2)) < cos(CV_PI / 30))
+		return false;
+	
+	float mx1 = (l1[0] + l1[2]) * 0.5f;
+	float mx2 = (l2[0] + l2[2]) * 0.5f;
+	float my1 = (l1[1] + l1[3]) * 0.5f;
+	float my2 = (l2[1] + l2[3]) * 0.5f;
+
+	float dist = sqrtf((mx1 - mx2)*(mx1 - mx2) + (my1 - my2)*(my1 - my2));
+
+	if (dist > std::max(length1, length2) * 0.5f)
+		return false;
+	return true;
+}
+
 int main()
 {
-	cv::Mat src = cv::imread("1.png");
+	cv::Mat src = cv::imread("pic7.jpg");
 	cv::Mat source = src.clone();
 	cv::Mat bkp = src.clone();
 	cv::Mat img = src.clone();
+	cv::Mat bgr;
+	cv::Mat hsv;
+	//cvtColor(img, img, CV_BGR2GRAY);
+	//GaussianBlur(img, img, cv::Size(5, 5), 0, 0);
 
-	cvtColor(img, img, CV_BGR2GRAY);
-	GaussianBlur(img, img, cv::Size(5, 5), 0, 0);
+	/////获取自定义核
+	//cv::Mat element = getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3));      //MORPH_RECT矩形卷积核
+	//dilate(img, img, element);
+	//Canny(img, img, 30, 120, 3);
+	//彩色图像的灰度值归一化
+	img.convertTo(bgr, CV_32FC3, 1.0 / 255, 0);
+	//颜色空间转换
+	cvtColor(bgr, hsv, cv::COLOR_BGR2HSV);
 
-	///获取自定义核
-	cv::Mat element = getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3));      //MORPH_RECT矩形卷积核
-	dilate(img, img, element);
-	Canny(img, img, 30, 120, 3);
+	std::vector<cv::Mat> mv;
+	split(hsv, mv);//分为3个通道  
+	cv::Mat s = mv[1];
+
+	threshold(s, s, 0.5, 255, cv::THRESH_BINARY);
+	s.convertTo(s, CV_8U, 1, 0);
 
 	std::vector<std::vector<cv::Point>> contours;
 	std::vector<std::vector<cv::Point> > f_contours;
 	std::vector<cv::Point> approx2;
 
-	findContours(img, f_contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+	findContours(s, f_contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
 
 	///求出面积最大的轮廓
 	int maxArea = 0;
@@ -176,10 +253,39 @@ int main()
 	std::vector<cv::Point> tmp = contours[0];
 	for (int lineType = 1; lineType <= 3; lineType++)
 	{
-		cv::Mat black = img.clone();
+		cv::Mat black = cv::Mat::zeros(img.size(), CV_8UC1);
+		//cv::Mat black = img.clone();
 		black.setTo(0);
 		drawContours(black, contours, 0, cv::Scalar(255), lineType);  //注意线的厚度，不要选择太细的
 		imshow("show contour", black);
+		imwrite("tmp.bmp", black);
+
+		cv::Ptr<cv::LineSegmentDetector> ls = cv::createLineSegmentDetector(cv::LSD_REFINE_STD);
+
+		//cv::Ptr<cv::LineSegmentDetector> ls = cv::createLineSegmentDetector(cv::LSD_REFINE_NONE);
+
+		std::vector<cv::Vec4i> lines_std;
+
+		// Detect the lines
+		ls->detect(black, lines_std);
+		std::vector<int> lables;
+		int numberOfLines = cv::partition(lines_std, lables, isEqual);
+
+		Mat cluster(src.rows, src.cols, CV_8UC1);
+		/*for (size_t i = 0; i < lines_std.size(); i++)
+		{
+			cluster.at<uchar>(lines_std[i]) = lables[i];
+		}*/
+
+		// Show found lines
+		//cv::Mat drawnLines(black);
+		//ls->drawSegments(drawnLines, lines_std);
+		//cv::imshow("Standard refinement", drawnLines);
+		for (int i = 0; i < lines_std.size();i++)
+		{
+			getPolarLine(lines_std.at(i));
+		}
+	
 
 		std::vector<cv::Vec4i> lines;
 		std::vector<cv::Point2f> corners;
@@ -194,7 +300,7 @@ int main()
 			corners.clear();
 			approx.clear();
 			center = cv::Point2f(0, 0);
-
+			
 			cv::HoughLinesP(black, lines, 1, CV_PI / 180, para, 30, 10);
 		
 			//过滤距离太近的直线

@@ -4,7 +4,7 @@
 
 int main()
 {
-	cv::Mat img_1 = cv::imread("btb3.bmp");
+	cv::Mat img_1 = cv::imread("pic7.jpg");
 	cv::Mat img_2 = cv::imread("result.bmp");
 
 	cv::Mat dst;

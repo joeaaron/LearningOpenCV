@@ -274,3 +274,11 @@ set_target_properties(Opennitest PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(Quadrangle quadrangle.cpp)
 target_link_libraries(Quadrangle ${OpenCV_LIBS})
 set_target_properties(Quadrangle PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(QuadSegmentation quad-segmentation.cpp)
+target_link_libraries(QuadSegmentation ${OpenCV_LIBS})
+set_target_properties(QuadSegmentation PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(Quad_tf quad_tf.cpp)
+target_link_libraries(Quad_tf ${OpenCV_LIBS})
+set_target_properties(Quad_tf PROPERTIES COMPILE_DEFINITIONS NOMINMAX)

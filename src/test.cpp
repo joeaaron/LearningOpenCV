@@ -1,86 +1,78 @@
 
-#include<opencv2/core.hpp>
-#include<opencv2/highgui.hpp>
-#include<opencv2/imgproc.hpp>
-using namespace cv;
 #include<iostream>
-#include<string>
+#include<opencv2/opencv.hpp>
+#include<vector>
+
+using namespace cv;
 using namespace std;
-//输入图像
-Mat img;
-//灰度值归一化
-Mat bgr;
-//HSV图像
-Mat hsv;
-//色相
-int hmin = 0;
-int hmin_Max = 360;
-int hmax = 360;
-int hmax_Max = 360;
-//饱和度
-int smin = 0;
-int smin_Max = 255;
-int smax = 255;
-int smax_Max = 255;
-//亮度
-int vmin = 106;
-int vmin_Max = 255;
-int vmax = 250;
-int vmax_Max = 255;
-//显示原图的窗口
-string windowName = "src";
-//输出图像的显示窗口
-string dstName = "dst";
-//输出图像
-Mat dst;
-//回调函数
-void callBack(int, void*)
+
+int main()
 {
-	//输出图像分配内存
-	dst = Mat::zeros(img.size(), CV_32FC3);
-	//掩码
-	Mat mask;
-	inRange(hsv, Scalar(hmin, smin / float(smin_Max), vmin / float(vmin_Max)), Scalar(hmax, smax / float(smax_Max), vmax / float(vmax_Max)), mask);
-	//只保留
-	for (int r = 0; r < bgr.rows; r++)
-	{
-		for (int c = 0; c < bgr.cols; c++)
-		{
-			if (mask.at<uchar>(r, c) == 255)
-			{
-				dst.at<Vec3f>(r, c) = bgr.at<Vec3f>(r, c);
-			}
-		}
-	}
-	//输出图像
-	imshow(dstName, dst);
-	//保存图像
-	dst.convertTo(dst, CV_8UC3, 255.0, 0);
-	imwrite("HSV_inRange.jpg", dst);
-}
-int main(int argc, char*argv[])
-{
-	//输入图像
-	img = imread("pic7.jpg");
-	if (!img.data || img.channels() != 3)
+	VideoCapture cap("1.mp4");
+	
+	if (!cap.isOpened()) // check if we succeeded
 		return -1;
-	imshow(windowName, img);
-	//彩色图像的灰度值归一化
-	img.convertTo(bgr, CV_32FC3, 1.0 / 255, 0);
-	//颜色空间转换
-	cvtColor(bgr, hsv, COLOR_BGR2HSV);
-	//定义输出图像的显示窗口
-	namedWindow(dstName, WINDOW_GUI_EXPANDED);
-	//调节色相 H
-	createTrackbar("hmin", dstName, &hmin, hmin_Max, callBack);
-	createTrackbar("hmax", dstName, &hmax, hmax_Max, callBack);
-	//调节饱和度 S
-	createTrackbar("smin", dstName, &smin, smin_Max, callBack);
-	createTrackbar("smax", dstName, &smax, smax_Max, callBack);
-	//调节亮度 V
-	createTrackbar("vmin", dstName, &vmin, vmin_Max, callBack);
-	createTrackbar("vmax", dstName, &vmax, vmax_Max, callBack);
-	callBack(0, 0);
-	waitKey(0);
+
+	for (;;)
+	{
+		Mat frame;
+		cap >> frame;
+		/*Mat srcImage = imread("pic7.jpg");
+		imshow("【原图】", srcImage);*/
+		Mat img, bgr, hsv;
+		img = frame.clone();
+		//因为强角点检测函数的输入图像是一个单通道的图像，所以，先对原图像进行图像空间的转换
+		blur(img, img, Size(3, 3));
+		//彩色图像的灰度值归一化
+		img.convertTo(bgr, CV_32FC3, 1.0 / 255, 0);
+		//颜色空间转换
+		cvtColor(bgr, hsv, COLOR_BGR2HSV);
+
+		vector<Mat> mv;
+		split(hsv, mv);//分为3个通道  
+		Mat s = mv[1];
+
+		threshold(s, s, 0.3, 255, THRESH_BINARY);
+		s.convertTo(s, CV_8U, 1, 0);
+		vector<vector<Point> > contours, contours2;
+		vector<Vec4i> hierarchy;
+		findContours(s, contours, hierarchy, CV_RETR_EXTERNAL, CHAIN_APPROX_NONE, Point(0, 0));
+
+		// draw black contours on white image
+		Mat drawing = Mat::zeros(img.size(), CV_8UC3);
+		drawContours(drawing, contours,
+			-1, // draw all contours
+			Scalar(255), // in black
+			2); // with a thickness of 2
+
+		vector<vector<Point>> polyContours(contours.size());
+		int maxArea = 0;
+		for (int index = 0; index < contours.size(); index++){
+			if (contourArea(contours[index]) > contourArea(contours[maxArea]))
+				maxArea = index;
+			approxPolyDP(contours[index], polyContours[index], 10, true);
+		}
+
+		Mat _drawing = Mat::zeros(img.size(), CV_8UC3);
+		drawContours(_drawing, polyContours, maxArea, Scalar(0, 0, 255/*rand() & 255, rand() & 255, rand() & 255*/), 2);
+		cvtColor(_drawing, _drawing, CV_BGRA2GRAY);
+		//开始进行强角点检测
+		//先配置需要的函数参数
+		vector<Point2f> dstPoint2f;
+		goodFeaturesToTrack(_drawing, dstPoint2f, 4, 0.3, 10, Mat(), 3);
+
+		//遍历每个点，进行绘制，便于显示
+		Mat dstImage;
+		frame.copyTo(dstImage);
+		for (int i = 0; i < (int)dstPoint2f.size(); i++)
+		{
+			circle(dstImage, dstPoint2f[i], 3, Scalar(theRNG().uniform(0, 255), theRNG().uniform(0, 255), theRNG().uniform(0, 255))
+				, 2, 8);
+		}
+
+		imshow("【检测到的角点图】", dstImage);
+
+		waitKey(1);
+	}
 	return 0;
 }
