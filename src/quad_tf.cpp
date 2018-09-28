@@ -107,8 +107,8 @@ void Sort4PointsClockwise(vector<Point2f> points)
 //************************************
 void CalcDstSize(const std::vector<cv::Point2f>& corners,int& h1, int& h2, int& w1, int& w2)
 {
-	h1 = sqrt((corners[0].x - corners[3].x)*(corners[0].x - corners[3].x) + (corners[0].y - corners[3].y)*(corners[0].y - corners[3].y));
-	h2 = sqrt((corners[1].x - corners[2].x)*(corners[1].x - corners[2].x) + (corners[1].y - corners[2].y)*(corners[1].y - corners[2].y));
+	h1 = sqrt((corners[0].x - corners[2].x)*(corners[0].x - corners[2].x) + (corners[0].y - corners[2].y)*(corners[0].y - corners[2].y));
+	h2 = sqrt((corners[1].x - corners[3].x)*(corners[1].x - corners[3].x) + (corners[1].y - corners[3].y)*(corners[1].y - corners[3].y));
 
 	w1 = sqrt((corners[0].x - corners[1].x)*(corners[0].x - corners[1].x) + (corners[0].y - corners[1].y)*(corners[0].y - corners[1].y));
 	w2 = sqrt((corners[2].x - corners[3].x)*(corners[2].x - corners[3].x) + (corners[2].y - corners[3].y)*(corners[2].y - corners[3].y));
@@ -237,31 +237,32 @@ void DrawArrow(cv::Mat& img, cv::Point pStart, cv::Point pEnd, int len, int alph
 void GetQuadCamTf(Mat img, vector<Point2f> crossPoints)
 {
 	//获得四个点的坐标
-	vector<double> coordinates_x;
-	vector<double> coordinates_y;
-	for (int i = 0; i < crossPoints.size(); i++)
-	{
-		coordinates_x.push_back(crossPoints[i].x);
-		coordinates_y.push_back(crossPoints[i].y);
-	}
+	//vector<double> coordinates_x;
+	//vector<double> coordinates_y;
+	//for (int i = 0; i < crossPoints.size(); i++)
+	//{
+	//	coordinates_x.push_back(crossPoints[i].x);
+	//	coordinates_y.push_back(crossPoints[i].y);
+	//}
 
 	//两条对角线的系数和偏移
-	double k1 = (coordinates_y[3] - coordinates_y[0]) / (coordinates_x[3] - coordinates_x[0]);
-	double b1 = (coordinates_x[3] * coordinates_y[0] - coordinates_x[0] * coordinates_y[3]) / (coordinates_x[3] - coordinates_x[0]);
-	double k2 = (coordinates_y[2] - coordinates_y[1]) / (coordinates_x[2] - coordinates_x[1]);
-	double b2 = (coordinates_x[2] * coordinates_y[1] - coordinates_x[1] * coordinates_y[2]) / (coordinates_x[2] - coordinates_x[1]);
+	double k1 = (crossPoints[3].y - crossPoints[0].y) / (crossPoints[3].x - crossPoints[0].x);
+	double b1 = (crossPoints[3].x * crossPoints[0].y - crossPoints[0].x * crossPoints[3].y) / (crossPoints[3].x - crossPoints[0].x);
+	double k2 = (crossPoints[2].y - crossPoints[1].y) / (crossPoints[2].x - crossPoints[1].x);
+	double b2 = (crossPoints[2].x * crossPoints[1].y - crossPoints[1].x * crossPoints[2].y) / (crossPoints[2].x - crossPoints[1].x);
 
 	//两条对角线交点的X坐标
 	double cross_x = -(b1 - b2) / (k1 - k2);
 	double cross_y = (k1*b2 - k2 *b1) / (k1 - k2);
 
-	double center_x = (coordinates_x[0] + coordinates_x[1]) / 2;
-	double center_y = (coordinates_y[0] + coordinates_y[1]) / 2;
+	double center_x = (crossPoints[0].x + crossPoints[1].x) / 2;
+	double center_y = (crossPoints[0].y + crossPoints[1].y) / 2;
 	if (cross_x >= 0 && cross_y >= 0 && cross_x <= img.cols && cross_y <= img.rows)     //保证交点在图像的范围之内
 	{
 		//quad coordinate
 		Scalar lineColor = Scalar(0, 0, 255);
 		DrawArrow(img, Point(cross_x, cross_y), Point(center_x, center_y), 25, 30, lineColor, 2, CV_AA);
+		lineColor = Scalar(0, 255, 0);
 		DrawArrow(img, Point(cross_x, cross_y), Point(cross_x, cross_y - 200), 25, 30, lineColor, 2, CV_AA);
 		//L
 		lineColor = Scalar(255, 0, 0);
@@ -290,7 +291,7 @@ int main(int /*argc*/, char** /*argv*/)
 	{
 		Mat frame;
 #if debug
-		frame = imread("test.png");
+		frame = imread("33.png");
 #else
 		cap >> frame; 
 #endif
@@ -319,9 +320,28 @@ int main(int /*argc*/, char** /*argv*/)
 		//Mat element = getStructuringElement(MORPH_RECT, Size(11, 11));
 		////dilate(s, s, element);
 		//morphologyEx(s, s, MORPH_CLOSE, element);
-		vector<vector<Point> > contours, contours2;
-		vector<Vec4i> hierarchy;
+		vector<vector<Point> > contours, _contours;
+		vector<Vec4i> hierarchy, _hierarchy;
 		findContours(s, contours, hierarchy, CV_RETR_EXTERNAL, CHAIN_APPROX_NONE, Point(0, 0));
+		findContours(s, _contours, _hierarchy, CV_RETR_TREE, CHAIN_APPROX_NONE, Point(0, 0));
+
+		if (contours.size() == _contours.size())
+			continue;
+
+		for (int i = 0; i < contours.size();i++)
+		{
+			int contourSize = contours[i].size();
+			for (int j = 0; j < _contours.size(); j++)
+			{
+				int size = _contours[j].size();
+				if (contourSize == size)
+				{
+					swap(_contours[j], _contours[_contours.size() - 1]);
+					_contours.pop_back();
+					break;
+				}
+			}
+		}
 		// Print contours' length轮廓的个数
 		//cout << "Contours: " << contours.size() << endl;
 #if debug
@@ -333,23 +353,23 @@ int main(int /*argc*/, char** /*argv*/)
 #endif
 		// draw black contours on white image
 		Mat drawing = Mat::zeros(img.size(), CV_8UC3);
-		drawContours(drawing, contours,
+		drawContours(drawing, _contours,
 			-1, // draw all contours
 			Scalar(255), // in black
 			2); // with a thickness of 2
 
 
-		vector<vector<Point>> polyContours(contours.size());
+		vector<vector<Point>> polyContours(_contours.size());
 		int maxArea = 0;
-		for (int index = 0; index < contours.size(); index++){
-			if (contourArea(contours[index]) > contourArea(contours[maxArea]))
+		for (int index = 0; index < _contours.size(); index++){
+			if (contourArea(_contours[index]) > contourArea(_contours[maxArea]))
 				maxArea = index;
-			approxPolyDP(contours[index], polyContours[index], 10, true);
+			approxPolyDP(_contours[index], polyContours[index], 10, true);
 		}
 
 		Mat _drawing = Mat::zeros(img.size(), CV_8UC3);
 		drawContours(_drawing, polyContours, maxArea, Scalar(0, 0, 255/*rand() & 255, rand() & 255, rand() & 255*/), 2);
-
+		
 		//2018-08-30
 		///LSD line detection & find the cross points!
 		Mat detectedLinesImg = Mat::zeros(img.rows, img.cols, CV_8UC3);
@@ -369,6 +389,8 @@ int main(int /*argc*/, char** /*argv*/)
 #if debug
 		std::cout << "Detected: " << linesWithoutSmall.size() << std::endl;
 #endif
+		if (linesWithoutSmall.size() < 1)
+			continue;
 		// partition via our partitioning function
 		std::vector<int> labels;
 		int equilavenceClassesCount = cv::partition(linesWithoutSmall, labels, [](const Vec4i l1, const Vec4i l2){
@@ -464,57 +486,79 @@ int main(int /*argc*/, char** /*argv*/)
 				circle(reducedLinesImg, crossPoint[i], 10, Scalar(rand() & 255, rand() & 255, rand() & 255), 3);
 			}
 
-			if (crossPoint.size() != 4)
+			if (crossPoint.size() < 4)
 			{
 				continue;
 			}
-
-			bool IsGoodPoints = true;
-			sort(crossPoint.begin(), crossPoint.end(), comp);         //topLeft, topRight, bottomLeft, bottomRight
-			// Get mass center  
-			Point2f center(0, 0);
-			for (int i = 0; i < crossPoint.size(); i++)
-				center += crossPoint[i];
-			center *= (1. / crossPoint.size());
-
-			std::vector<cv::Point2f> top, bot;
-			for (int i = 0; i < crossPoint.size(); i++)
+			else
 			{
-				if (crossPoint[i].y < center.y && top.size() < 2)    //这里的小于2是为了避免三个顶点都在top的情况
-					top.push_back(crossPoint[i]);
-				else
-					bot.push_back(crossPoint[i]);
-			}
-	
-			if (top.size() == 2 && bot.size() == 2)
-			{
-				//保证点与点的距离足够大以排除错误点
+				sort(crossPoint.begin(), crossPoint.end(), mySortY);
+				if (crossPoint.size() > 4)
+				{
+					
+					crossPoint.erase(crossPoint.begin());
+					
+				}
+				bool IsGoodPoints = true;
+
+				if (crossPoint[0].x > crossPoint[1].x)
+					swap(crossPoint[0], crossPoint[1]);
+				if (crossPoint[2].x > crossPoint[3].x)
+					swap(crossPoint[2], crossPoint[3]); 
+
+				//sort(crossPoint.begin(), crossPoint.end(), comp);         //topLeft, topRight, bottomLeft, bottomRight
+				// Get mass center  
+				Point2f center(0, 0);
+				for (int i = 0; i < crossPoint.size(); i++)
+					center += crossPoint[i];
+				center *= (1. / crossPoint.size());
+
+				std::vector<cv::Point2f> top, bot;
 				for (int i = 0; i < crossPoint.size(); i++)
 				{
+					if (crossPoint[i].y < center.y && top.size() < 2)    //这里的小于2是为了避免三个顶点都在top的情况
+						top.push_back(crossPoint[i]);
+					else
+						bot.push_back(crossPoint[i]);
+				}
+
+				if (top.size() == 2 && bot.size() == 2)
+				{
+					//保证点与点的距离足够大以排除错误点
+					/*for (int i = 0; i < crossPoint.size(); i++)
+					{
 					for (int j = i + 1; j < crossPoint.size(); j++)
 					{
-						int distance = sqrt((crossPoint[i].x - crossPoint[j].x)*(crossPoint[i].x - crossPoint[j].x) + (crossPoint[i].y - crossPoint[j].y)*(crossPoint[i].y - crossPoint[j].y));
-						if (distance < 50 || distance > 2000)
-						{
-							IsGoodPoints = false;
+					int distance = sqrt((crossPoint[i].x - crossPoint[j].x)*(crossPoint[i].x - crossPoint[j].x) + (crossPoint[i].y - crossPoint[j].y)*(crossPoint[i].y - crossPoint[j].y));
+					if (distance < 100 || distance > 2000)
+					{
+					IsGoodPoints = false;
+					}
+					}
+					}*/
+					int h1, h2, w1, w2;
+					CalcDstSize(crossPoint, h1, h2, w1, w2);
+					if (h1 < 70 || h1 > 2000 || h2 < 70 || h2 > 2000 || w1 < 70 || w1 > 2000 || w2 < 70 || w2 > 2000)
+					{
+						IsGoodPoints = false;
+					}
+
+					if (!IsGoodPoints) continue;
+
+					else
+					{
+						for (int i = 0; i < reducedLines.size(); i++){
+							circle(img, crossPoint[i], 10, Scalar(rand() & 255, rand() & 255, rand() & 255), 3);
 						}
-					}
-				}
 
-				if (!IsGoodPoints) continue;
-
-				else
-				{
-					for (int i = 0; i < reducedLines.size(); i++){
-						circle(img, crossPoint[i], 10, Scalar(rand() & 255, rand() & 255, rand() & 255), 3);
+						GetQuadCamTf(img, crossPoint);
+						imshow("result", img);
+						if (waitKey(1) >= 0)
+							break;
 					}
-				
-					GetQuadCamTf(img, crossPoint);
-					imshow("result", img);
-					if (waitKey(1) >= 0)
-						break;
 				}
 			}
+			
 		}
 
 		imshow("ori", frame);
