@@ -282,3 +282,7 @@ set_target_properties(QuadSegmentation PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(Quad_tf quad_tf.cpp)
 target_link_libraries(Quad_tf ${OpenCV_LIBS})
 set_target_properties(Quad_tf PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(GoalSegment goalSegment.cpp)
+target_link_libraries(GoalSegment ${OpenCV_LIBS})
+set_target_properties(GoalSegment PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
