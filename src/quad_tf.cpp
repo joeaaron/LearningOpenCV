@@ -23,7 +23,7 @@ purpose:
 using namespace cv;
 using namespace std;
 
-#define debug 0
+#define debug 1
 
 struct sortY {
 	bool operator() (cv::Point pt1, cv::Point pt2) { return (pt1.y < pt2.y); }
@@ -261,12 +261,12 @@ void GetQuadCamTf(Mat img, vector<Point2f> crossPoints)
 	{
 		//quad coordinate
 		Scalar lineColor = Scalar(0, 0, 255);
-		DrawArrow(img, Point(cross_x, cross_y), Point(center_x, center_y), 25, 30, lineColor, 2, CV_AA);
+		DrawArrow(img, Point(cross_x, cross_y), Point(center_x, center_y), 25, 30, lineColor, 1, CV_AA);
 		lineColor = Scalar(0, 255, 0);
-		DrawArrow(img, Point(cross_x, cross_y), Point(cross_x, cross_y - 200), 25, 30, lineColor, 2, CV_AA);
+		DrawArrow(img, Point(cross_x, cross_y), Point(cross_x, cross_y - 200), 25, 30, lineColor, 1, CV_AA);
 		//L
 		lineColor = Scalar(255, 0, 0);
-		DrawArrow(img, Point(cross_x, cross_y), Point(img.cols / 2, img.rows / 2), 25, 30, lineColor, 2, CV_AA);
+		DrawArrow(img, Point(cross_x, cross_y), Point(img.cols / 2, img.rows / 2), 25, 30, lineColor, 1, CV_AA);
 		double L = sqrt(pow(cross_x - img.cols / 2, 2) + pow(cross_y - img.rows / 2, 2));
 
 		Point2f pt0(cross_x, cross_y);
@@ -275,14 +275,12 @@ void GetQuadCamTf(Mat img, vector<Point2f> crossPoints)
 		Point2f pt3(cross_x, cross_y - 200);
 	}
 		
-
-
 }
 
 int main(int /*argc*/, char** /*argv*/)
 {
 
-	VideoCapture cap("1.mp4");
+	VideoCapture cap("2.mp4");
 	VideoWriter writer("VideoTest.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25.0, Size(960, 544));
 	if (!cap.isOpened()) // check if we succeeded
 		return -1;
@@ -291,7 +289,7 @@ int main(int /*argc*/, char** /*argv*/)
 	{
 		Mat frame;
 #if debug
-		frame = imread("33.png");
+		frame = imread("line3.png");
 #else
 		cap >> frame; 
 #endif
@@ -313,9 +311,19 @@ int main(int /*argc*/, char** /*argv*/)
 		split(hsv, mv);//分为3个通道  
 		Mat s = mv[1];
 
-		threshold(s, s, 0.3, 255, THRESH_BINARY);
+		threshold(s, s, 0.2, 255, THRESH_BINARY); //appropriate value for s
 		s.convertTo(s, CV_8U, 1, 0);
 
+		//vector<Point2f> crossPoint;
+		//goodFeaturesToTrack(s, crossPoint, 20, 0.3, 10, Mat(), 3);       //config the appropriate value
+
+		////遍历每个点，进行绘制，便于显示
+		//Mat draw = Mat::zeros(img.size(), CV_8UC3);
+		//for (int i = 0; i < (int)crossPoint.size(); i++)
+		//{
+		//	circle(draw, crossPoint[i], 3, Scalar(theRNG().uniform(0, 255), theRNG().uniform(0, 255), theRNG().uniform(0, 255))
+		//		, 2, 8);
+		//}
 		////获取自定义核
 		//Mat element = getStructuringElement(MORPH_RECT, Size(11, 11));
 		////dilate(s, s, element);
@@ -538,7 +546,7 @@ int main(int /*argc*/, char** /*argv*/)
 					}*/
 					int h1, h2, w1, w2;
 					CalcDstSize(crossPoint, h1, h2, w1, w2);
-					if (h1 < 70 || h1 > 2000 || h2 < 70 || h2 > 2000 || w1 < 70 || w1 > 2000 || w2 < 70 || w2 > 2000)
+					if (h1 < 70 || h1 > 2000 || h2 < 70 || h2 > 2000 || w1 < 100 || w1 > 2000 || w2 < 100 || w2 > 2000)
 					{
 						IsGoodPoints = false;
 					}
@@ -561,7 +569,7 @@ int main(int /*argc*/, char** /*argv*/)
 			
 		}
 
-		imshow("ori", frame);
+		imshow("ORI", frame);
 		if (waitKey(1) >= 0)
 			break;
 		

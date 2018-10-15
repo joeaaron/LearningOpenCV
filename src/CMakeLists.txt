@@ -286,3 +286,15 @@ set_target_properties(Quad_tf PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(GoalSegment goalSegment.cpp)
 target_link_libraries(GoalSegment ${OpenCV_LIBS})
 set_target_properties(GoalSegment PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(CornerDetect cornerDetect.cpp)
+target_link_libraries(CornerDetect ${OpenCV_LIBS})
+set_target_properties(CornerDetect PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(YCrCbDemo YCrCbDemo.cpp)
+target_link_libraries(YCrCbDemo ${OpenCV_LIBS})
+set_target_properties(YCrCbDemo PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(RemoveSmallRegion removeSmallRegion.cpp)
+target_link_libraries(RemoveSmallRegion ${OpenCV_LIBS})
+set_target_properties(RemoveSmallRegion PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
