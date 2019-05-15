@@ -14,6 +14,7 @@ purpose:
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 
+
 #include <iostream>
 #include <cmath>
 #include <string>
@@ -105,7 +106,7 @@ void Sort4PointsClockwise(vector<Point2f> points)
 // Parameter: int & w1
 // Parameter: int & w2
 //************************************
-void CalcDstSize(const std::vector<cv::Point2f>& corners,int& h1, int& h2, int& w1, int& w2)
+void CalcDstSize(const std::vector<cv::Point2f>& corners, int& h1, int& h2, int& w1, int& w2)
 {
 	h1 = sqrt((corners[0].x - corners[2].x)*(corners[0].x - corners[2].x) + (corners[0].y - corners[2].y)*(corners[0].y - corners[2].y));
 	h2 = sqrt((corners[1].x - corners[3].x)*(corners[1].x - corners[3].x) + (corners[1].y - corners[3].y)*(corners[1].y - corners[3].y));
@@ -157,7 +158,7 @@ std::vector<Point2i> boundingRectangleContour(Vec4i line, float d){
 		// slope of perpendicular lines
 		float m_per = -1 / m;
 
-		// y1 = m_per * x1 + c_per
+		// y1 = m_per * x1 + c_per23
 		float c_per1 = line[1] - m_per * line[0];
 		float c_per2 = line[3] - m_per * line[2];
 
@@ -274,69 +275,79 @@ void GetQuadCamTf(Mat img, vector<Point2f> crossPoints)
 		Point2f pt2(img.cols / 2, img.rows / 2);
 		Point2f pt3(cross_x, cross_y - 200);
 	}
-		
+
 }
 
 int main(int /*argc*/, char** /*argv*/)
 {
 
-	VideoCapture cap("2.mp4");
+	VideoCapture cap("1.mp4");
 	VideoWriter writer("VideoTest.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25.0, Size(960, 544));
-	if (!cap.isOpened()) // check if we succeeded
-		return -1;
+	//if (!cap.isOpened()) // check if we succeeded
+	//	return -1;
 
 	for (;;)
 	{
 		Mat frame;
 #if debug
-		frame = imread("line3.png");
+		frame = imread("pic9.png");
 #else
-		cap >> frame; 
+		cap >> frame;
 #endif
 		if (frame.empty())
 		{
 			continue;
 		}
 		Mat img, bgr, hsv;
+		Mat Y, Cr, Cb;
+		Mat s, tmp;
+		vector<Mat> channels;
 
 		img = frame.clone();
 		//resize(img, img, cv::Size(960, 480), INTER_NEAREST);
 		blur(img, img, Size(3, 3));
-		//彩色图像的灰度值归一化
-		img.convertTo(bgr, CV_32FC3, 1.0 / 255, 0);
-		//颜色空间转换
-		cvtColor(bgr, hsv, COLOR_BGR2HSV);
 
-		vector<Mat> mv;
-		split(hsv, mv);//分为3个通道  
-		Mat s = mv[1];
+		cvtColor(img, tmp, CV_BGR2YCrCb);
+		split(tmp, channels);
+		Y = channels.at(0);
+		Cr = channels.at(1);
+		Cb = channels.at(2);
 
-		threshold(s, s, 0.2, 255, THRESH_BINARY); //appropriate value for s
-		s.convertTo(s, CV_8U, 1, 0);
+		cvtColor(img, s, COLOR_BGR2GRAY);
 
-		//vector<Point2f> crossPoint;
-		//goodFeaturesToTrack(s, crossPoint, 20, 0.3, 10, Mat(), 3);       //config the appropriate value
+		/*遍历图像，将符合阈值范围的像素设置为255，其余为0*/
+		for (int j = 0; j < Y.rows - 1; j++)
+		{
+			uchar* currentCr = Cr.ptr< uchar>(j);
+			uchar* currentCb = Cb.ptr< uchar>(j);
+			uchar* current = s.ptr< uchar>(j);
+			for (int i = 0; i < Y.cols - 1; i++)
+			{
+				if ((currentCr[i] > 135) && (currentCr[i] < 175) && (currentCb[i] > 60) && (currentCb[i] < 118))
+					current[i] = 255;
+				else
+					current[i] = 0;
+			}
+		}
+	
+		//获取自定义核
+		Mat element = getStructuringElement(MORPH_RECT, Size(11, 11));
+		morphologyEx(s, s, MORPH_CLOSE, element);
 
-		////遍历每个点，进行绘制，便于显示
-		//Mat draw = Mat::zeros(img.size(), CV_8UC3);
-		//for (int i = 0; i < (int)crossPoint.size(); i++)
-		//{
-		//	circle(draw, crossPoint[i], 3, Scalar(theRNG().uniform(0, 255), theRNG().uniform(0, 255), theRNG().uniform(0, 255))
-		//		, 2, 8);
-		//}
-		////获取自定义核
-		//Mat element = getStructuringElement(MORPH_RECT, Size(11, 11));
-		////dilate(s, s, element);
-		//morphologyEx(s, s, MORPH_CLOSE, element);
 		vector<vector<Point> > contours, _contours;
 		vector<Vec4i> hierarchy, _hierarchy;
 		findContours(s, contours, hierarchy, CV_RETR_EXTERNAL, CHAIN_APPROX_NONE, Point(0, 0));
+		Mat draw = Mat::zeros(img.size(), CV_8UC1);
+		for (size_t i = 0; i < contours.size(); i++){
+			drawContours(draw, contours, i, Scalar(255), -1);
+		}
+
 		findContours(s, _contours, _hierarchy, CV_RETR_TREE, CHAIN_APPROX_NONE, Point(0, 0));
 
 		if (contours.size() == _contours.size())
 			continue;
 
-		for (int i = 0; i < contours.size();i++)
+		for (int i = 0; i < contours.size(); i++)
 		{
 			int contourSize = contours[i].size();
 			for (int j = 0; j < _contours.size(); j++)
@@ -377,7 +388,7 @@ int main(int /*argc*/, char** /*argv*/)
 
 		Mat _drawing = Mat::zeros(img.size(), CV_8UC3);
 		drawContours(_drawing, polyContours, maxArea, Scalar(0, 0, 255/*rand() & 255, rand() & 255, rand() & 255*/), 2);
-		
+
 		//2018-08-30
 		///LSD line detection & find the cross points!
 		Mat detectedLinesImg = Mat::zeros(img.rows, img.cols, CV_8UC3);
@@ -503,16 +514,16 @@ int main(int /*argc*/, char** /*argv*/)
 				sort(crossPoint.begin(), crossPoint.end(), mySortY);
 				if (crossPoint.size() > 4)
 				{
-					
+
 					crossPoint.erase(crossPoint.begin());
-					
+
 				}
 				bool IsGoodPoints = true;
 
 				if (crossPoint[0].x > crossPoint[1].x)
 					swap(crossPoint[0], crossPoint[1]);
 				if (crossPoint[2].x > crossPoint[3].x)
-					swap(crossPoint[2], crossPoint[3]); 
+					swap(crossPoint[2], crossPoint[3]);
 
 				//sort(crossPoint.begin(), crossPoint.end(), comp);         //topLeft, topRight, bottomLeft, bottomRight
 				// Get mass center  
@@ -566,15 +577,15 @@ int main(int /*argc*/, char** /*argv*/)
 					}
 				}
 			}
-			
+
 		}
 
 		imshow("ORI", frame);
 		if (waitKey(1) >= 0)
 			break;
-		
+
 	}
 
-	
+
 	return 0;
 }

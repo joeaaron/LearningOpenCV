@@ -723,7 +723,7 @@ int main()
 	bool stop = false;
 
 	frame = imread("line3.png");
-	frame.copyTo(tmp);					//拷贝备份
+	frame.copyTo(tmp);					 //backup
 	/*转换颜色空间并分割颜色通道*/
 	cvtColor(tmp, tmp, CV_BGR2YCrCb);
 	split(tmp, channels);
@@ -734,12 +734,12 @@ int main()
 	result.create(frame.rows, frame.cols, CV_8UC1);
 
 	/*遍历图像，将符合阈值范围的像素设置为255，其余为0*/
-	for (int j = 1; j < Y.rows - 1; j++)
+	for (int j = 0; j < Y.rows - 1; j++)
 	{
 		uchar* currentCr = Cr.ptr< uchar>(j);
 		uchar* currentCb = Cb.ptr< uchar>(j);
 		uchar* current = result.ptr< uchar>(j);
-		for (int i = 1; i < Y.cols - 1; i++)
+		for (int i = 0; i < Y.cols - 1; i++)
 		{
 			if ((currentCr[i] > 135) && (currentCr[i] < 175) && (currentCb[i] > 60) && (currentCb[i] < 118))
 				current[i] = 255;
@@ -750,7 +750,6 @@ int main()
 
 	Mat element = getStructuringElement(MORPH_RECT, Size(11, 11));
 	morphologyEx(result, result, MORPH_CLOSE, element);
-
 
 	//cv::Canny(result, result, 10, 350)
 	//vector<Vec4i> lines;//储存着检测到的直线的参数对 (X1, Y1, X2, Y2) 的容器，也就是线段的两个端点
@@ -788,7 +787,7 @@ int main()
 		else
 		{
 			drawContours(drawing, contours, i, Scalar(255), -1);
-		}
+		}  
 	}
 
 	//thin the contours

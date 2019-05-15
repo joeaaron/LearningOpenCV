@@ -298,3 +298,7 @@ set_target_properties(YCrCbDemo PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(RemoveSmallRegion removeSmallRegion.cpp)
 target_link_libraries(RemoveSmallRegion ${OpenCV_LIBS})
 set_target_properties(RemoveSmallRegion PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(DotLineDetect dotLineDetect.cpp)
+target_link_libraries(DotLineDetect ${OpenCV_LIBS})
+set_target_properties(DotLineDetect PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
