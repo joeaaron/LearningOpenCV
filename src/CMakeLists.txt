@@ -302,3 +302,15 @@ set_target_properties(RemoveSmallRegion PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(DotLineDetect dotLineDetect.cpp)
 target_link_libraries(DotLineDetect ${OpenCV_LIBS})
 set_target_properties(DotLineDetect PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(Posture posture.cpp)
+target_link_libraries(Posture ${OpenCV_LIBS})
+set_target_properties(Posture PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(EstimatePosition estimatePosition.cpp)
+target_link_libraries(EstimatePosition ${OpenCV_LIBS})
+set_target_properties(EstimatePosition PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(White white.cpp)
+target_link_libraries(White ${OpenCV_LIBS})
+set_target_properties(White PROPERTIES COMPILE_DEFINITIONS NOMINMAX)

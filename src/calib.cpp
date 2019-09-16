@@ -314,6 +314,7 @@ int main(int argc, char* argv[])
 	{
 		Mat view;
 		view = s.nextImage();
+		
 		//-----  If no more image, or got enough, then stop calibration and show result -------------
 		if (mode == CAPTURING && corners.size() >= (size_t)s.nrFrames)
 		{

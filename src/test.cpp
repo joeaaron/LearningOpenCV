@@ -1,131 +1,410 @@
-#include <iostream> 
-#include <fstream> 
-#include <iterator> 
-#include <vector> 
-#include <opencv2/opencv.hpp>
+ï»¿#include<iostream>
+#include<cmath>
+#include<queue>
+#include<time.h>
+#include <windows.h>
+#include<opencv2/opencv.hpp>
+#include<opencv2/highgui/highgui.hpp>
+#include <Commdlg.h>
+#include<stdio.h>
+#include <opencv2/highgui/highgui_c.h>
 
-using namespace std;
+using namespace  cv;
+using namespace  std;
 
-/*----------------------------
-* ¹¦ÄÜ : ½« cv::Mat Êı¾İĞ´Èëµ½ .txt ÎÄ¼ş
-*----------------------------
-* º¯Êı : WriteData
-* ·ÃÎÊ : public
-* ·µ»Ø : -1£º´ò¿ªÎÄ¼şÊ§°Ü£»0£ºĞ´ÈëÊı¾İ³É¹¦£»1£º¾ØÕóÎª¿Õ
-*
-* ²ÎÊı : fileName [in] ÎÄ¼şÃû
-* ²ÎÊı : matData [in] ¾ØÕóÊı¾İ
-*/
-int WriteData(string fileName, cv::Mat& matData)
+#define pi acos(-1)
+
+const double INF = 1000000000000000000.0;
+const double eps = 1e-8;
+typedef pair<int, int>  Pii;
+Mat img;                                         //åŸå§‹å›¾åƒçŸ©é˜µ
+Mat fz, fg;                                      //å­˜å‚¨fZã€fGå€¼çš„çŸ©é˜µ
+Mat grad_x, grad_y;                              //ä¸¤ä¸ªæ–¹å‘æ¢¯åº¦çŸ©é˜µ
+Mat abs_grad_x, abs_grad_y;                      //æ¢¯åº¦çŸ©é˜µç»å¯¹å€¼åŒ–
+Mat dist;                                        //è·ç¦»çŸ©é˜µï¼Œå­˜å‚¨æ¯ä¸ªç‚¹åˆ°Seedç‚¹çš„ä½ç½®
+Mat pre;                                         //å¯¹äºè·ç¦»çŸ©é˜µï¼Œå­˜å‚¨æ¯ä¸ªç‚¹çš„çš„å‰é©±èŠ‚ç‚¹
+Mat img_draw;                                    //ç”»å¸ƒçŸ©é˜µ
+Mat used;                                        //dijkstraä¸­ä½¿ç”¨ï¼Œæœ‰æ— è®¿é—®è¿‡
+Mat D;                                           //fDä¸­çš„Déƒ¨åˆ†
+Mat result_img;                                  //ç»“æœçŸ©é˜µ
+Mat tmp;                                         //æŠ å›¾æ—¶ä½¿ç”¨çš„01çŸ©é˜µ
+double Cost[2005][2005][8];                      //Costé¢„å¤„ç†
+double wz = 0.4, wd = 0.4, wg = 0.2;
+int dir_x[8] = { -1, -1, -1, 0, 1, 1, 1, 0 };    //å…«è¿é€š
+int dir_y[8] = { -1, 0, 1, 1, 1, 0, -1, -1 };    //å…«è¿é€š
+
+struct P
 {
-	int retVal = 0;
-
-	// ´ò¿ªÎÄ¼ş 
-	ofstream outFile(fileName.c_str(), ios_base::out); //°´ĞÂ½¨»ò¸²¸Ç·½Ê½Ğ´Èë 
-	if (!outFile.is_open())
+	double first;
+	Vec2i second;
+	P(double first, Vec2i second)
 	{
-		cout << "´ò¿ªÎÄ¼şÊ§°Ü" << endl;
-		retVal = -1;
-		return (retVal);
+		this->first = first;
+		this->second = second;
 	}
-
-	// ¼ì²é¾ØÕóÊÇ·ñÎª¿Õ 
-	if (matData.empty())
+	bool operator <(const P& b)const
 	{
-		cout << "¾ØÕóÎª¿Õ" << endl;
-		retVal = 1;
-		return (retVal);
+		return first > b.first;
 	}
-
-	// Ğ´ÈëÊı¾İ 
-	for (int r = 0; r < matData.rows; r++)
+	bool operator > (const P& b)const
 	{
-		for (int c = 0; c < matData.cols; c++)
+		return first < b.first;
+	}
+};
+
+struct img_Stack                     //æ¨¡æ‹Ÿæ ˆ
+{
+	Mat img[15];
+	Point seed[15];
+	int sz;
+}Sta;
+
+void init()
+{
+	fz.create(img.rows, img.cols, CV_8UC1);
+	dist.create(img.rows, img.cols, CV_64FC1);
+	pre.create(img.rows, img.cols, CV_32SC2);
+	used.create(img.rows, img.cols, CV_8UC1);
+	D.create(img.rows, img.cols, CV_64FC2);
+	//	Cost.create(img.rows, img.cols, CV_64FC1);
+	tmp.create(img.rows, img.cols, CV_8UC1);
+}
+/*å‚æ•°sçš„xä¸ºMatæ„ä¹‰ä¸Šçš„åˆ—ï¼Œyä¸ºMatæ„ä¹‰ä¸Šçš„è¡Œ*/
+void dijkstra(Point s)
+{
+	LARGE_INTEGER  nFreq, t1, t2;
+	double dt;
+	QueryPerformanceFrequency(&nFreq);
+	QueryPerformanceCounter(&t1);
+
+
+	swap(s.x, s.y);
+	int cnt = 0;
+	priority_queue< P > que;
+	while (!que.empty())que.pop();  //æ¸…ç©ºä¼˜å…ˆé˜Ÿåˆ—
+	dist.setTo(INF);
+	used.setTo(0);
+	dist.ptr<double>(s.x)[s.y] = 0;
+	Vec2i start;
+	start[0] = s.x;
+	start[1] = s.y;
+	pre.ptr<Vec2i>(s.x)[s.y] = start;
+	que.push(P(0.0, start));
+
+	bool flag = true;
+	while (!que.empty())
+	{
+		P p = que.top();          //å¯¼å‡ºä¼˜å…ˆé˜Ÿåˆ—é¦–å…ƒç´ 
+		que.pop();                //æ¸…é™¤é¦–å…ƒç´ 
+		Vec2i v = p.second;
+		if (dist.at<double>(v[0], v[1]) < p.first)continue;
+		used.ptr<uchar>(v[0])[v[1]] = 1;
+		for (int i = 0; i < 8; i++)
 		{
-			uchar data = matData.at<uchar>(r, c); //¶ÁÈ¡Êı¾İ£¬at<type> - type ÊÇ¾ØÕóÔªËØµÄ¾ßÌåÊı¾İ¸ñÊ½ 
-			outFile << data << "\t"; //Ã¿ÁĞÊı¾İÓÃ tab ¸ô¿ª 
-		}
-		outFile << endl; //»»ĞĞ 
-	}
+			flag = i & 1;
+			int tx = v[0] + dir_x[i];
+			int ty = v[1] + dir_y[i];
+			if (tx < 0 || ty < 0 || tx >= img.rows || ty >= img.cols)
+				continue;
+			if (used.ptr<uchar>(tx)[ty] == 1)
+				continue;
+			Vec2i to = Vec2i(tx, ty);
+			double Ipq = Cost[tx][ty][i];
+			if (dist.ptr<double>(tx)[ty] > dist.ptr<double>(v[0])[v[1]] + Ipq)
+			{
+				dist.ptr<double>(tx)[ty] = dist.ptr<double>(v[0])[v[1]] + Ipq;
 
-	return (retVal);
+				pre.ptr<Vec2i>(tx)[ty] = v;
+				que.push(P(dist.ptr<double>(tx)[ty], to));
+
+			}
+		}
+		flag = false;
+	}
+	QueryPerformanceCounter(&t2);
+	dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
+	cout << "Running time : " << dt * 1000000 << "us" << endl;
 }
 
-/*----------------------------
-* ¹¦ÄÜ : ´Ó .txt ÎÄ¼şÖĞ¶ÁÈëÊı¾İ£¬±£´æµ½ cv::Mat ¾ØÕó
-* - Ä¬ÈÏ°´ float ¸ñÊ½¶ÁÈëÊı¾İ£¬
-* - Èç¹ûÃ»ÓĞÖ¸¶¨¾ØÕóµÄĞĞ¡¢ÁĞºÍÍ¨µÀÊı£¬ÔòÊä³öµÄ¾ØÕóÊÇµ¥Í¨µÀ¡¢N ĞĞ 1 ÁĞµÄ
-*----------------------------
-* º¯Êı : LoadData
-* ·ÃÎÊ : public
-* ·µ»Ø : -1£º´ò¿ªÎÄ¼şÊ§°Ü£»0£º°´Éè¶¨µÄ¾ØÕó²ÎÊı¶ÁÈ¡Êı¾İ³É¹¦£»1£º°´Ä¬ÈÏµÄ¾ØÕó²ÎÊı¶ÁÈ¡Êı¾İ
-*
-* ²ÎÊı : fileName [in] ÎÄ¼şÃû
-* ²ÎÊı : matData [out] ¾ØÕóÊı¾İ
-* ²ÎÊı : matRows [in] ¾ØÕóĞĞÊı£¬Ä¬ÈÏÎª 0
-* ²ÎÊı : matCols [in] ¾ØÕóÁĞÊı£¬Ä¬ÈÏÎª 0
-* ²ÎÊı : matChns [in] ¾ØÕóÍ¨µÀÊı£¬Ä¬ÈÏÎª 0
-*/
-int LoadData(string fileName, cv::Mat& matData, int matRows = 0, int matCols = 0, int matChns = 0)
+int LmouseOn;      //é¼ æ ‡å·¦é”®æ˜¯å¦æŒ‰ä¸‹
+int RmouseOn;      //é¼ æ ‡å³é”®æ˜¯å¦æŒ‰ä¸‹
+Point Seed;        //å½“å‰çš„ç§å­åƒç´ èŠ‚ç‚¹
+Point StartPoint;  //å…¨å±€ç§å­åƒç´ èŠ‚ç‚¹
+bool work_flag;    //ç‚¹å‡»å³é”®åå˜ä¸ºfalseï¼Œä¸èƒ½å†å¯¹å›¾ç‰‡è¿›è¡Œæ“ä½œ
+void onMouse(int Event, int x, int y, int flags, void* param)
 {
-	int retVal = 0;
-
-	// ´ò¿ªÎÄ¼ş 
-	ifstream inFile(fileName.c_str(), ios_base::in);
-	if (!inFile.is_open())
+	if (Event == CV_EVENT_MOUSEMOVE && LmouseOn == 2 && work_flag)
 	{
-		cout << "¶ÁÈ¡ÎÄ¼şÊ§°Ü" << endl;
-		retVal = -1;
-		return (retVal);
+		img.copyTo(img_draw);
+		Point cur = Point(x, y);
+		Point tmp;
+		while (cur != Seed)
+		{
+			tmp = Point(pre.at<Vec2i>(cur.y, cur.x)[1], pre.at<Vec2i>(cur.y, cur.x)[0]);
+			line(img_draw, cur, tmp, Scalar(0, 0, 255), 2, CV_AA);
+			cur = tmp;
+		}
+		imshow("Live-Wire Test", img_draw);
+	}
+	else if (Event == CV_EVENT_LBUTTONDOWN && work_flag)
+	{
+		LmouseOn = 1;
+	}
+	else if (Event == CV_EVENT_LBUTTONUP && work_flag)
+	{
+		LmouseOn++;
+		if (LmouseOn == 2)
+		{
+			Sta.sz++;
+			img.copyTo(Sta.img[Sta.sz - 1]);
+			if (Sta.sz > 1)Sta.seed[Sta.sz - 1] = Seed;
+			Seed = Point(x, y);
+			dijkstra(Seed);
+			if (Sta.sz == 1)
+			{
+				StartPoint = Seed;
+
+			}
+			else
+			{
+				img_draw.copyTo(img);
+			}
+		}
+	}
+	else if (Event == CV_EVENT_RBUTTONDOWN && work_flag)
+	{
+		RmouseOn = 1;
+	}
+	else if (Event == CV_EVENT_RBUTTONUP && Sta.sz > 1 && RmouseOn && work_flag)
+	{
+		img.copyTo(img_draw);
+		Point cur = StartPoint;
+		Point tmp;
+		while (cur != Seed)
+		{
+			tmp = Point(pre.at<Vec2i>(cur.y, cur.x)[1], pre.at<Vec2i>(cur.y, cur.x)[0]);
+			line(img_draw, cur, tmp, Scalar(0, 0, 255), 2, CV_AA);
+			cur = tmp;
+		}
+		imshow("Live-Wire Test", img_draw);
+		RmouseOn = 0;
+		work_flag = false;
+	}
+}
+
+void bfs(int x, int y)
+{
+	queue<Pii> que;
+	que.push(Pii(0, 0));
+	tmp.ptr<uchar>(0)[0] = 0;
+	int x1, y1;
+	while (!que.empty())
+	{
+		x1 = que.front().first;
+		y1 = que.front().second;
+
+		que.pop();
+		int tx, ty;
+		for (int i = 0; i < 8; i++)
+		{
+			tx = x1 + dir_x[i];
+
+			ty = y1 + dir_y[i];
+			if (tx < 0 || ty < 0 || tx >= img.rows || ty >= img.cols || tmp.ptr<uchar>(tx)[ty] == 0)
+				continue;
+			else
+			{
+				tmp.ptr<uchar>(tx)[ty] = 0;
+				que.push(Pii(tx, ty));
+			}
+		}
+	}
+}
+
+void solve()
+{
+	Vec3b red;
+	red[0] = 0; red[1] = 0; red[2] = 255;
+	for (int i = 0; i < img.rows; i++)
+	{
+		for (int j = 0; j < img.cols; j++)
+		{
+			if (result_img.at<Vec3b>(i, j)[0] < 20 && result_img.at<Vec3b>(i, j)[1] < 20 && result_img.at<Vec3b>(i, j)[2]>230)
+			{
+				tmp.ptr<uchar>(i)[j] = 0;
+			}
+			else tmp.ptr<uchar>(i)[j] = 1;
+		}
 	}
 
-	// ÔØÈëÊı¾İ 
-	istream_iterator<float> begin(inFile); //°´ float ¸ñÊ½È¡ÎÄ¼şÊı¾İÁ÷µÄÆğÊ¼Ö¸Õë 
-	istream_iterator<float> end; //È¡ÎÄ¼şÁ÷µÄÖÕÖ¹Î»ÖÃ 
-	vector<float> inData(begin, end); //½«ÎÄ¼şÊı¾İ±£´æÖÁ std::vector ÖĞ 
-	cv::Mat tmpMat = cv::Mat(inData); //½«Êı¾İÓÉ std::vector ×ª»»Îª cv::Mat 
-
-	// Êä³öµ½ÃüÁîĞĞ´°¿Ú 
-	//copy(vec.begin(),vec.end(),ostream_iterator<double>(cout,"\t")); 
-
-	// ¼ì²éÉè¶¨µÄ¾ØÕó³ß´çºÍÍ¨µÀÊı 
-	size_t dataLength = inData.size();
-	//1.Í¨µÀÊı 
-	if (matChns == 0)
+	for (int i = 0; i < img.rows; i++)
 	{
-		matChns = 1;
+		for (int j = 0; j < img.cols; j++)
+		{
+			if (tmp.ptr<uchar>(i)[j] == 0)
+			{
+				result_img.at<Vec3b>(i, j) = Vec3b(0, 0, 0);
+			}
+		}
 	}
-	//2.ĞĞÁĞÊı 
-	if (matRows != 0 && matCols == 0)
+	//	namedWindow("tmp", CV_WINDOW_AUTOSIZE);
+	//	imshow("tmp", result_img);
+	bfs(0, 0);
+	for (int i = 0; i < img.rows; i++)
 	{
-		matCols = dataLength / matChns / matRows;
+		for (int j = 0; j < img.cols; j++)
+		{
+			if (tmp.ptr<uchar>(i)[j] == 0)
+			{
+				result_img.at<Vec3b>(i, j) = Vec3b(0, 0, 0);
+			}
+		}
 	}
-	else if (matCols != 0 && matRows == 0)
-	{
-		matRows = dataLength / matChns / matCols;
-	}
-	else if (matCols == 0 && matRows == 0)
-	{
-		matRows = dataLength / matChns;
-		matCols = 1;
-	}
-	//3.Êı¾İ×Ü³¤¶È 
-	if (dataLength != (matRows * matCols * matChns))
-	{
-		cout << "¶ÁÈëµÄÊı¾İ³¤¶È ²»Âú×ã Éè¶¨µÄ¾ØÕó³ß´çÓëÍ¨µÀÊıÒªÇó£¬½«°´Ä¬ÈÏ·½Ê½Êä³ö¾ØÕó£¡" << endl;
-		retVal = 1;
-		matChns = 1;
-		matRows = dataLength;
-	}
-
-	// ½«ÎÄ¼şÊı¾İ±£´æÖÁÊä³ö¾ØÕó 
-	matData = tmpMat.reshape(matChns, matRows).clone();
-
-	return (retVal);
 }
 
 int main()
 {
-	cv::Mat matData;
-	LoadData("depth.txt", matData, 480, 640, 1);
+	//	img = imread("1.jpg", CV_LOAD_IMAGE_UNCHANGED);
+	img = imread("jiqimao.jpg", 1);  //300x300
+	if (img.empty())
+	{
+		cout << "å›¾åƒåŠ è½½å¤±è´¥ï¼" << endl;
+		return -1;
+	}
+	cout << " rows = " << img.rows << " cols = " << img.cols << endl;
+	init();
+	cout << img.type() << endl;
+	Mat grayImage;
+	cvtColor(img, grayImage, COLOR_BGR2GRAY);
+	GaussianBlur(grayImage, grayImage, Size(5, 5), 0, 0, BORDER_DEFAULT);
+	Mat img_canny;
+	Canny(grayImage, img_canny, 50, 100);
+	fz = 1 - img_canny / 255;
+	Sta.sz = 0;
+
+	int scale = 1;
+	int delta = 0;
+	int ddepth = CV_64F;
+
+	/// æ±‚ Xæ–¹å‘æ¢¯åº¦
+	Sobel(grayImage, grad_x, ddepth, 1, 0, 3, scale, delta, BORDER_DEFAULT);
+	convertScaleAbs(grad_x, abs_grad_x);
+	/// æ±‚ Yæ–¹å‘æ¢¯åº¦
+	Sobel(grayImage, grad_y, ddepth, 0, 1, 3, scale, delta, BORDER_DEFAULT);
+	convertScaleAbs(grad_y, abs_grad_y);
+	/// åˆå¹¶æ¢¯åº¦(è¿‘ä¼¼)
+	addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, fg);
+	Mat angle;
+	cartToPolar(grad_x, grad_y, fg, angle);//è°ƒç”¨åº“å‡½æ•°
+	double max_G = 0.0;
+	minMaxLoc(fg, 0, &max_G, 0, 0);
+	fg = 1 - fg / max_G;
+
+	double Dpx, Dpy, len;
+	for (int i = 0; i < img.rows; i++)
+	{
+		for (int j = 0; j < img.cols; j++)
+		{
+			Dpx = grad_y.at<double>(i, j);
+			Dpy = -grad_x.at<double>(i, j);
+			len = sqrt(Dpx * Dpx + Dpy * Dpy);
+			if (len - 0 > eps)
+			{
+				Dpx /= len;
+				Dpy /= len;
+			}
+			D.at<Vec2d>(i, j)[0] = Dpx;
+			D.at<Vec2d>(i, j)[1] = Dpy;
+		}
+	}
+	LARGE_INTEGER  nFreq, t1, t2;
+	double dt;
+	QueryPerformanceFrequency(&nFreq);
+	QueryPerformanceCounter(&t1);
+	Vec2i p, q;
+	double fZ, fG, fD;
+	Vec2d Dp, Dq;
+	Vec2d Lpq;
+	for (int i = 0; i < img.rows; i++)
+	{
+		for (int j = 0; j < img.cols; j++)
+		{
+			p[0] = i; p[1] = j;
+			Dp = D.at<double>(p[0], p[1]);
+			for (int k = 0; k < 8; k++)
+			{
+				int tx = i + dir_x[k], ty = j + dir_y[k];
+				if (tx < 0 || ty < 0 || tx >= img.rows || ty >= img.cols)
+					continue;
+				q[0] = tx;
+				q[1] = ty;
+
+				fZ = fz.ptr<uchar>(q[0])[q[1]];
+				fG = fg.ptr<double>(q[0])[q[1]];
+
+				Dq = D.at<double>(q[0], q[1]);
+
+				if (Dp.dot(q - p) >= 0)
+					Lpq = q - p;
+				else
+					Lpq = p - q;
+				double dp = Dp.dot(Lpq);
+				double dq = Lpq.dot(Dq);
+				if (!(k & 1))
+				{
+					dp /= sqrt(2);//???
+					dq /= sqrt(2);//???
+				}
+				fD = (acos(dp) + acos(dq)) / pi;
+				if ((k & 1))fG /= sqrt(2);//???
+				Cost[i][j][k] = wz * fZ + wd * fD + wg * fG;
+			}
+		}
+	}
+	QueryPerformanceCounter(&t2);
+	dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
+	cout << "Running time : " << dt * 1000000 << "us" << endl;
+	work_flag = 1;
+	LmouseOn = false;
+	RmouseOn = false;
+	namedWindow("Live-Wire Test", CV_WINDOW_AUTOSIZE);
+	setMouseCallback("Live-Wire Test", onMouse);
+	imshow("Live-Wire Test", img);
+
+	//ç­‰å¾…ç›´åˆ°æœ‰é”®æŒ‰ä¸‹
+	while (true)
+	{
+		int c = waitKey(0);
+		if (c == 13)
+		{
+			img_draw.copyTo(result_img);
+			solve();
+			namedWindow("Result", CV_WINDOW_AUTOSIZE);
+			imshow("Result", result_img);
+		}
+		else if (c == 0 && Sta.sz)
+		{
+			work_flag = 1;
+			Sta.img[Sta.sz - 1].copyTo(img);
+			Sta.img[Sta.sz - 1].copyTo(img_draw);
+			imshow("Live-Wire Test", img_draw);
+			Seed = Sta.seed[Sta.sz - 1];
+			Sta.sz--;
+			if (Sta.sz)dijkstra(Seed);
+			else LmouseOn = 0;
+		}
+	}
+
+	waitKey(0);
+	//é”€æ¯MyWindowçš„çª—å£
+	destroyWindow("Live-Wire Test");
+	return 0;
+
 }
+
+/*
+Scalar(B,G,R)
+Vec3b çš„å­˜å‚¨ä¹Ÿæ˜¯BGR
+lineå‡½æ•°ç»˜åˆ¶ç›´çº¿çš„æ—¶å€™Pointçš„åæ ‡æ¨ªå‘xè½´ï¼Œç«–å‘yè½´
+Matè¡Œä¸ºxè½´ï¼Œåˆ—ä¸ºyè½´
+*/
