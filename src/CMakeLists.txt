@@ -314,3 +314,7 @@ set_target_properties(EstimatePosition PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
 add_executable(White white.cpp)
 target_link_libraries(White ${OpenCV_LIBS})
 set_target_properties(White PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
+
+add_executable(PeekSeek PeekSeek.cpp)
+target_link_libraries(PeekSeek ${OpenCV_LIBS})
+set_target_properties(PeekSeek PROPERTIES COMPILE_DEFINITIONS NOMINMAX)
